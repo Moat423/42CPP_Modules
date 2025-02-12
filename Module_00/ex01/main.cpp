@@ -10,7 +10,7 @@
 // display updated phonebook
 int main (void)
 {
-	PhoneBook	phoneBook;
+	PhoneBook	book;
 	std::string	input;
 
 	while (input.compare("EXIT"))
@@ -18,7 +18,10 @@ int main (void)
 		std::cout << "DO > " << std::flush;
 		std::cin >> std::setw(7) >> input;
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cout << "You entered: " << input << std::endl;
+		if (input.compare("ADD") == 0)
+			book.addContact();
+		else if (input.compare("SEARCH"))
+			book.searchContact();
 	}
 	return 0;
 }

@@ -1,12 +1,14 @@
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
-/*#include "Contact.hpp"*/
+#include "Contact.hpp"
+#include <string>
 
 class PhoneBook
 {
-	/*private:*/
-		/*Contact	_contacts[8];*/
+	private:
+		Contact		_contacts[8];
+		std::string	_getInput();
 	public:
 		PhoneBook();
 		~PhoneBook();
