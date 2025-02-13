@@ -1,6 +1,8 @@
 #include "PhoneBook.hpp"
 #include <iostream>
 #include <string>
+#include <iomanip>
+#include <limits>
 
 PhoneBook::PhoneBook()
 {
@@ -14,10 +16,12 @@ PhoneBook::~PhoneBook()
 	std::cout << bye << std::endl;
 }
 
-std::string	PhoneBook::_getInput()
+std::string	PhoneBook::_getInput(std::string prompt)
 {
 	std::string	input;
-
+	std::cout << prompt << std::flush;
+	std::cin >> std::setw(15) >> input;
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	return (input);
 }
 

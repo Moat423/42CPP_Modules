@@ -8,7 +8,7 @@ class PhoneBook
 {
 	private:
 		Contact		_contacts[8];
-		std::string	_getInput();
+		std::string	_getInput(std::string const);
 	public:
 		PhoneBook();
 		~PhoneBook();
