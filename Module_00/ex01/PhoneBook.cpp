@@ -1,13 +1,25 @@
 #include "PhoneBook.hpp"
 #include <iostream>
+#include <ostream>
 #include <string>
-#include <iomanip>
-#include <limits>
 
 PhoneBook::PhoneBook()
 {
-	std::string welcome = "WELCOME to MY_AWESOME_80S_PHONEBOOK";
-	std::cout << welcome << std::endl;
+	/*std::string welcome = "WELCOME to MY_AWESOME_80S_PHONEBOOK";*/
+	/*std::cout << welcome << std::endl;*/
+	std::cout << 
+" _____        _____                                   " << std::endl << \
+"|     |_ _   |  _  |_ _ _ ___ ___ ___ _____ ___       " << std::endl << \
+"| | | | | |  |     | | | | -_|_ -| . |     | -_|      " << std::endl << \
+"|_|_|_|_  |  |__|__|_____|___|___|___|_|_|_|___|      " << std::endl << \
+"      |___|                                           " << std::endl << \
+"                                                      " << std::endl << \
+" ___ ___        _____ _               _           _   " << std::endl << \
+"| . |   |___   |  _  | |_ ___ ___ ___| |_ ___ ___| |_ " << std::endl << \
+"| . | | |_ -|  |   __|   | . |   | -_| . | . | . | '_|" << std::endl << \
+"|___|___|___|  |__|  |_|_|___|_|_|___|___|___|___|_,_|" << std::endl << std::endl ;
+
+	std::cout << "type 'ADD' to add contacts, 'SEARCH' to search through your phonebook OR 'EXIT' " << std::endl << std::endl;
 }
 
 PhoneBook::~PhoneBook()
@@ -16,12 +28,15 @@ PhoneBook::~PhoneBook()
 	std::cout << bye << std::endl;
 }
 
-std::string	PhoneBook::_getInput(std::string prompt)
+// technically, i am not guaranteeing a stack allocation here, but phonenumbers are at maximum 15 digits,
+// SSO (small string optimisation) is 15 chars on this computer, so i would need 16 chars to comply with the standard,
+// therefore there is no possiblitiy to comply with international standart for phone numbers and guarantee stack allocation
+std::string	PhoneBook::_getInput(std::string prompt) const
 {
 	std::string	input;
+
 	std::cout << prompt << std::flush;
-	std::cin >> std::setw(15) >> input;
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::getline(std::cin, input);
 	return (input);
 }
 
@@ -31,17 +46,11 @@ void	PhoneBook::addContact()
 	static int	i = 0;
 	int			index = i % 8;
 
-	std::cout << "FIRST NAME:" << std::flush;
-	std::getline(std::cin, firstName);
-	std::cout << "LAST NAME:" << std::flush;
-	std::getline(std::cin, lastName);
-	std::cout << "NICKNAME:" << std::flush;
-	std::getline(std::cin, nickname);
-	std::cout << "PHONE NUMBER:" << std::flush;
-	std::getline(std::cin, phoneNumber);
-	std::cout << "darkest secret:" << std::flush;
-	std::getline(std::cin, darkestSecret);
-
+	firstName = _getInput("FIRST NAME: ");
+	lastName = _getInput("LAST NAME: ");
+	nickname = _getInput("NICKNAME: ");
+	phoneNumber = _getInput("PHONE NUMBER: ");
+	darkestSecret = _getInput("darkest secret: ");
 	_contacts[index].set(firstName, lastName, nickname, phoneNumber, darkestSecret);
 	i++;
 }

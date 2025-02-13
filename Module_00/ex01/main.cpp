@@ -15,8 +15,7 @@ int main (void)
 
 	while (input.compare("EXIT"))
 	{
-		std::cout << "Capacity of empty string: " << input.capacity() << std::endl;
-		std::cout << "DO > " << std::flush;
+		std::cout << "> " << std::flush;
 		std::cin >> std::setw(7) >> input;
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		if (input.compare("ADD") == 0)
