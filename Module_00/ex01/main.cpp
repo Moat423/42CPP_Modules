@@ -20,8 +20,11 @@ int main (void)
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		if (input.compare("ADD") == 0)
 			book.addContact();
-		else if (input.compare("SEARCH"))
-			book.searchContact();
+		else if (input.compare("SEARCH") == 0)
+		{
+			book.printBook();
+			/*book.searchContact();*/
+		}
 	}
 	return 0;
 }
