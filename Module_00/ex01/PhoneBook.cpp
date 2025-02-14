@@ -1,7 +1,6 @@
 #include "PhoneBook.hpp"
 #include <iostream>
-#include <iterator>
-#include <string>
+#include <limits>
 #include <iomanip>
 
 PhoneBook::PhoneBook()
@@ -52,11 +51,16 @@ void	PhoneBook::addContact()
 	nickname = _getInput("NICKNAME: ");
 	phoneNumber = _getInput("PHONE NUMBER: ");
 	darkestSecret = _getInput("darkest secret: ");
+	if (firstName.empty() || lastName.empty() || nickname.empty() || phoneNumber.empty() || darkestSecret.empty())
+	{
+		std::cout << std::endl << "ERROR: can not have empty fields" << std::endl << "........ RETURNING" << std::endl;
+		return ;
+	}
 	_contacts[index].set(firstName, lastName, nickname, phoneNumber, darkestSecret);
 	i++;
 }
 
-void	PhoneBook::printBook() const
+void	PhoneBook::_printBook() const
 {
 	int	i = 0;
 	std::cout << " ___________________________________________ " << std::endl;
@@ -74,12 +78,8 @@ void	PhoneBook::printBook() const
 		std::cout << std::setw(_WIDTH) << nickname << "|" << std::endl;
 		i++;
 	}
-	if (i == 0)
-		std::cout << "no Contacts in your PHONEBOOK (╥﹏╥)" << std::endl;
-	else
-		std::cout << "---------------------------------------------" << std::endl;
+	std::cout << " ------------------------------------------- " << std::endl;
 	std::cout << std::flush;
-
 }
 
 std::string	PhoneBook::_formatString(std::string str) const
@@ -93,7 +93,29 @@ std::string	PhoneBook::_formatString(std::string str) const
 	return (str + std::string( _WIDTH - str.length(), ' '));
 }
 
-void	PhoneBook::searchContact(int i) const
+void	PhoneBook::searchContact() const
 {
-	(void) i;
+	int	i = 0;
+	if (_contacts[0].getFirstName().empty())
+	{
+		std::cout << "no Contacts in your PHONEBOOK (╥﹏╥)" << std::endl;
+		return ;
+	}
+	_printBook();
+	std::cout << std::endl << "ENTER INDEX OF CONTACT TO DISPLAY: " << std::endl;
+	std::cout << "> " << std::flush;
+	std::cin >> i;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	if (i >= 0 && i < 8 && !_contacts[i].getFirstName().empty())
+	{
+	std::cout << std::endl;
+	std::cout << "--------------> CONTACT #" << i << std::endl;
+	std::cout << "FIRST NAME:     " << _contacts[i].getFirstName() << std::endl;
+	std::cout << "LAST NAME:      " << _contacts[i].getLastName() << std::endl;
+	std::cout << "NICKNAME:       " << _contacts[i].getNickname() << std::endl;
+	std::cout << "PHONE NUMBER:   " << _contacts[i].getPhonenumber() << std::endl;
+	std::cout << "DARKEST SECRET: " << _contacts[i].getDarkestSecret() << std::endl << std::endl;
+	}
+	else
+		std::cout << "invalid input" << std::endl << std::endl;
 }

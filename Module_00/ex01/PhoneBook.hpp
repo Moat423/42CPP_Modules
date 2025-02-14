@@ -11,12 +11,12 @@ class PhoneBook
 		std::string			_getInput(std::string const) const;
 		static int const	_WIDTH = 10;
 		std::string	_formatString(std::string str) const;
+		void	_printBook() const;
 	public:
 		PhoneBook();
 		~PhoneBook();
 		void	addContact();
-		void	searchContact(int i) const;
-		void	printBook() const;
+		void	searchContact() const;
 };
 
 #endif // PHONEBOOK_HPP
