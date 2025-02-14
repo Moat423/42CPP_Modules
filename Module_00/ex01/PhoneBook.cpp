@@ -1,5 +1,6 @@
 #include "PhoneBook.hpp"
 #include <iostream>
+#include <iterator>
 #include <string>
 #include <iomanip>
 
@@ -58,11 +59,11 @@ void	PhoneBook::addContact()
 void	PhoneBook::printBook() const
 {
 	int	i = 0;
-	std::cout << "________________________________________________" << std::endl;
-	std::cout << "|   INDEX  |FIRST NAME | LAST NAME | NICKNAME  |" << std::endl;
-	/*std::cout << "INDEX" << std::setw(_WIDTH) << "|" << "FIRST NAME" << std::setw(_WIDTH) << "|" << "LAST NAME" << std::setw(_WIDTH) << "|" << "NICKNAME" << std::setw(_WIDTH) << "|" << std::endl;*/
+	std::cout << " ___________________________________________ " << std::endl;
+	std::cout << "|   INDEX  |FIRST NAME|LAST NAME | NICKNAME |" << std::endl;
 	while (i < 8 && !_contacts[i].getFirstName().empty())
 	{
+		std::cout << "|----------|----------|----------|----------|" << std::endl;
 		std::string	firstName, lastName, nickname;
 		firstName = _formatString(_contacts[i].getFirstName());
 		lastName = _formatString(_contacts[i].getLastName());
@@ -73,6 +74,10 @@ void	PhoneBook::printBook() const
 		std::cout << std::setw(_WIDTH) << nickname << "|" << std::endl;
 		i++;
 	}
+	if (i == 0)
+		std::cout << "no Contacts in your PHONEBOOK (╥﹏╥)" << std::endl;
+	else
+		std::cout << "---------------------------------------------" << std::endl;
 	std::cout << std::flush;
 
 }
