@@ -1,13 +1,7 @@
 #include "PhoneBook.hpp"
-#include <limits>
 #include <string>
 #include <iostream>
-#include <iomanip>
 
-// display startup
-//str = get_iput
-// call correct function
-// display updated phonebook
 int main (void)
 {
 	PhoneBook	book;
