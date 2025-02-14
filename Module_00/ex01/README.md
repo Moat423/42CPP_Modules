@@ -11,6 +11,9 @@ getline seems to just do a better job.
 
 It is important to always check that the input buffer is cleaning after having the user type in something. So i learned, to call the cin.ignore method after doing a cin << i or other things.
 
+Also, its a really nice feature of C++ to declare functions as const. that means, the compiler knows, they will not change any members of the class, and can optimise better.
+I will try to use that in the future.
+
 
 things to read:
 https://vorbrodt.blog/2019/03/30/sso-of-stdstring/
