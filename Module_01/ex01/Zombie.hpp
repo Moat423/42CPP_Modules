@@ -13,15 +13,20 @@
 # define RESET "\033[0m"
 # define BOLD "\033[1m"
 
+# define HORDENUM 5
+
 #include <string>
 class Zombie
 {
 	private:
 		std::string _name;
 	public:
+		Zombie( void );
 		Zombie( std::string name );
 		~Zombie ( void );
-		void	announce( void );
+		void	announce( void ) const;
+		void	setName(std::string name) ;
+		
 };
 
 Zombie*	newZombie( std::string name );

@@ -4,7 +4,12 @@
 Zombie::Zombie(std::string name)
 {
 	this->_name = name;
-	std::cout << "A Zombie named " << _name << "has risen from the ground and starts walking towards you" << std::endl;
+	std::cout << "A Zombie named " << _name << " has risen from the ground and starts walking towards you" << std::endl;
+}
+
+Zombie::Zombie( void )
+{
+	std::cout << "A Zombie has risen from the ground and starts walking towards you" << std::endl;
 }
 
 Zombie::~Zombie()
@@ -12,7 +17,12 @@ Zombie::~Zombie()
 	std::cout << GREEN << _name << " collapses and lays still, unmoving, as if nothing ever happened" << RESET << std::endl;
 }
 
-void	Zombie::announce(void)
+void	Zombie::announce(void) const
 {
 	std::cout << BRED << _name << ": " << RESET << RED << "BraiiiiiiinnnzzzZ..." << RESET << std::endl;
+}
+
+void	Zombie::setName(std::string name)
+{
+	this->_name = name;
 }

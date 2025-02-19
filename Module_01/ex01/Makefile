@@ -7,7 +7,7 @@ NAME := Zombie
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -pedantic -std=c++98
 
-SRCS := main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
+SRCS := main.cpp Zombie.cpp zombieHorde.cpp
 
 OBJS := $(SRCS:.cpp=.o)
 
