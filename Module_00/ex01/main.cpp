@@ -5,14 +5,14 @@
 int main (void)
 {
 	PhoneBook	book;
-	std::string	input;
+	std::string	input = "";
 
-	while (true)
+	while (input.compare("EXIT") != 0 && std::cin.eof() == 0)
 	{
 		std::cout << "> ";
 		std::getline(std::cin, input);
-		if (input.compare("EXIT") == 0 || std::cin.eof())
-			break ;
+		if (input.empty())
+			continue ;
 		if (input.compare("ADD") == 0)
 			book.addContact();
 		else if (input.compare("SEARCH") == 0)

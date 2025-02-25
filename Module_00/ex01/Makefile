@@ -5,7 +5,7 @@ MAKEFLAGS += --no-print-directory --warn-undefined-variables
 
 NAME := phonebook
 CXX := c++
-CXXFLAGS := -Wall -Wextra -Werror -pedantic -std=c++98
+CXXFLAGS := -Wall -Wextra -Werror -pedantic -std=c++98 -fPIE
 
 SRCS := main.cpp PhoneBook.cpp Contact.cpp
 
