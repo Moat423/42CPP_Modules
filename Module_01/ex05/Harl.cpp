@@ -34,4 +34,13 @@ void Harl::error( void )
 }
 
 void Harl::complain( std::string level )
-{}
+{
+	switch (level)
+	{
+		case DEBUG:
+			this->debug();
+		case INFO:
+			this->info();
+
+	}
+}
