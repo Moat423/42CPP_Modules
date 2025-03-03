@@ -3,7 +3,7 @@ SHELL := /bin/bash
 MAKEFILES := lib/libft/Makefile lib/mlx/Makefile
 MAKEFLAGS += --no-print-directory --warn-undefined-variables
 
-NAME := megaphone
+NAME := Harl
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -pedantic -std=c++98
 
@@ -31,11 +31,6 @@ $(NAME): $(OBJS)
 %.o: %.cpp
 	@printf "$(YELLOW)Compiling $(RESET)"
 	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-test: all
-	./$(NAME) "shhhhh... I think the students are asleep..."
-	./$(NAME) Damnit " ! " "Sorry students, I thought this thing was off."
-	./$(NAME)
 
 run: $(NAME)
 	./$(NAME)

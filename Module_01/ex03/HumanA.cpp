@@ -1,6 +1,3 @@
-#ifndef _HUMANA_CPP
-#define _HUMANA_CPP
-
 #include "HumanA.hpp"
 #include <iostream>
 
@@ -13,4 +10,3 @@ void	HumanA::attack( void ) const
 {
 	std::cout << _name << " attacks with his " << _weapon.getType() << std::endl;
 }
-#endif

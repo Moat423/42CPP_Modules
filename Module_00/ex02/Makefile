@@ -32,11 +32,6 @@ $(NAME): $(OBJS)
 	@printf "$(YELLOW)Compiling $(RESET)"
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-test: all
-	./$(NAME) "shhhhh... I think the students are asleep..."
-	./$(NAME) Damnit " ! " "Sorry students, I thought this thing was off."
-	./$(NAME)
-
 run: $(NAME)
 	./$(NAME)
 
