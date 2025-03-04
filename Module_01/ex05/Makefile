@@ -3,11 +3,11 @@ SHELL := /bin/bash
 MAKEFILES := lib/libft/Makefile lib/mlx/Makefile
 MAKEFLAGS += --no-print-directory --warn-undefined-variables
 
-NAME := megaphone
+NAME := Harl
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -pedantic -std=c++98
 
-SRCS := megaphone.cpp
+SRCS := Harl.cpp main.cpp
 
 OBJS := $(SRCS:.cpp=.o)
 
