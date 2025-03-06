@@ -3,7 +3,7 @@ SHELL := /bin/bash
 MAKEFILES := lib/libft/Makefile lib/mlx/Makefile
 MAKEFLAGS += --no-print-directory --warn-undefined-variables
 
-NAME := Fixed
+NAME := a.out
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -pedantic -std=c++98
 
