@@ -22,7 +22,7 @@ CURSOR_UP := $(shell printf '\033[1A')
 
 NAME := harlFilter
 
-PHONY := all clean fclean re
+.PHONY: all clean fclean re
 
 all: $(NAME)
 
@@ -39,7 +39,7 @@ $(NAME): $(OBJS)
 test: all
 	./$(NAME) "WARNING"
 	./$(NAME) "I am not sure how tired I am today..."
-	./$(NAME)
+	./$(NAME) "DEBUG"
 
 run: $(NAME)
 	./$(NAME)
