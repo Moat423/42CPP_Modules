@@ -12,6 +12,14 @@ what i take from this article for future computation:
 	changing polynomials to be functions of 1/x instead of x
 - Overflow: look out for multiplications of large numbers. If possible, rearrage the formula and extract some large number from the multiplication, you would always rather do more division, as getting closer to 0 doesn't matter, but when you reach infinity, its bad for calculations.
 
+## Function overloading
+
+that means, the programmer defines functions with the same name, that can takedifferent arguments. The compiler will choose the right function based on the arguments.
+
+		Fixed();
+		Fixed( const int value );
+		Fixed( const float value );
+
 ## orthodox Canonical Form
 
 - A default constructor that initializes what is needed
@@ -93,3 +101,41 @@ Rule of three:
 https://en.wikipedia.org/wiki/Rule_of_three_(C++_programming)
 copy constructor
 https://unstop.com/blog/copy-constructor-in-cpp
+
+## overloading for binary operators
+(that means operators that take two arguments)
+
+this may not be defined as a member function, as that would make it have three arguments, because of the implicit this argument.
+example:
+std::ostream &operator<<( std::ostream &out, const Fixed &rhs );
+
+## type-casting
+
+https://favtutor.com/blogs/static-cast-cpp
+
+	static_cast<float>( this->getRawBits() ) / ( 1 << _fractional );
+
+in c++ you can use C style conversion, which which have some pitfalls
+But there are other possibliitis. One of them is static_cast<type>(value). You can also do implicit conversion (which the compiler does automatically).
+The advantage of static casting is that is more explicit, and has checks on compile time.
+
+## conversion
+
+### int
+
+very easy, just a bitshift, since the int is basically a fixed with the dot behind the last number.
+
+### float
+
+https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/round-roundf-roundl?view=msvc-170
+to convert a float to a fixed point value, you have to first understand that floats are not stored in the same way. and that means, that wee ned to multiply the float value by a the 2^ resolution of the fixed point value. that means
+
+value * (1 >> this->_fractional)
+
+and then it is very good to use roundf to round it to the nearest integer, as floats have a lot of decimal places, that we can't represent in the fixed point value.
+std::roundf(value * (1 >> this->_fractional))
+
+to convert something to the float representation, you have to divide by the resolution of the fixed point value.
+
+	static_cast<float>( this->getRawBits() ) / ( 1 << _fractional );
+just make sure to cast as needed, as the division will be an integer division, if you don't cast it to a float.
