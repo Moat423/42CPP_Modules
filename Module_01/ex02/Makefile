@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 .ONESHELL:
-MAKEFILES := lib/libft/Makefile lib/mlx/Makefile
+MAKEFILES :=
 MAKEFLAGS += --no-print-directory --warn-undefined-variables
 
 NAME := brain
