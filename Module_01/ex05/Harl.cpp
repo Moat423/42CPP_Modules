@@ -47,4 +47,5 @@ void	Harl::complain( const std::string level ) const
 			return ;
 		}
 	}
+	std::cout << "No matching level found." << std::endl;
 }
