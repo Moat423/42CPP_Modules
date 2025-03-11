@@ -95,7 +95,7 @@ std::string	PhoneBook::_formatString(std::string str) const
 
 void	PhoneBook::searchContact() const
 {
-	int	i = 0;
+	int	i = -1;
 	if (_contacts[0].getFirstName().empty())
 	{
 		std::cout << "no Contacts in your PHONEBOOK (╥﹏╥)" << std::endl;
@@ -104,8 +104,15 @@ void	PhoneBook::searchContact() const
 	_printBook();
 	std::cout << std::endl << "ENTER INDEX OF CONTACT TO DISPLAY: " << std::endl;
 	std::cout << "> " << std::flush;
-	std::cin >> i;
+	if (!(std::cin >> i))
+		i = -1;
+	std::cin.clear();
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	if (i == -1)
+	{
+		std::cout << "invalid input" << std::endl << std::endl;
+		return ;
+	}
 	if (i >= 0 && i < 8 && !_contacts[i].getFirstName().empty())
 	{
 	std::cout << std::endl;
