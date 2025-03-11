@@ -3,13 +3,14 @@ SHELL := /bin/bash
 MAKEFILES := lib/libft/Makefile lib/mlx/Makefile
 MAKEFLAGS += --no-print-directory --warn-undefined-variables
 
-NAME := megaphone
-CXX := c++
-CXXFLAGS := -Wall -Wextra -Werror -pedantic -std=c++98
+CPP := c++
+CPPFLAGS := -Wall -Wextra -Werror -pedantic -std=c++98
 
-SRCS := megaphone.cpp
+SRCS := Harl.cpp main.cpp
 
 OBJS := $(SRCS:.cpp=.o)
+
+CPLUS_INCLUDE_PATH := .
 
 BOLD := $(shell printf '\033[1m')
 RESET := $(shell printf '\033[0m')
@@ -18,19 +19,27 @@ GREEN := $(shell printf '\033[32m')
 YELLOW := $(shell printf '\033[33m')
 CLEAR_LINE := $(shell printf '\033[2K')
 CURSOR_UP := $(shell printf '\033[1A')
+
+NAME := harlFilter
+
 PHONY := all clean fclean re
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@printf "\n$(BOLD)Linking $(NAME)$(RESET)\n"
-	$(CXX) $(CXXFLAGS) -o $@ $^ && \
+	$(CPP) $(CPPFLAGS) -o $@ $^ && \
 	printf "\n$(GREEN)$(BOLD)Build successful!$(RESET)\n" || \
 	printf "$(RED)$(BOLD)Build failed!$(RESET)\n"
 
 %.o: %.cpp
 	@printf "$(YELLOW)Compiling $(RESET)"
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CPP) $(CPPFLAGS) -c $< -o $@
+
+test: all
+	./$(NAME) "WARNING"
+	./$(NAME) "I am not sure how tired I am today..."
+	./$(NAME)
 
 run: $(NAME)
 	./$(NAME)

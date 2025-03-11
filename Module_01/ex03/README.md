@@ -83,7 +83,8 @@ its a bit hard to express the syntax for std::string or Weapon::getType but thin
 
 
 ## assignment versus initialization
-
+srcs:
+https://stackoverflow.com/questions/1272680/what-does-a-colon-following-a-c-constructor-name-do
 the constructer body only ever contains assignments. So this is invalid for a weapon of reference type (needs to be initialised with value)
 
 ```
