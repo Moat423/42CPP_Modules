@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cmath>
 
-static const int	_fractional = 8;
+const int	Fixed::_fractional = 8;
 
 Fixed::Fixed( void ):  _value(0)
 {
