@@ -39,21 +39,6 @@ void	Fixed::setRawBits( int const raw)
 	this->_value = raw;
 }
 
-Fixed &Fixed::operator=(const Fixed &rhs)
-{
-	std::cout << "Copy assignment operator called" << std::endl;
-	if (this != &rhs)
-		this->setRawBits(rhs.getRawBits());
-	return ( *this );
-}
-
-std::ostream &operator<<( std::ostream &out, const Fixed &rhs )
-{
-	out << rhs.toFloat();
-	return ( out );
-}
-
-
 float	Fixed::toFloat( void ) const
 {
 	return static_cast<float>( this->getRawBits() ) / ( 1 << _fractional );

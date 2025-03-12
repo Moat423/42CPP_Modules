@@ -21,10 +21,18 @@ class Fixed
 		void	setRawBits( int const raw );
 		float	toFloat( void ) const;
 		int		toInt( void ) const;
-		Fixed	&operator+(const Fixed &rhs);
-		Fixed	&operator-(const Fixed &rhs);
-		Fixed	&operator*(const Fixed &rhs);
-		Fixed	&operator/(const Fixed &rhs);
+		Fixed	&operator+=(const Fixed &rhs);
+		Fixed	&operator-=(const Fixed &rhs);
+		Fixed	&operator*=(const Fixed &rhs);
+		Fixed	&operator/=(const Fixed &rhs);
+		Fixed	operator+(const Fixed &rhs) const;
+		Fixed	operator-(const Fixed &rhs) const;
+		Fixed	operator*(const Fixed &rhs) const;
+		Fixed	operator/(const Fixed &rhs) const;
+		Fixed	&operator++( void ); // ++precrement
+		Fixed	operator++ ( int ); // postcrement++ with dummy int
+		Fixed	&operator--( void ); // --precrement
+		Fixed	operator-- ( int ); // postcrement-- with dummy int
 };
 
 std::ostream &operator<<( std::ostream &out, const Fixed &rhs );

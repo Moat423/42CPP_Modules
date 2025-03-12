@@ -101,9 +101,19 @@ Rule of three:
 https://en.wikipedia.org/wiki/Rule_of_three_(C++_programming)
 copy constructor
 https://unstop.com/blog/copy-constructor-in-cpp
+## overloading for unary operators
+(++, --,)
+src for understanding post and precrement well:
+https://isocpp.org/wiki/faq/operator-overloading
+
 
 ## overloading for binary operators
 (that means operators that take two arguments)
++, -, *, /
+these may be defined as member or non member functions, per rule of thumb, they should be defined as non member functions, as they are not changing the state of the object, but rather creating a new one.
+I was however asked to implement them as member functions in this scenario.
+
+Since it it bad form and confuses the user to have + but not +=, i will also implement these, and the + can be based on the += operator as well.
 
 this may not be defined as a member function, as that would make it have three arguments, because of the implicit this argument.
 example:
