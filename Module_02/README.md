@@ -112,6 +112,7 @@ https://isocpp.org/wiki/faq/operator-overloading
 +, -, *, /
 these may be defined as member or non member functions, per rule of thumb, they should be defined as non member functions, as they are not changing the state of the object, but rather creating a new one.
 I was however asked to implement them as member functions in this scenario.
+That goes for both the comparing operators and the arithmetic operators. (they both should be non members and friends, but i am forbidden from using friends)
 
 Since it it bad form and confuses the user to have + but not +=, i will also implement these, and the + can be based on the += operator as well.
 
@@ -149,3 +150,14 @@ to convert something to the float representation, you have to divide by the reso
 
 	static_cast<float>( this->getRawBits() ) / ( 1 << _fractional );
 just make sure to cast as needed, as the division will be an integer division, if you don't cast it to a float.
+
+## static member functions
+
+src:
+https://www.learncpp.com/cpp-tutorial/static-member-functions/
+
+-can be called directly by using the class name (Fixed) and scope resolution operator (::)
+	that means they may be called without an object of the class
+	a static member function may also be called thorugh an object of the class, but that is not recommended, as it is confusing to the user.
+-have no this pointer, as they are not called on an object!!
+

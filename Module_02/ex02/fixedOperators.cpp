@@ -3,7 +3,70 @@
 #include <cmath>
 #include <limits>
 
-//----------------------------binary operators----------------------------
+//UNARY OPERATORS
+
+//---------------------------------------pre- and postcrement---------------------------------------
+
+Fixed	&Fixed::operator++( void )
+{
+	this->_value += 1;
+	return ( *this );
+}
+
+Fixed	Fixed::operator++ ( int )
+{
+	Fixed ans(*this);
+	++(*this);
+	return (ans);
+}
+
+Fixed	&Fixed::operator--( void )
+{
+	this->_value -= 1;
+	return ( *this );
+}
+
+Fixed	Fixed::operator-- ( int )
+{
+	Fixed ans(*this);
+	++(*this);
+	return (ans);
+}
+
+//BINARY OPERATORS
+
+//----------------------------comparison operators----------------------------
+
+bool	Fixed::operator>(const Fixed &rhs) const
+{
+	return (this->getRawBits() > rhs.getRawBits());
+}
+
+bool	Fixed::operator<(const Fixed &rhs) const
+{
+	return (getRawBits() < rhs.getRawBits());
+}
+
+bool	Fixed::operator>=(const Fixed &rhs) const
+{
+	return (getRawBits() >= rhs.getRawBits());
+}
+
+bool	Fixed::operator<=(const Fixed &rhs) const
+{
+	return (getRawBits() <= rhs.getRawBits());
+}
+
+bool	Fixed::operator==(const Fixed &rhs) const
+{
+	return (getRawBits() == rhs.getRawBits());
+}
+bool	Fixed::operator!=(const Fixed &rhs) const
+{
+	return (!operator==(rhs));
+}
+
+//----------------------------arithmetic operators----------------------------
 
 Fixed	&Fixed::operator+=(const Fixed &rhs)
 {
@@ -86,28 +149,13 @@ Fixed	Fixed::operator/(const Fixed &rhs) const
 
 Fixed	&Fixed::operator=(const Fixed &rhs)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
+	/*std::cout << "Copy assignment operator called" << std::endl;*/
 	if (this != &rhs)
 		this->setRawBits(rhs.getRawBits());
 	return ( *this );
 }
 
-Fixed	&Fixed::operator++( void )
-{
-	/*return (this->operator+(Fixed(1)));*/
-	this->_value += Fixed(1)._value;
-	return ( *this );
-}
-
-Fixed	Fixed::operator++ ( int )
-{
-	Fixed ans(*this);
-	++(*this);
-	return (ans);
-}
-
-Fixed	&Fixed::operator--( void );
-Fixed	Fixed::operator-- ( int );
+//----------------------------non-member functions----------------------------
 
 std::ostream &operator<<( std::ostream &out, const Fixed &rhs )
 {
