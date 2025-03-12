@@ -7,7 +7,7 @@ NAME := a.out
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -pedantic -std=c++98
 
-SRCS := Harl.cpp main.cpp
+SRCS := Fixed.cpp main.cpp fixedOperators.cpp
 
 OBJS := $(SRCS:.cpp=.o)
 

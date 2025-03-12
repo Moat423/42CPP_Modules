@@ -2,6 +2,8 @@
 #include <iostream>
 #include <cmath>
 
+static const int	_fractional = 8;
+
 Fixed::Fixed( void ):  _value(0)
 {
 	std::cout << "Default constructor called" << std::endl;

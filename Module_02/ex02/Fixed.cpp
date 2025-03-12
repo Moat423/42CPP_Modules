@@ -1,36 +1,38 @@
 #include "Fixed.hpp"
-#include <iostream>
+/*#include <iostream>*/
 #include <cmath>
+
+static const int	_fractional = 8;
 
 Fixed::Fixed( void ):  _value(0)
 {
-	std::cout << "Default constructor called" << std::endl;
+	/*std::cout << "Default constructor called" << std::endl;*/
 }
 
 Fixed::Fixed( const int value ): _value(value << this->_fractional)
 {
-	std::cout << "Int constructor called" << std::endl;
+	/*std::cout << "Int constructor called" << std::endl;*/
 }
 
 Fixed::Fixed( const float value ): _value(static_cast<int>(std::round(value * (1 << this->_fractional))))
 {
-	std::cout << "Float constructor called" << std::endl;
+	/*std::cout << "Float constructor called" << std::endl;*/
 }
 
 Fixed::~Fixed( void ) 
 {
-	std::cout << "Destructor called" << std::endl;
+	/*std::cout << "Destructor called" << std::endl;*/
 }
 
 Fixed::Fixed( const Fixed &rhs )
 {
-	std::cout << "Copy constructor called" << std::endl;
+	/*std::cout << "Copy constructor called" << std::endl;*/
 	this->setRawBits(rhs.getRawBits());
 }
 
 int		Fixed::getRawBits( void ) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
+	/*std::cout << "getRawBits member function called" << std::endl;*/
 	return (this->_value);
 }
 
