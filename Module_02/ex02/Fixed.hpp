@@ -40,9 +40,11 @@ class Fixed
 		Fixed	&operator--( void ); // --precrement
 		Fixed	operator-- ( int ); // postcrement-- with dummy int
 		static Fixed	&min( Fixed &lhs, Fixed &rhs );
-		static Fixed	&min( const Fixed &lhs, const Fixed &rhs );
+		static const Fixed	&min( const Fixed &lhs, const Fixed &rhs );
 		static Fixed	&max( Fixed &lhs, Fixed &rhs );
-		static Fixed	&max( const Fixed &lhs, const Fixed &rhs );
+		static const Fixed	&max( const Fixed &lhs, const Fixed &rhs );
+    // Create from raw bits (static factory method) this is only added for the tests
+		static Fixed fromRawBits(int rawBits);
 };
 
 std::ostream &operator<<( std::ostream &out, const Fixed &rhs );

@@ -35,6 +35,9 @@ $(NAME): $(OBJS)
 run: $(NAME)
 	./$(NAME)
 
+test:
+	$(CXX) $(CXXFLAGS) -o test tests.cpp Fixed.cpp fixedOperators.cpp
+
 clean:
 	@rm -f $(OBJS)
 

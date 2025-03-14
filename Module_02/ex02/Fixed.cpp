@@ -55,3 +55,42 @@ int		Fixed::toInt( void ) const
 {
 	return (this->_value >> this->_fractional);
 }
+
+Fixed	&Fixed::min( Fixed &lhs, Fixed &rhs )
+{
+	if (lhs.getRawBits() < rhs.getRawBits())
+		return (lhs);
+	else
+	 	return (rhs);
+}
+
+const Fixed	&Fixed::min( const Fixed &lhs, const Fixed &rhs )
+{
+	if (lhs.getRawBits() < rhs.getRawBits())
+		return (lhs);
+	else
+	 	return (rhs);
+}
+
+Fixed	&Fixed::max( Fixed &lhs, Fixed &rhs )
+{
+	if (lhs.getRawBits() > rhs.getRawBits())
+		return (lhs);
+	else
+	 	return (rhs);
+}
+
+const Fixed	&Fixed::max( const Fixed &lhs, const Fixed &rhs )
+{
+	if (lhs.getRawBits() > rhs.getRawBits())
+		return (lhs);
+	else
+	 	return (rhs);
+}
+
+Fixed Fixed::fromRawBits(int rawBits)
+{
+	Fixed result;
+	result._value = rawBits;
+	return result;
+}

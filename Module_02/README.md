@@ -161,3 +161,201 @@ https://www.learncpp.com/cpp-tutorial/static-member-functions/
 	a static member function may also be called thorugh an object of the class, but that is not recommended, as it is confusing to the user.
 -have no this pointer, as they are not called on an object!!
 
+## something specific for my implementation
+
+I read in that very elaborate stackoverflow (link above in text) that you can use += to define + and prefix ++ to define postfix ++,
+so i am trying to do that here, as I read it is good form to limit the amount of code you write, and to make it more readable.
+
+I also added the fromRawBits function, which enables me to create a Fixed from a raw bit integer value i am giving it, which makes the testing cleaner, because i don't have to initialize every obejct with a float or int value. it's usage can be seen in the tests.
+
+
+## overflow/underflow checks
+
+I decided to make this Fixed point class more robust and have overflow checks, which isn't that easy in C++98 standard, since i can't use a long long int. 
+Her however is a great source that discusses long long fixed point implementations and operations very well:
+https://vanhunteradams.com/FixedPoint/FixedPoint.html
+There are also some compiler flags that could be set, but these are more for debugging and not for the final product.
+Therefore i have this solution for += (and -=, which just mirrors that)
+
+``` C++
+	if (rhs._value > 0 && this->_value > std::numeric_limits<int>::max() - rhs._value)
+		throw std::overflow_error("Overflow error");
+```
+this checks if the value is positive and if value is bigger that the maximum minus that positive value. if it is, if would overflow. (that would mean there is "not enough space" for rhs till int max)
+
+``` C++
+	else if (rhs._value < 0 && this->_value < std::numeric_limits<int>::min() - rhs._value)
+		throw std::underflow_error("Underflow error");
+}
+```
+same with negative numbers, so I check if its a negative and then see if int min minus the negative value (meaning + the absolute value) is bigger that the current value. If it is, it would underflow.
+
+### multiplication
+ that is a bit more complicated. I decided to try to make my class more robust and have overflow checks and preserve as much accuracy as possible.
+But that means it is going to be slightly slower.
+```C++
+
+	if (rhs._value == 0 || this->_value == 0)
+	{
+		this->_value = 0;
+		return (*this);
+	}
+```
+first a basic check if i can return quci, as multiplying by 0 is always 0.
+``` C++
+	bool	negative = (this->_value < 0) != (rhs._value < 0);
+	int		abs_this = std::abs(this->_value);
+	int		abs_rhs = std::abs(rhs._value);
+	if (abs_rhs > ((std::numeric_limits<int>::max() >> _fractional) / abs_this))
+		throw std::overflow_error("Overflow error in multiplication");
+	int	result = 0;
+```
+switching over to absolute values to simplify for checking for overflow and preserve if the result should be negative.
+``` C++
+	//splitting the number
+	int	this_high = abs_this >> (_fractional / 2);
+	int	this_low = abs_this & (1 << _fractional / 2) - 1;
+	int	rhs_high = abs_rhs >> (_fractional / 2);
+	int	rhs_low = abs_rhs & (1 << _fractional / 2) - 1;
+```
+making the multiplication in parts to preserve accuracy and to check for overflow.
+``` C++
+	// distributive mutliplication to preserve accuracy
+	int	high_high = this_high * rhs_high;
+	int	high_low = this_high * rhs_low;
+	int	low_high = this_low * rhs_high;
+	int	low_low = this_low * rhs_low;
+```
+then using the distributive property of multiplication to split the multiplication in parts, to preserve accuracy and to check for overflow.
+in this case:
+(a + b) * (c + d) = (a*c) + (a*d) + (b*c) + (b*d)
+with
+a = high bits of first number(this) (shifted left)
+b = low bits of first number (this)
+c = high bits of second number (rhs)(shifted left)
+d = low bits of second number (rhs)
+``` C++
+	// combining the results
+	result = high_high;
+	result += (high_low >> (_fractional / 2));
+	result += (low_high >> (_fractional / 2));
+	result += (low_low >> _fractional);
+	this->_value = negative ? -result : result;
+	return ( *this );
+```
+
+### Division
+Now that is an even more complicated topic. I decided on a middleground between preserving some accuracy, but still being a bit fast.
+ofc it would have been all easy if i used a long long:
+```C++
+	long long result = ((static_cast<long long>(this->_value) << this->_fractional) / static_cast<long long>(rhs._value));
+	if (result > std::numeric_limits<int>::max())
+		throw std::overflow_error("Overflow error");
+	else if (result < std::numeric_limits<int>::min())
+		throw std::underflow_error("Underflow error");
+	else
+		this->_value = result;
+	```
+but this not what we are doing. We are implementing some c++98 safe code.
+
+``` C++
+	if (rhs._value == 0)
+		throw std::runtime_error("Division by zero");
+	if (this->_value == 0)
+		return *this;
+```
+first is of course 0 check.
+``` C++
+	bool	negative = (this->_value < 0) != (rhs._value < 0);
+	int	abs_this = std::abs(this->_value);
+	int	abs_rhs = std::abs(rhs._value);
+```
+converting to absolute values and saving if result should be negative, so overflow check is easier.
+``` C++
+	//simple overflow check for small divisors causing overflow
+	if (abs_rhs < (1 << _fractional) &&
+		abs_this > (std::numeric_limits<int>::max() >> (_fractional / 2 - 1)))
+		throw std::overflow_error("Overflow error in division");
+```
+now this is where I am simplifying to save some time. I check if I have a small divisor, and if I do, then i check if I have some space in my value to have it become bigger.
+If abs_rhs was the minimum (0.00390625 with 8 fractional bits) then that would mean the resulting multiplication factor would be 2^_fractional. So its going to become large.
+But I am not shifting by the full _fractional, but i am shifting by a safety ammount and I have decided that _fractional / 2 - 1 would be reasonable.
+
+``` C++
+// Simple fixed-point division with some safety margin
+    int result = ((abs_this << (_fractional - 2)) / abs_rhs) << 2;
+```
+now normally you would shift by _fractional first and then do the division, but i am doing part of the shift first and then the rest in the hopes of perserving some accuracy and speed.
+``` C++
+	this->_value = negative ? -result : result;
+	return *this;
+```
+
+
+ofc the most robust version would be to check how many bits can be safely shifted by and then still split the number into a lover and an upper part to preserve the most accuracy.
+But I decided against this, as I believe it would be going overboard.
+``` C++
+Fixed &Fixed::operator/=(const Fixed &rhs)
+{
+    if (rhs._value == 0)
+        throw std::runtime_error("Division by zero");
+    if (this->_value == 0) {
+        return *this; // 0 divided by anything remains 0
+    }
+    bool negative = (this->_value < 0) != (rhs._value < 0);
+    int abs_this = this->_value < 0 ? -this->_value : this->_value;
+    int abs_rhs = rhs._value < 0 ? -rhs._value : rhs._value;
+    // First approach: try to get as much precision as possible
+    int result;
+    // Check how many leading zeros we have to determine safe shift
+    int leading_zeros = 0;
+    int temp = abs_this;
+    for (int i = 31; i >= 0; i--) {
+        if ((temp & (1 << i)) == 0)
+            leading_zeros++;
+        else
+            break;
+    }
+    int safe_shift = leading_zeros;
+    // Check if division might cause overflow even with safe shift
+    // If divisor is small, result gets larger
+    if (abs_rhs < (1 << _fractional)) {
+        // Maximum multiplier effect from division
+        int multiplier_effect = (1 << _fractional) / abs_rhs;
+        // Adjust safe_shift to account for division making number larger
+        while (multiplier_effect > 1 && safe_shift > 0) {
+            multiplier_effect >>= 1;
+            safe_shift--;
+        }
+    }
+    if (safe_shift >= _fractional) {
+        // We can do full precision division
+        result = ((abs_this << _fractional) / abs_rhs);
+    } else {
+        // We need to use a two-step approach to maximize precision
+        // Step 1: Get the whole number part
+        int whole_part = abs_this / abs_rhs;
+        // Step 2: Get remainder and calculate fractional part
+        int remainder = abs_this % abs_rhs;
+        int fractional_part = 0;
+        if (remainder > 0) {
+            // Shift the remainder by safe amount
+            remainder <<= safe_shift;
+            fractional_part = remainder / abs_rhs;
+            // Adjust to proper fixed-point scale
+            if (safe_shift < _fractional) {
+                fractional_part <<= (_fractional - safe_shift);
+            } else if (safe_shift > _fractional) {
+                fractional_part >>= (safe_shift - _fractional);
+            }
+        }
+        // Combine whole and fractional parts
+        result = (whole_part << _fractional) + fractional_part;
+    }
+    if (negative) {
+        result = -result;
+    }
+    this->_value = result;
+    return *this;
+}
+```
