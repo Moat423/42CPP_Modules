@@ -73,7 +73,7 @@ int main() {
     testOperation("Zero addition", Fixed(0), Fixed(-17.625f), add, -17.625f);
     
     // Small number addition
-    testOperation("Small number addition", Fixed(0.001953125f), Fixed(0.001953125f), add, 0.00390625f);
+    testOperation("Small number addition", Fixed(0.00390625f), Fixed(0.00390625f), add, 0.0078125f);
     
     // Overflow tests
     int maxInt = std::numeric_limits<int>::max();
@@ -93,7 +93,7 @@ int main() {
     testOperation("Subtract zero", Fixed(42.125f), Fixed(0), subtract, 42.125f);
     
     // Small number subtraction
-    testOperation("Small number subtraction", Fixed(0.00390625f), Fixed(0.001953125f), subtract, 0.001953125f);
+    testOperation("Small number subtraction", Fixed(0.00390625f), Fixed(0.00390625f), subtract, 0.00000000f);
     
     // Overflow tests
     testOperation("Overflow subtraction", Fixed::fromRawBits(maxInt - 100), Fixed(-1.0f), subtract, 0, true);
@@ -137,7 +137,7 @@ int main() {
     testOperation("Fractional division (precise)", Fixed(1.0f), Fixed(8.0f), divide, 0.125f);
     
     // Division by very small number (potential overflow)
-    testOperation("Division by small number", Fixed(1000.0f), Fixed(0.001953125f), divide, 512000.0f, true);
+    testOperation("Division by small number", Fixed(1000.0f), Fixed(0.00390625f), divide, 256000.0f, false);
     
     // Division by zero
     testOperation("Division by zero", Fixed(42.125f), Fixed(0), divide, 0, true);
@@ -169,7 +169,7 @@ int main() {
     
     // Test approaching limits
     testOperation("Near max + small value", Fixed::fromRawBits(std::numeric_limits<int>::max() - 1000), 
-                 Fixed::fromRawBits(900), add, 0, true);
+                 Fixed(4.50000000f), add, 0, true);
     
     std::cout << "\nAll tests completed.\n" << std::endl;
     

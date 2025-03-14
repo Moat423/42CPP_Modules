@@ -88,7 +88,7 @@ Fixed	&Fixed::operator-=(const Fixed &rhs)
 	else if (rhs._value > 0 && this->_value < std::numeric_limits<int>::min() + rhs._value)
 		throw std::underflow_error("Underflow error");
 	else
-		this->_value = this->_value + rhs._value;
+		this->_value = this->_value - rhs._value;
 	return ( *this );
 }
 
