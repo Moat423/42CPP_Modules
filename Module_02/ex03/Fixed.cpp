@@ -1,4 +1,5 @@
 #include "Fixed.hpp"
+#include "Debug.hpp"
 /*#include <iostream>*/
 #include <cmath>
 
@@ -12,33 +13,33 @@ static double myRound(double value)
 
 Fixed::Fixed( void ):  _value(0)
 {
-	/*std::cout << "Default constructor called" << std::endl;*/
+	debug("Default constructor called");
 }
 
 Fixed::Fixed( const int value ): _value(value << this->_fractional)
 {
-	/*std::cout << "Int constructor called" << std::endl;*/
+	debug("Int constructor called");
 }
 
 Fixed::Fixed( const float value ): _value(static_cast<int>(myRound(value * (1 << this->_fractional))))
 {
-	/*std::cout << "Float constructor called" << std::endl;*/
+	debug("Float constructor called");
 }
 
 Fixed::~Fixed( void ) 
 {
-	/*std::cout << "Destructor called" << std::endl;*/
+	debug("Destructor called");
 }
 
 Fixed::Fixed( const Fixed &rhs )
 {
-	/*std::cout << "Copy constructor called" << std::endl;*/
+	debug("Copy constructor called");
 	this->setRawBits(rhs.getRawBits());
 }
 
 Fixed &Fixed::operator=(const Fixed &rhs)
 {
-	/*std::cout << "Copy assignment operator called" << std::endl;*/
+	debug("Copy assignment operator called");
 	if (this != &rhs)
 		this->setRawBits(rhs.getRawBits());
 	return ( *this );
@@ -46,7 +47,7 @@ Fixed &Fixed::operator=(const Fixed &rhs)
 
 int		Fixed::getRawBits( void ) const
 {
-	/*std::cout << "getRawBits member function called" << std::endl;*/
+	debug("getRawBits member function called");
 	return (this->_value);
 }
 

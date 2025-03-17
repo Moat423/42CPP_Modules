@@ -344,3 +344,7 @@ the second one is the one I decided for in the end, it just swaps in a new insta
 	return (*this);
 ```
 that is more elegant and safe, as it is a standard library function and is guaranteed to work.
+
+## the debug header
+in ex03 i started using a debug header to only pront the messages of the constructor and the other stuff when i need them
+it is enabled with the DEBUG flag in the Makefile

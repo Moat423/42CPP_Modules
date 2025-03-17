@@ -1,17 +1,14 @@
-
-		/*Point( void );*/
-		/*~Point( void );*/
-		/*Point(const Point &rhs);*/
-		/*Point operator=(Point const &rhs);*/
-		/*Fixed getX( void ) const;*/
-		/*Fixed getY( void ) const;*/
-
 #include "Point.hpp"
 #include "Debug.hpp"
 
 Point::Point( void ): x(0), y(0)
 {
 	debug("Default constructor called");
+}
+
+Point::Point( const float x, const float y ): x(x), y(y)
+{
+	debug("Float constructor called");
 }
 
 Point::~Point( void )
