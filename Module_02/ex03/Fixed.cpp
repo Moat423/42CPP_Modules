@@ -105,9 +105,9 @@ Fixed Fixed::fromRawBits(int rawBits)
 	return result;
 }
 
-Fixed &Fixed::abs(Fixed &value)
+Fixed Fixed::abs(Fixed const &value)
 {
 	if (value.getRawBits() < 0)
-		value._value *= -1;
+		return (Fixed(value) * Fixed(-1));
 	return (value);
 }

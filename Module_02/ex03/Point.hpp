@@ -9,6 +9,7 @@ class Point
 		Fixed const y;
 	public:
 		Point( void );
+		Point( const float x, const float y );
 		~Point( void );
 		Point(const Point &rhs);
 		Point operator=(Point const &rhs);

@@ -44,7 +44,7 @@ class Fixed
 		static Fixed	&max( Fixed &lhs, Fixed &rhs );
 		static const Fixed	&max( const Fixed &lhs, const Fixed &rhs );
 		//utils
-		static Fixed &abs(Fixed &value);
+		static Fixed abs(const Fixed &value);
 		// Create from raw bits (static factory method) this is only added for the tests
 		static Fixed fromRawBits(int rawBits);
 };
