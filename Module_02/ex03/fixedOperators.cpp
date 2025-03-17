@@ -129,15 +129,13 @@ Fixed &Fixed::operator/=(const Fixed &rhs)
     if (rhs._value == 0)
         throw std::runtime_error("Division by zero");
     if (this->_value == 0)
-        return *this; // 0 divided by anything remains 0
+        return *this;
     int result;
     bool negative = (this->_value < 0) != (rhs._value < 0);
 	int	abs_this = std::abs(this->_value);
 	int	abs_rhs = std::abs(rhs._value);
     int leading_zeros = 0;
     int temp = abs_this;
-    // First approach: try to get as much precision as possible
-    // Check how many leading zeros we have to determine safe shift
     for (int i = 31; i >= 0; i--) 
 	{
         if ((temp & (1 << i)) == 0)
@@ -146,41 +144,31 @@ Fixed &Fixed::operator/=(const Fixed &rhs)
             break;
     }
     int safe_shift = leading_zeros;
-    // Check if division might cause overflow even with safe shift
-    // If divisor is small, result gets larger
     if (abs_rhs < (1 << _fractional))
 	{
-        // Maximum multiplier effect from division
         int multiplier_effect = (1 << _fractional) / abs_rhs;
-        // Adjust safe_shift to account for division making number larger
         while (multiplier_effect > 1 && safe_shift > 0)
 		{
             multiplier_effect >>= 1;
             --safe_shift;
         }
     }
-    if (safe_shift >= _fractional)// We can do full precision division
-        result = ((abs_this << _fractional) / abs_rhs); //normal formula for division
+    if (safe_shift >= _fractional)
+        result = ((abs_this << _fractional) / abs_rhs);
     else
 	{
-        // We need to use a two-step approach to maximize precision
-        // Step 1: Get the whole number part
         int whole_part = abs_this / abs_rhs;
-        // Step 2: Get remainder and calculate fractional part
         int remainder = abs_this % abs_rhs;
         int fractional_part = 0;
-        if (remainder > 0) {
-            // Shift the remainder by safe amount
+        if (remainder > 0)
+		{
             remainder <<= safe_shift;
             fractional_part = remainder / abs_rhs;
-            // Adjust to proper fixed-point scale
-            if (safe_shift < _fractional) {
+            if (safe_shift < _fractional)
                 fractional_part <<= (_fractional - safe_shift);
-            } else if (safe_shift > _fractional) {
+            else if (safe_shift > _fractional)
                 fractional_part >>= (safe_shift - _fractional);
-            }
         }
-        // Combine whole and fractional parts
         result = (whole_part << _fractional) + fractional_part;
     }
 	this->_value = negative ? -result : result;
