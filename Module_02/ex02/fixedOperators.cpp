@@ -214,14 +214,6 @@ Fixed	Fixed::operator/(const Fixed &rhs) const
 	return (result);
 }
 
-Fixed	&Fixed::operator=(const Fixed &rhs)
-{
-	/*std::cout << "Copy assignment operator called" << std::endl;*/
-	if (this != &rhs)
-		this->setRawBits(rhs.getRawBits());
-	return ( *this );
-}
-
 //----------------------------non-member functions----------------------------
 
 std::ostream &operator<<( std::ostream &out, const Fixed &rhs )
