@@ -315,3 +315,32 @@ Fixed &Fixed::operator/=(const Fixed &rhs)
 }
 ```
 in the end, the version that is in my code now is more complex, but also more accurate and robust.
+
+## BSP
+
+### the Point
+
+since i am required to make my private attribus x and y Fixed const, it is not actually that nice to make a copy assignment operator overload, as that would mean that the x and y values could be changed, which is not what i want.
+So acutally implementing a copy assignment operator overload is a bit stupid, as shown in this discussion:
+https://cplusplus.com/forum/beginner/55742/
+But anyway, there are ways to circumvent constness in CPP too.
+
+This one is to const_cast. But it is not recommended, as it is not safe and can lead to undefined behaviour.
+```C++
+	if (this != &rhs)
+	{
+		const_cast<Fixed&>(this->x) = rhs.getX();
+		const_cast<Fixed&>(this->y) = rhs.getY();
+	}
+	return (*this);
+```
+the second one is the one I decided for in the end, it just swaps in a new instance on the class.
+```C++
+	if (this != &rhs)
+	{
+		Point	tmp(rhs);
+		std::swap(*this, tmp);
+	}
+	return (*this);
+```
+that is more elegant and safe, as it is a standard library function and is guaranteed to work.

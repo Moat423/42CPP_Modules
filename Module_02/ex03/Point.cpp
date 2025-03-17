@@ -29,8 +29,8 @@ Point Point::operator=( Point const &rhs )
 	debug("Copy assignment operator called");
 	if (this != &rhs)
 	{
-		static_cast<Fixed>(this->x) = rhs.getX();
-		static_cast<Fixed>(this->y) = rhs.getY();
+		Point	tmp(rhs);
+		std::swap(*this, tmp);
 	}
 	return (*this);
 }

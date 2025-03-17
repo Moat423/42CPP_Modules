@@ -103,3 +103,10 @@ Fixed Fixed::fromRawBits(int rawBits)
 	result._value = rawBits;
 	return result;
 }
+
+Fixed &Fixed::abs(Fixed &value)
+{
+	if (value.getRawBits() < 0)
+		value._value *= -1;
+	return (value);
+}
