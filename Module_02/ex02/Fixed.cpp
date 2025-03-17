@@ -4,8 +4,9 @@
 
 const int	Fixed::_fractional = 8;
 
-// round function of my own
-static double myRound(double value) {
+// round function of my own static to only this file
+static double myRound(double value)
+{
     return (value >= 0.0) ? floor(value + 0.5) : ceil(value - 0.5);
 }
 
