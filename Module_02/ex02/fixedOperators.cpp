@@ -126,21 +126,66 @@ Fixed &Fixed::operator*=(const Fixed &rhs)
 
 Fixed &Fixed::operator/=(const Fixed &rhs)
 {
-	if (rhs._value == 0)
-		throw std::runtime_error("Division by zero");
-	if (this->_value == 0)
-		return *this;
-	bool	negative = (this->_value < 0) != (rhs._value < 0);
-	int	abs_this = std::abs(this->_value);
-	int	abs_rhs = std::abs(rhs._value);
-	//simple overflow check for small divisors causing overflow
-	if (abs_rhs < (1 << _fractional) &&
-		abs_this > (std::numeric_limits<int>::max() >> (_fractional / 2 - 1)))
-		throw std::overflow_error("Overflow error in division");
-	// Simple fixed-point division with some safety margin
-    int result = ((abs_this << (_fractional - 2)) / abs_rhs) << 2;
-	this->_value = negative ? -result : result;
-	return ( *this );
+    if (rhs._value == 0)
+        throw std::runtime_error("Division by zero");
+    if (this->_value == 0) {
+        return *this; // 0 divided by anything remains 0
+    }
+    bool negative = (this->_value < 0) != (rhs._value < 0);
+    int abs_this = this->_value < 0 ? -this->_value : this->_value;
+    int abs_rhs = rhs._value < 0 ? -rhs._value : rhs._value;
+    // First approach: try to get as much precision as possible
+    int result;
+    // Check how many leading zeros we have to determine safe shift
+    int leading_zeros = 0;
+    int temp = abs_this;
+    for (int i = 31; i >= 0; i--) {
+        if ((temp & (1 << i)) == 0)
+            leading_zeros++;
+        else
+            break;
+    }
+    int safe_shift = leading_zeros;
+    // Check if division might cause overflow even with safe shift
+    // If divisor is small, result gets larger
+    if (abs_rhs < (1 << _fractional)) {
+        // Maximum multiplier effect from division
+        int multiplier_effect = (1 << _fractional) / abs_rhs;
+        // Adjust safe_shift to account for division making number larger
+        while (multiplier_effect > 1 && safe_shift > 0) {
+            multiplier_effect >>= 1;
+            safe_shift--;
+        }
+    }
+    if (safe_shift >= _fractional) {
+        // We can do full precision division
+        result = ((abs_this << _fractional) / abs_rhs);
+    } else {
+        // We need to use a two-step approach to maximize precision
+        // Step 1: Get the whole number part
+        int whole_part = abs_this / abs_rhs;
+        // Step 2: Get remainder and calculate fractional part
+        int remainder = abs_this % abs_rhs;
+        int fractional_part = 0;
+        if (remainder > 0) {
+            // Shift the remainder by safe amount
+            remainder <<= safe_shift;
+            fractional_part = remainder / abs_rhs;
+            // Adjust to proper fixed-point scale
+            if (safe_shift < _fractional) {
+                fractional_part <<= (_fractional - safe_shift);
+            } else if (safe_shift > _fractional) {
+                fractional_part >>= (safe_shift - _fractional);
+            }
+        }
+        // Combine whole and fractional parts
+        result = (whole_part << _fractional) + fractional_part;
+    }
+    if (negative) {
+        result = -result;
+    }
+    this->_value = result;
+    return *this;
 }
 
 Fixed	Fixed::operator+(const Fixed &rhs) const
