@@ -136,8 +136,6 @@ Fixed &Fixed::operator/=(const Fixed &rhs)
 	int	abs_rhs = std::abs(rhs._value);
     int leading_zeros = 0;
     int temp = abs_this;
-    // First approach: try to get as much precision as possible
-    // Check how many leading zeros we have to determine safe shift
     for (int i = 31; i >= 0; i--) 
 	{
         if ((temp & (1 << i)) == 0)
@@ -169,16 +167,16 @@ Fixed &Fixed::operator/=(const Fixed &rhs)
         // Step 2: Get remainder and calculate fractional part
         int remainder = abs_this % abs_rhs;
         int fractional_part = 0;
-        if (remainder > 0) {
+        if (remainder > 0)
+		{
             // Shift the remainder by safe amount
             remainder <<= safe_shift;
             fractional_part = remainder / abs_rhs;
             // Adjust to proper fixed-point scale
-            if (safe_shift < _fractional) {
+            if (safe_shift < _fractional)
                 fractional_part <<= (_fractional - safe_shift);
-            } else if (safe_shift > _fractional) {
+            else if (safe_shift > _fractional)
                 fractional_part >>= (safe_shift - _fractional);
-            }
         }
         // Combine whole and fractional parts
         result = (whole_part << _fractional) + fractional_part;

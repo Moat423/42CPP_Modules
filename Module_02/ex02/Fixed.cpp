@@ -36,6 +36,14 @@ Fixed::Fixed( const Fixed &rhs )
 	this->setRawBits(rhs.getRawBits());
 }
 
+Fixed &Fixed::operator=(const Fixed &rhs)
+{
+	/*std::cout << "Copy assignment operator called" << std::endl;*/
+	if (this != &rhs)
+		this->setRawBits(rhs.getRawBits());
+	return ( *this );
+}
+
 int		Fixed::getRawBits( void ) const
 {
 	/*std::cout << "getRawBits member function called" << std::endl;*/
