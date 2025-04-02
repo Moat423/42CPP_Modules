@@ -12,7 +12,7 @@ int	main (void)
 
 	std::cout << "You turn around to run away, but on the horizon you see a horde of zombies approaching" << std::endl;
 	Zombie *horde = zombieHorde(HORDENUM, "Horton");
-	for (int i; i < HORDENUM; i++)
+	for (int i = 0; i < HORDENUM; i++)
 		horde[i].announce();
 
 	std::cout << YEL << "By a saving grace, the first sunrays touch the horizon, as it deletes the ZombieHorde" << RESET << std::endl;
