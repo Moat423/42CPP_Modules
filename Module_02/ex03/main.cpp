@@ -24,7 +24,7 @@ int	main( void )
     
     // Test 2: Point clearly outside the triangle
     std::cout << "Test " << ++testNr << ": Point clearly outside the triangle" << std::endl;
-    Point outsidePoint(15.0f, 5.0f);
+    Point outsidePoint(15.0f, 15.0f);
     std::cout << "Expected: false, Result: " << bsp(a, b, c, outsidePoint) << "\n" << std::endl;
     
     // Test 3: Point exactly on vertex A

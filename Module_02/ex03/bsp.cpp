@@ -11,6 +11,15 @@ Fixed	area(Point const a, Point const b, Point const c)
 
 bool bsp( Point const a, Point const b, Point const c, Point const point)
 {
+	try {
+		Fixed	pab = area(point, a, b);
+		Fixed	pbc = area(point, b, c);
+		Fixed	pac = area(point, a, c);
+	}
+	catch (const std::exception&) {
+		std::cout << "failed to calc area" << std::endl;
+		return (false);
+	}
 	Fixed	pab = area(point, a, b);
 	Fixed	pbc = area(point, b, c);
 	Fixed	pac = area(point, a, c);
