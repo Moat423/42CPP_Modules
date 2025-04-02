@@ -318,6 +318,11 @@ in the end, the version that is in my code now is more complex, but also more ac
 
 ## BSP
 
+since the smallest number i can represent is:
+0.00390625f
+
+anything below get rounded to 0 or that. so calculating tiny triangles, with less than that, is not going to work.
+
 ### the Point
 
 since i am required to make my private attribus x and y Fixed const, it is not actually that nice to make a copy assignment operator overload, as that would mean that the x and y values could be changed, which is not what i want.
@@ -344,6 +349,29 @@ the second one is the one I decided for in the end, it just swaps in a new insta
 	return (*this);
 ```
 that is more elegant and safe, as it is a standard library function and is guaranteed to work.
+
+### bsp algorithm
+
+I decided to have the possibility of an early exit if my point lies way outside the triangle, because then i don't get as many overflow errors:
+```C++
+	Fixed minX = Fixed::min(Fixed::min(a.getX(), b.getX()), c.getX());
+    Fixed maxX = Fixed::max(Fixed::max(a.getX(), b.getX()), c.getX());
+    Fixed minY = Fixed::min(Fixed::min(a.getY(), b.getY()), c.getY());
+    Fixed maxY = Fixed::max(Fixed::max(a.getY(), b.getY()), c.getY());
+	if (point.getX() < minX || point.getX() > maxX || point.getY() < minX || point.getY() > maxX)
+		return (false);
+```
+and then i am just calculating the area of three triangles, with the point i assume to be part of the triangle as a vertex with each of the other vertexes, so i get three smaller triangles, that i sum together.
+
+		Fixed	pab = area(point, a, b);
+		Fixed	pbc = area(point, b, c);
+		Fixed	pac = area(point, a, c);
+
+here i compare it against the actual area:
+
+		Fixed	total_area = area(a, b, c);
+		Fixed	sum = pab + pac + pbc;
+		return (sum == total_area);
 
 ## the debug header
 in ex03 i started using a debug header to only pront the messages of the constructor and the other stuff when i need them
