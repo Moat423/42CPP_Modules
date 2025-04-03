@@ -1,9 +1,6 @@
 #ifndef DEBUG_HPP
 # define DEBUG_HPP
 
-# include <iostream>
-# include <sstream>
-
 # define RED "\033[31m"
 # define GREEN "\033[32m"
 # define YEL "\033[33m"
@@ -16,6 +13,9 @@
 # define BOLD "\033[1m"
 
 # ifdef DEBUG
+# include <iostream>
+# include <sstream>
+
 # define debug(msg) \
 	std::cerr << YEL << __FILE__ << ":" << __LINE__ << " " << msg << RESET << std::endl;
 # else
