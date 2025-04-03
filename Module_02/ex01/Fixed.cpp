@@ -59,7 +59,7 @@ std::ostream &operator<<( std::ostream &out, const Fixed &rhs )
 
 float	Fixed::toFloat( void ) const
 {
-	return static_cast<float>( this->getRawBits() ) / ( 1 << _fractional );
+	return static_cast<float>( this->_value ) / ( 1 << _fractional );
 }
 
 int		Fixed::toInt( void ) const
