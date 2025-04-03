@@ -4,15 +4,15 @@
 #include <ostream>
 
 ClapTrap::ClapTrap( void ):
-	_name("default"), _hitPoints(10), _energyPoints(10), _attackDamage(0)
+	_name("default"), _hitPoints(BASE_MAX_HP), _energyPoints(10), _attackDamage(0)
 {
-	debug("Default constructor called");
+	debug("ClapTrap constructed");
 }
 
 ClapTrap::ClapTrap( const char *name ):
-	_name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
+	_name(name), _hitPoints(BASE_MAX_HP), _energyPoints(10), _attackDamage(0)
 {
-	debug("Name constructor called");
+	debug("ClapTrap constructed with name");
 }
 
 ClapTrap::ClapTrap( const ClapTrap &rhs ):
@@ -21,44 +21,62 @@ ClapTrap::ClapTrap( const ClapTrap &rhs ):
 	_energyPoints(rhs._energyPoints), 
 	_attackDamage(rhs._attackDamage)
 {
-	debug("Copy constructor called");
+	debug("ClapTrap copy constructed");
 }
 
 ClapTrap::~ClapTrap()
 {
-	debug("Destructor called");
+	debug("ClapTrap destroyed");
 }
 
-ClapTrap &ClapTrap::operator=( const ClapTrap &rhs ){
-	this->_name = rhs._name;
-	this->_attackDamage = rhs._attackDamage;
-	this->_energyPoints = rhs._energyPoints;
-	this->_hitPoints = rhs._hitPoints;
+ClapTrap &ClapTrap::operator=( const ClapTrap &rhs )
+{
+	_name = rhs._name;
+	_attackDamage = rhs._attackDamage;
+	_energyPoints = rhs._energyPoints;
+	_hitPoints = rhs._hitPoints;
 	return (*this);
 }
 
 const char	*ClapTrap::getName( void )
 {
-	return (this->_name);
+	return (_name);
+}
+
+void	ClapTrap::exhaustMsg(const std::string action) const
+{
+	std::cout << BLUE <<
+		"ClapTrap " << _name << " is exhausted and can't " << action << " anymore!" <<
+		RESET << std::endl;
+	return;
+}
+
+void	ClapTrap::deadMsg(const std::string action) const
+{
+	std::cout << BRED <<
+	"ClapTrap " << _name << " is dead and can't " << action << " anymore!" <<
+	RESET << std::endl;
+	return ;
 }
 
 void	ClapTrap::attack(const std::string& target)
 {
 	if (_energyPoints == 0)
 	{
-		std::cout << "ClapTrap " << (this->_name ? _name : "null") << " is exhausted and can't attack anymore" << std::endl;
+		exhaustMsg("attack");
 		return ;
 	}
 	if (_hitPoints == 0)
 	{
-		std::cout << "ClapTrap " << (this->_name ? _name : "null") << " is dead and can't attack anymore" << std::endl;
 		return ;
 	}
-	this->_energyPoints--;
-	std::cout << "ClapTrap " << (this->_name ? _name : "null")  <<
+	_energyPoints--;
+	std::cout << RED <<
+		"ClapTrap " << (_name ? _name : "null")  <<
 		" attacks " << target <<
-		", causing " << this->_attackDamage  <<
-		" points of damage!" << std::endl;
+		", causing " << _attackDamage  <<
+		" points of damage!" <<
+		RESET << std::endl;
 }
 
 void ClapTrap::takeDamage( unsigned int amount )
@@ -67,16 +85,17 @@ void ClapTrap::takeDamage( unsigned int amount )
 
 	if (_hitPoints == 0)
 	{
-		std::cout << "ClapTrap " << (this->_name ? _name : "null") << " is dead and can't take Damage anymore" << std::endl;
+		exhaustMsg("take damage");
 		return ;
 	}
-	this->_energyPoints--;
-	tmp_hp = this->_hitPoints - amount;
-	this->_hitPoints = tmp_hp > 0 ? tmp_hp : 0;
-	std::cout << "ClapTrap " << (this->_name ? _name : "null") <<
+	tmp_hp = _hitPoints - amount;
+	_hitPoints = tmp_hp > 0 ? tmp_hp : 0;
+	std::cout << YEL <<
+		"ClapTrap " << (_name ? _name : "null") <<
 		" got damaged for " << amount <<
-		" and has " << this->_hitPoints <<
-		" Hit Points left." << std::endl;
+		" and has " << _hitPoints <<
+		" Hit Points left." <<
+		RESET << std::endl;
 	return ;
 }
 
@@ -86,14 +105,22 @@ void ClapTrap::beRepaired( unsigned int amount )
 
 	if (_hitPoints == 0)
 	{
-		std::cout << "ClapTrap " << (this->_name ? _name : "null") << " is dead and can't be revived through repair" << std::endl;
+		deadMsg("repair itself");
 		return ;
 	}
-	this->_energyPoints--;
-	tmp_hp = this->_hitPoints + amount;
-	this->_hitPoints = tmp_hp >= 10 ? 10 : tmp_hp;
-	std::cout << "ClapTrap " << (this->_name ? _name : "null") <<
+	if (_energyPoints == 0)
+	{
+		exhaustMsg("repair itself");
+		return ;
+	}
+	--_energyPoints;
+	tmp_hp = _hitPoints + amount;
+	_hitPoints = tmp_hp >= BASE_MAX_HP ? BASE_MAX_HP : tmp_hp;
+	std::cout << GREEN <<
+		"ClapTrap " << (_name ? _name : "null") <<
 		" got repaired for " << amount <<
-		" and has " << this->_hitPoints <<
-		" left." << std::endl;
+		" and has " << _hitPoints <<
+		" Hit Points left." << 
+		RESET << std::endl;
+	return ;
 }

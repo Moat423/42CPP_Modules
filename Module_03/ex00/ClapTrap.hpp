@@ -13,6 +13,10 @@
 /*• void takeDamage(unsigned int amount);*/
 /*• void beRepaired(unsigned int amount);*/
 
+# ifndef BASE_MAX_HP
+#  define BASE_MAX_HP 10
+# endif // BASE_MAX_HP
+
 class ClapTrap
 {
 	public:
@@ -25,6 +29,8 @@ class ClapTrap
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
 		const char	*getName(void);
+		void	exhaustMsg(const std::string action) const;
+		void	deadMsg(const std::string action) const;
 	private:
 		const char *_name;
 		int			_hitPoints;

@@ -3,7 +3,7 @@
 int	main( void )
 {
 	ClapTrap	dummy;
-	ClapTrap	npc("standard");
+	ClapTrap	npc("npc");
 	ClapTrap	helper(dummy);
 	dummy.attack(npc.getName());
 	npc.takeDamage(0);
@@ -16,5 +16,11 @@ int	main( void )
 		dummy.attack(npc.getName());
 		npc.takeDamage(0);
 	}
+	dummy.beRepaired(5);
+	
 	npc.beRepaired(9);
+	for (int i = 0; i < 9; i++)
+	{
+		npc.beRepaired(1);
+	}
 }
