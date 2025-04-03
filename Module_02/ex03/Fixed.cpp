@@ -34,14 +34,14 @@ Fixed::~Fixed( void )
 Fixed::Fixed( const Fixed &rhs )
 {
 	debug("Copy constructor called");
-	this->setRawBits(rhs.getRawBits());
+	this->setRawBits(rhs._value);
 }
 
 Fixed &Fixed::operator=(const Fixed &rhs)
 {
 	debug("Copy assignment operator called");
 	if (this != &rhs)
-		this->setRawBits(rhs.getRawBits());
+		this->setRawBits(rhs._value);
 	return ( *this );
 }
 
@@ -58,7 +58,7 @@ void	Fixed::setRawBits( int const raw)
 
 float	Fixed::toFloat( void ) const
 {
-	return static_cast<float>( this->getRawBits() ) / ( 1 << _fractional );
+	return static_cast<float>( this->_value ) / ( 1 << _fractional );
 }
 
 int		Fixed::toInt( void ) const
@@ -68,7 +68,7 @@ int		Fixed::toInt( void ) const
 
 Fixed	&Fixed::min( Fixed &lhs, Fixed &rhs )
 {
-	if (lhs.getRawBits() < rhs.getRawBits())
+	if (lhs._value < rhs._value)
 		return (lhs);
 	else
 	 	return (rhs);
@@ -76,7 +76,7 @@ Fixed	&Fixed::min( Fixed &lhs, Fixed &rhs )
 
 const Fixed	&Fixed::min( const Fixed &lhs, const Fixed &rhs )
 {
-	if (lhs.getRawBits() < rhs.getRawBits())
+	if (lhs._value < rhs._value)
 		return (lhs);
 	else
 	 	return (rhs);
@@ -84,7 +84,7 @@ const Fixed	&Fixed::min( const Fixed &lhs, const Fixed &rhs )
 
 Fixed	&Fixed::max( Fixed &lhs, Fixed &rhs )
 {
-	if (lhs.getRawBits() > rhs.getRawBits())
+	if (lhs._value > rhs._value)
 		return (lhs);
 	else
 	 	return (rhs);
@@ -92,7 +92,7 @@ Fixed	&Fixed::max( Fixed &lhs, Fixed &rhs )
 
 const Fixed	&Fixed::max( const Fixed &lhs, const Fixed &rhs )
 {
-	if (lhs.getRawBits() > rhs.getRawBits())
+	if (lhs._value > rhs._value)
 		return (lhs);
 	else
 	 	return (rhs);
@@ -107,7 +107,7 @@ Fixed Fixed::fromRawBits(int rawBits)
 
 Fixed Fixed::abs(Fixed const &value)
 {
-	if (value.getRawBits() < 0)
+	if (value._value < 0)
 		return (Fixed(value) * Fixed(-1));
 	return (value);
 }
