@@ -17,7 +17,7 @@ class ClapTrap
 {
 	public:
 		ClapTrap();
-		ClapTrap(char *name);
+		ClapTrap(const char *name);
 		~ClapTrap();
 		ClapTrap(const ClapTrap &rhs);
 		ClapTrap &operator=(const ClapTrap &rhs);
@@ -26,10 +26,10 @@ class ClapTrap
 		void	beRepaired(unsigned int amount);
 		const char	*getName(void);
 	private:
-		const char	*_name;
-		int		_hitPoints;
-		int		_energyPoints;
-		int		_attackDamage;
+		const char *_name;
+		int			_hitPoints;
+		int			_energyPoints;
+		int			_attackDamage;
 };
 
 #endif // CLAPTRAP_HPP

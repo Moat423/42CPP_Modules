@@ -3,10 +3,10 @@
 #include <ostream>
 
 ClapTrap::ClapTrap( void ):
-	_name(NULL), _hitPoints(10), _energyPoints(10), _attackDamage(0)
+	_name("default"), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {}
 
-ClapTrap::ClapTrap( char *name ): _name(name) {}
+ClapTrap::ClapTrap( const char *name ): _name(name) {}
 
 ClapTrap::ClapTrap( const ClapTrap &rhs ):
 	_name(rhs._name), 
@@ -14,6 +14,8 @@ ClapTrap::ClapTrap( const ClapTrap &rhs ):
 	_energyPoints(rhs._energyPoints), 
 	_attackDamage(rhs._attackDamage)
 {}
+
+ClapTrap::~ClapTrap() {}
 
 ClapTrap &ClapTrap::operator=( const ClapTrap &rhs ){
 	this->_name = rhs._name;
@@ -62,7 +64,7 @@ void ClapTrap::takeDamage( unsigned int amount )
 	std::cout << "ClapTrap " << (this->_name ? _name : "null") <<
 		" got damaged for " << amount <<
 		" and has " << this->_hitPoints <<
-		" left." << std::endl;
+		" Hit Points left." << std::endl;
 	return ;
 }
 
