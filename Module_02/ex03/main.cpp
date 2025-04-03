@@ -15,20 +15,10 @@ int	main( void )
     int testNr = 0;
     
     // Define a triangle for most tests
-	float	x0 = 0.0f;
-	float	y0 = 0.0f;
-
-	float	x1 = 10;
-	float	y1 = 0;
-
-	float	x2 = 5;
-	float	y2 = 10;
-
     Point a(0.0f, 0.0f);      // Origin
     Point b(10.0f, 0.0f);     // 10 units right from origin
     Point c(5.0f, 10.0f);     // 5 units right, 10 units up (forming a triangle)
     
-	std::cout << "actual area of the triange, from FLOATS: " << std::abs(x0 * (y1 - y2) + x1 * (y2 - y0) + x2 * (y0 - y1)) / 2 << std::endl;
     // Test 1: Point clearly inside the triangle
     std::cout << "Test " << ++testNr << ": Point clearly inside the triangle" << std::endl;
     Point insidePoint(5.0f, 3.0f);
