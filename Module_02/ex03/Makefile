@@ -7,8 +7,6 @@ NAME := a.out
 CXX := c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 
-# CXXFLAGS += -DDEBUG
-
 SRCS := Fixed.cpp main.cpp fixedOperators.cpp bsp.cpp Point.cpp
 
 OBJS := $(SRCS:.cpp=.o)
@@ -36,6 +34,9 @@ $(NAME): $(OBJS)
 
 run: $(NAME)
 	./$(NAME)
+
+debug: CXXFLAGS += -DDEBUG
+debug: re
 
 clean:
 	@rm -f $(OBJS)

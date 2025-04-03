@@ -19,7 +19,7 @@
 # define debug(msg) \
 	std::cerr << YEL << __FILE__ << ":" << __LINE__ << " " << msg << RESET << std::endl;
 # else
-# define debug(...)
+# define debug(msg) (void(0))
 # endif
 
 #endif // !DEBUG_HPP
