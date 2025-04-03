@@ -14,7 +14,7 @@ Fixed::Fixed( const int value ): _value(value << this->_fractional)
 	std::cout << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed( const float value ): _value(static_cast<int>(round(value * (1 << this->_fractional))))
+Fixed::Fixed( const float value ): _value(static_cast<int>(roundf(value * (1 << this->_fractional))))
 {
 	std::cout << "Float constructor called" << std::endl;
 }

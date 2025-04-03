@@ -5,12 +5,6 @@
 
 const int	Fixed::_fractional = 8;
 
-// round function of my own static to only this file
-static double myRound(double value)
-{
-    return (value >= 0.0) ? floor(value + 0.5) : ceil(value - 0.5);
-}
-
 Fixed::Fixed( void ):  _value(0)
 {
 	debug("Default constructor called");
@@ -21,7 +15,7 @@ Fixed::Fixed( const int value ): _value(value << this->_fractional)
 	debug("Int constructor called");
 }
 
-Fixed::Fixed( const float value ): _value(static_cast<int>(myRound(value * (1 << this->_fractional))))
+Fixed::Fixed( const float value ): _value(static_cast<int>(roundf(value * (1 << this->_fractional))))
 {
 	debug("Float constructor called");
 }
