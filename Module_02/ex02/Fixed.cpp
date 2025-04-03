@@ -57,7 +57,7 @@ void	Fixed::setRawBits( int const raw)
 
 float	Fixed::toFloat( void ) const
 {
-	return static_cast<float>( this->getRawBits() ) / ( 1 << _fractional );
+	return static_cast<float>( this->_value ) / ( 1 << _fractional );
 }
 
 int		Fixed::toInt( void ) const
@@ -67,7 +67,7 @@ int		Fixed::toInt( void ) const
 
 Fixed	&Fixed::min( Fixed &lhs, Fixed &rhs )
 {
-	if (lhs.getRawBits() < rhs.getRawBits())
+	if (lhs._value < rhs._value)
 		return (lhs);
 	else
 	 	return (rhs);
@@ -75,7 +75,7 @@ Fixed	&Fixed::min( Fixed &lhs, Fixed &rhs )
 
 const Fixed	&Fixed::min( const Fixed &lhs, const Fixed &rhs )
 {
-	if (lhs.getRawBits() < rhs.getRawBits())
+	if (lhs._value < rhs._value)
 		return (lhs);
 	else
 	 	return (rhs);
@@ -83,7 +83,7 @@ const Fixed	&Fixed::min( const Fixed &lhs, const Fixed &rhs )
 
 Fixed	&Fixed::max( Fixed &lhs, Fixed &rhs )
 {
-	if (lhs.getRawBits() > rhs.getRawBits())
+	if (lhs._value > rhs._value)
 		return (lhs);
 	else
 	 	return (rhs);
@@ -91,7 +91,7 @@ Fixed	&Fixed::max( Fixed &lhs, Fixed &rhs )
 
 const Fixed	&Fixed::max( const Fixed &lhs, const Fixed &rhs )
 {
-	if (lhs.getRawBits() > rhs.getRawBits())
+	if (lhs._value > rhs._value)
 		return (lhs);
 	else
 	 	return (rhs);
