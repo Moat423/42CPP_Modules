@@ -5,9 +5,14 @@
 class Animal
 {
   public:
-    void make_sound( void );
+    void makeSound( void );
   protected:
     std::string   name;
 };
+
+class Cat : public Animal
+{
+  
+}
 
 #endif //ANIMAL_HPP
