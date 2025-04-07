@@ -1,6 +1,5 @@
 #include "ClapTrap.hpp"
 #include <iostream>
-#include <iterator>
 #include <ostream>
 
 int	main( void )
