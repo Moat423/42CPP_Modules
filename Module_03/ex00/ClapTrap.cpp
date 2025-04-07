@@ -41,11 +41,6 @@ ClapTrap &ClapTrap::operator=( const ClapTrap &rhs )
 	return (*this);
 }
 
-const char	*ClapTrap::getName( void )
-{
-	return (_name);
-}
-
 void	ClapTrap::exhaustMsg(const std::string action) const
 {
 	std::cout << BLUE <<
