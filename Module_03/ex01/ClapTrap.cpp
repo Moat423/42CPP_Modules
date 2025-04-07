@@ -66,6 +66,7 @@ void	ClapTrap::attack(const std::string& target)
 	}
 	if (_hitPoints == 0)
 	{
+		deadMsg("attack");
 		return ;
 	}
 	_energyPoints--;

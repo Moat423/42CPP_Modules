@@ -26,6 +26,13 @@ derived object through a base class pointer, the behavior is undefined.
 The base class destructor will be called, but the derived class's destructor won't, 
 leading to memory leaks and potential crashes.
 
+so what that means is when i do
+	ClapTrap	*pretender = new FragTrap("pretender");
+	ClapTrap	mutant(*pretender);
+
+i should not get memory leaks.
+this is really weird, as i am copying from a derived class to a base class, but it does not copy the derived class functions.
+
 ### virtual
 
 https://stackoverflow.com/questions/2391679/why-do-we-need-virtual-functions-in-c
