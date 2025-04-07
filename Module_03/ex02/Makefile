@@ -7,9 +7,9 @@ NAME := a.out
 CXX := c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 
-HDRS := ClapTrap.hpp ScavTrap.hpp
+HDRS := ClapTrap.hpp ScavTrap.hpp FragTrap.hpp
 
-SRCS := main.cpp ClapTrap.cpp ScavTrap.cpp
+SRCS := main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
 
 OBJS := $(SRCS:.cpp=.o)
 

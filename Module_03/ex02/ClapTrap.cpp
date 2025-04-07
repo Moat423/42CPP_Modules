@@ -114,7 +114,7 @@ void ClapTrap::beRepaired( unsigned int amount )
 	}
 	--_energyPoints;
 	tmp_hp = _hitPoints + amount;
-	_hitPoints = tmp_hp >= BASE_MAX_HP ? BASE_MAX_HP : tmp_hp;
+	_hitPoints = tmp_hp >= 100 ? 100 : tmp_hp;
 	std::cout << GREEN <<
 		"ClapTrap " << (_name ? _name : "null") <<
 		" got repaired for " << amount <<

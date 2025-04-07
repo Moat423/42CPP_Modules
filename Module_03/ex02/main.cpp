@@ -1,5 +1,4 @@
 #include "Debug.hpp"
-#include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 #include <iostream>
@@ -39,8 +38,10 @@ int	main( void )
 	std::cout << std::endl;
 	std::cout << "the ScavTraps have had enough and now it's their turn!!" << RESET << std::endl;
 	SC4V_TRAP.attack("his imagination WITH RANGE");
-	paul.takeDamage(0);
+	paul.takeDamage(50);
 	SC4V_TRAP.beRepaired(5);
+	for (int i = 0; i < 11; i++)
+		paul.beRepaired(20);
 	SC4V_TRAP.attack("one too many times WITH RANGE");
 	paul.beRepaired(1);
 	SC4V_TRAP.guardGate();
