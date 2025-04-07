@@ -1,26 +1,33 @@
 #include "ScavTrap.hpp"
+#include "ClapTrap.hpp"
 #include "Debug.hpp"
 #include <iostream>
 #include <ostream>
 
-ScavTrap::ScavTrap( void ):
-	_name("default"), _hitPoints(BASE_MAX_HP), _energyPoints(10), _attackDamage(0)
+ScavTrap::ScavTrap( void )
 {
+	_name = "default";
+	_hitPoints = SCAV_MAX_HP;
+	_energyPoints = 50;
+	_attackDamage = 20;
 	debug("[ ScavTrap ] constructed");
 }
 
-ScavTrap::ScavTrap( const char *name ):
-	_name(name), _hitPoints(BASE_MAX_HP), _energyPoints(10), _attackDamage(0)
+ScavTrap::ScavTrap( const char *name )
 {
+	_name = name;
+	_hitPoints = SCAV_MAX_HP;
+	_energyPoints = 50;
+	_attackDamage = 20;
 	debug("[ ScavTrap ] constructed with name");
 }
 
-ScavTrap::ScavTrap( const ScavTrap &rhs ):
-	_name(rhs._name), 
-	_hitPoints(rhs._hitPoints),
-	_energyPoints(rhs._energyPoints), 
-	_attackDamage(rhs._attackDamage)
+ScavTrap::ScavTrap( const ScavTrap &rhs )
 {
+	_name = rhs._name;
+	_hitPoints = rhs._hitPoints;
+	_energyPoints = rhs._energyPoints;
+	_attackDamage = rhs._attackDamage;
 	debug("[ ScavTrap ] copy constructed");
 }
 
@@ -123,4 +130,13 @@ void ScavTrap::beRepaired( unsigned int amount )
 		" Hit Points left." << 
 		RESET << std::endl;
 	return ;
+}
+
+void	ScavTrap::guardGate(void) const
+{
+	
+	std::cout << MAG <<
+		"[ ScavTrap ] " << (_name ? _name : "null") <<
+		" is now in GATE KEEPER MODE !" <<
+		RESET << std::endl;
 }
