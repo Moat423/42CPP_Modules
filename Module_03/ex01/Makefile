@@ -37,7 +37,7 @@ $(NAME): $(OBJS)
 run: $(NAME)
 	./$(NAME)
 
-debug: CXXFLAGS += -DDEBUG
+debug: CXXFLAGS += -DNODEBUG
 debug: re
 
 clean:
