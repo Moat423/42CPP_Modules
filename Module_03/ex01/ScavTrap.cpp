@@ -72,7 +72,20 @@ void	ScavTrap::attack(const std::string& target)
 
 void	ScavTrap::guardGate(void) const
 {
-	
+	if (_energyPoints == 0)
+	{
+		std::cout << BLUE <<
+		"[ ScavTrap ] " << _name << " is dead and can't guard anymore!" <<
+		RESET << std::endl;
+		return ;
+	}
+	if (_hitPoints == 0)
+	{
+		std::cout << BRED <<
+		"[ ScavTrap ] " << _name << " is dead and can't guard anymore!" <<
+		RESET << std::endl;
+		return ;
+	}
 	std::cout << MAG <<
 		"[ ScavTrap ] " << _name  <<
 		" is now in GATE KEEPER MODE!" <<

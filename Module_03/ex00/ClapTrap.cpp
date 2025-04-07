@@ -89,7 +89,7 @@ void ClapTrap::takeDamage( unsigned int amount )
 
 	if (_hitPoints == 0)
 	{
-		exhaustMsg("take damage");
+		deadMsg("take damage");
 		return ;
 	}
 	tmp_hp = _hitPoints - amount;

@@ -28,16 +28,15 @@ int	main( void )
 		npc.beRepaired(1);
 	std::cout << std::endl;
 	std::cout << CYN << "the ScavTraps have had enough and now it's their turn!!" << RESET << std::endl;
+	paul.takeDamage(110);
 	for (int i = 0; i < 50; i++)
 	{
 		SC4V_TRAP.attack("his imagination WITH RANGE");
 		mutant.attack("flailing arround");
-		paul.takeDamage(0);
 	}
 	SC4V_TRAP.beRepaired(5);
 	SC4V_TRAP.attack("one too many times WITH RANGE");
-	for (int i = 0; i < 11; i++)
-		paul.beRepaired(1);
+	paul.beRepaired(1);
 	paul.guardGate();
 	SC4V_TRAP.guardGate();
 	SC4V_TRAP2.guardGate();
