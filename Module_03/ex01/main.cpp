@@ -38,4 +38,7 @@ int	main( void )
 	SC4V_TRAP.attack("one too many times WITH RANGE");
 	for (int i = 0; i < 11; i++)
 		paul.beRepaired(1);
+	paul.guardGate();
+	SC4V_TRAP.guardGate();
+	SC4V_TRAP2.guardGate();
 }
