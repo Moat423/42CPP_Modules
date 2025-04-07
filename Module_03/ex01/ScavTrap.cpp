@@ -50,7 +50,7 @@ void	ScavTrap::attack(const std::string& target)
 	if (_energyPoints == 0)
 	{
 		std::cout << BLUE <<
-		"[ ScavTrap ] " << _name << " is dead and can't attack anymore!" <<
+		"[ ScavTrap ] " << _name << " is exhausted and can't attack anymore!" <<
 		RESET << std::endl;
 		return ;
 	}
@@ -75,7 +75,7 @@ void	ScavTrap::guardGate(void) const
 	if (_energyPoints == 0)
 	{
 		std::cout << BLUE <<
-		"[ ScavTrap ] " << _name << " is dead and can't guard anymore!" <<
+		"[ ScavTrap ] " << _name << " is exhausted and can't guard anymore!" <<
 		RESET << std::endl;
 		return ;
 	}
