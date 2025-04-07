@@ -31,10 +31,13 @@ ClapTrap::~ClapTrap()
 
 ClapTrap &ClapTrap::operator=( const ClapTrap &rhs )
 {
-	_name = rhs._name;
-	_attackDamage = rhs._attackDamage;
-	_energyPoints = rhs._energyPoints;
-	_hitPoints = rhs._hitPoints;
+	if (this != &rhs)
+	{
+		_name = rhs._name;
+		_attackDamage = rhs._attackDamage;
+		_energyPoints = rhs._energyPoints;
+		_hitPoints = rhs._hitPoints;
+	}
 	return (*this);
 }
 
@@ -68,6 +71,7 @@ void	ClapTrap::attack(const std::string& target)
 	}
 	if (_hitPoints == 0)
 	{
+		deadMsg("attack");
 		return ;
 	}
 	_energyPoints--;

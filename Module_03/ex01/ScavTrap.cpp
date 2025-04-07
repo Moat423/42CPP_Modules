@@ -4,30 +4,27 @@
 #include <iostream>
 #include <ostream>
 
-ScavTrap::ScavTrap( void )
+ScavTrap::ScavTrap( void ): ClapTrap()
 {
-	_name = "default";
 	_hitPoints = SCAV_MAX_HP;
 	_energyPoints = 50;
 	_attackDamage = 20;
 	debug("[ ScavTrap ] constructed");
 }
 
-ScavTrap::ScavTrap( const char *name )
+ScavTrap::ScavTrap( const char *name ): ClapTrap(name)
 {
-	_name = name;
 	_hitPoints = SCAV_MAX_HP;
 	_energyPoints = 50;
 	_attackDamage = 20;
 	debug("[ ScavTrap ] constructed with name");
 }
 
-ScavTrap::ScavTrap( const ScavTrap &rhs )
+ScavTrap::ScavTrap( const ScavTrap &rhs ): ClapTrap(rhs)
 {
-	_name = rhs._name;
-	_hitPoints = rhs._hitPoints;
-	_energyPoints = rhs._energyPoints;
-	_attackDamage = rhs._attackDamage;
+	/*_hitPoints = rhs._hitPoints;*/
+	/*_energyPoints = rhs._energyPoints;*/
+	/*_attackDamage = rhs._attackDamage;*/
 	debug("[ ScavTrap ] copy constructed");
 }
 
@@ -38,43 +35,30 @@ ScavTrap::~ScavTrap()
 
 ScavTrap &ScavTrap::operator=( const ScavTrap &rhs )
 {
-	_name = rhs._name;
-	_attackDamage = rhs._attackDamage;
-	_energyPoints = rhs._energyPoints;
-	_hitPoints = rhs._hitPoints;
+	if (this != &rhs)
+	{
+		_name = rhs._name;
+		_attackDamage = rhs._attackDamage;
+		_energyPoints = rhs._energyPoints;
+		_hitPoints = rhs._hitPoints;
+	}
 	return (*this);
-}
-
-const char	*ScavTrap::getName( void )
-{
-	return (_name);
-}
-
-void	ScavTrap::exhaustMsg(const std::string action) const
-{
-	std::cout << BLUE <<
-		"[ ScavTrap ] " << _name << " is exhausted and can't " << action << " anymore!" <<
-		RESET << std::endl;
-	return;
-}
-
-void	ScavTrap::deadMsg(const std::string action) const
-{
-	std::cout << BRED <<
-	"[ ScavTrap ] " << _name << " is dead and can't " << action << " anymore!" <<
-	RESET << std::endl;
-	return ;
 }
 
 void	ScavTrap::attack(const std::string& target)
 {
 	if (_energyPoints == 0)
 	{
-		exhaustMsg("attack");
+		std::cout << BLUE <<
+		"[ ScavTrap ] " << _name << " is dead and can't attack anymore!" <<
+		RESET << std::endl;
 		return ;
 	}
 	if (_hitPoints == 0)
 	{
+		std::cout << BRED <<
+		"[ ScavTrap ] " << _name << " is dead and can't attack anymore!" <<
+		RESET << std::endl;
 		return ;
 	}
 	_energyPoints--;
@@ -86,57 +70,11 @@ void	ScavTrap::attack(const std::string& target)
 		RESET << std::endl;
 }
 
-void ScavTrap::takeDamage( unsigned int amount )
-{
-	int	tmp_hp;
-
-	if (_hitPoints == 0)
-	{
-		exhaustMsg("take damage");
-		return ;
-	}
-	tmp_hp = _hitPoints - amount;
-	_hitPoints = tmp_hp > 0 ? tmp_hp : 0;
-	std::cout << YEL <<
-		"[ ScavTrap ] " << (_name ? _name : "null") <<
-		" got damaged for " << amount <<
-		" and has " << _hitPoints <<
-		" Hit Points left." <<
-		RESET << std::endl;
-	return ;
-}
-
-void ScavTrap::beRepaired( unsigned int amount )
-{
-	int	tmp_hp;
-
-	if (_hitPoints == 0)
-	{
-		deadMsg("repair itself");
-		return ;
-	}
-	if (_energyPoints == 0)
-	{
-		exhaustMsg("repair itself");
-		return ;
-	}
-	--_energyPoints;
-	tmp_hp = _hitPoints + amount;
-	_hitPoints = tmp_hp >= BASE_MAX_HP ? BASE_MAX_HP : tmp_hp;
-	std::cout << GREEN <<
-		"[ ScavTrap ] " << (_name ? _name : "null") <<
-		" got repaired for " << amount <<
-		" and has " << _hitPoints <<
-		" Hit Points left." << 
-		RESET << std::endl;
-	return ;
-}
-
 void	ScavTrap::guardGate(void) const
 {
 	
 	std::cout << MAG <<
-		"[ ScavTrap ] " << (_name ? _name : "null") <<
-		" is now in GATE KEEPER MODE !" <<
+		"[ ScavTrap ] " << _name  <<
+		" is now in GATE KEEPER MODE!" <<
 		RESET << std::endl;
 }
