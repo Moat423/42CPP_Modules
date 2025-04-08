@@ -2,7 +2,6 @@
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 #include <iostream>
-#include <memory>
 
 int	main( void )
 {
@@ -30,6 +29,8 @@ int	main( void )
 	FR4G_TRAP.highFivesGuys();
 	FR4G_TRAP2.highFivesGuys();
 	FR4G_TRAP.beRepaired(80);
+	std::cout << "FragTrap attacking with its base class attack unawarely" << std::endl;
+	FR4G_TRAP.ClapTrap::attack("another target");
 	mutant.takeDamage(20);
 	dummy.attack("his imagination");
 	npc.takeDamage(0);

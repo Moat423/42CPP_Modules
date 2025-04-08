@@ -36,3 +36,15 @@ this is really weird, as i am copying from a derived class to a base class, but 
 ### virtual
 
 https://stackoverflow.com/questions/2391679/why-do-we-need-virtual-functions-in-c
+
+### shadowing
+
+https://www.programiz.com/cpp-programming/function-overriding
+
+shadowing is when both the derived and the base class have the same function implemented.
+But when the funciton gets called from a derived class, the derived class function with the same name gets called instead of the base clas Fkt, even though both exist.
+You can however call the base class funciton from the derived class pointer as well:
+
+	FR4G_TRAP.ClapTrap::attack("another target");
+
+dereivedClassInstance.Base::functionFromBase();
