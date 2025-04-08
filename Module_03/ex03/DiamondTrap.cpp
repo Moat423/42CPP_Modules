@@ -1,33 +1,35 @@
 #include "DiamondTrap.hpp"
 #include "ClapTrap.hpp"
 #include "Debug.hpp"
+#include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 #include <iostream>
-#include <ostream>
 
 DiamondTrap::DiamondTrap( void ): ClapTrap()
 {
 	_hitPoints = FRAG_MAX_HP;
-	_energyPoints = 100;
+	_energyPoints = 50;
 	_attackDamage = 30;
-	debug("< DiamondTrap > constructed");
+	debug("# DiamondTrap # constructed");
 }
 
-DiamondTrap::DiamondTrap( const char *name ): ClapTrap(name)
+DiamondTrap::DiamondTrap( const char *name ): ClapTrap(name), ScavTrap(name), FragTrap(name), _name(name)
 {
+	// TODO strcpy name and append _clap_name to initialize ClapTrap
 	_hitPoints = FRAG_MAX_HP;
-	_energyPoints = 100;
+	_energyPoints = 50;
 	_attackDamage = 30;
-	debug("< DiamondTrap > constructed with name");
+	debug("# DiamondTrap # constructed with name");
 }
 
-DiamondTrap::DiamondTrap( const DiamondTrap &rhs ): ClapTrap(rhs)
+DiamondTrap::DiamondTrap( const DiamondTrap &rhs ): ClapTrap(rhs), ScavTrap(rhs), FragTrap(rhs)
 {
-	debug("< DiamondTrap > copy constructed");
+	debug("# DiamondTrap # copy constructed");
 }
 
 DiamondTrap::~DiamondTrap()
 {
-	debug("< DiamondTrap > destroyed");
+	debug("# DiamondTrap # destroyed");
 }
 
 DiamondTrap &DiamondTrap::operator=( const DiamondTrap &rhs )
@@ -42,4 +44,8 @@ DiamondTrap &DiamondTrap::operator=( const DiamondTrap &rhs )
 	return (*this);
 }
 
-void DiamondTrap::whoAmI() const;
+void DiamondTrap::whoAmI() const
+{
+	std::cout << CYN << "I am a # DiamondTrap # named " << BOLD << _name << RESET << std::endl
+		<< CYN << "ClapTrap-Name: " << BOLD << DiamondTrap::ClapTrap::_name << RESET << std::endl;
+}

@@ -1,4 +1,5 @@
 #include "Debug.hpp"
+#include "DiamondTrap.hpp"
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 #include <iostream>
@@ -16,6 +17,12 @@ int	main( void )
 	FragTrap	anon;
 	FragTrap	FR4G_TRAP(anon);
 	FragTrap	FR4G_TRAP2("Frederick");
+	DiamondTrap	tim("Tim");
+	DiamondTrap	dude;
+	DiamondTrap	timsTwin(tim);
+	tim.highFivesGuys();
+	tim.whoAmI();
+	dude.whoAmI();
 	pretender->takeDamage(50);
 	pretender->beRepaired(30);
 	pretender->beRepaired(30);
@@ -48,4 +55,5 @@ int	main( void )
 	SC4V_TRAP.attack("again WITH RANGE");
 	paul.beRepaired(1);
 	SC4V_TRAP.guardGate();
+
 }
