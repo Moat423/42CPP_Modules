@@ -9,6 +9,26 @@ class declaration
 							name of class to inherit from
 {...
 
+### Inheritance design
+
+https://isocpp.org/wiki/faq/multiple-inheritance#mi-example
+
+bridge pattern: have one class with many derived classes and nest a pointer to another class inside that class, so the nested class can be arbitrarily chosen
+
+nested generalization: have one base with many derived classes and write a derived class for every single comnbination of the derived + the feature that you want (so don't externaize it into a seperate class. this means a lot of duplicate code, but fine grain control)
+
+multiple-inheritance: inherits from at least two separate parents
+
+		Diamond inheritance: subproblem of multiple inheritance. A particular class appears more than once in the class's inheritance
+
+To avoid the duplicated base class subobject that occurs with the “dreaded diamond”, you should use the virtual keyword in the inheritance part of the classes that derive directly from the top of the diamond
+
+### virtual inheritance
+
+https://stackoverflow.com/questions/2659116/how-does-virtual-inheritance-solve-the-diamond-multiple-inheritance-ambiguit
+
+"Code class B: virtual A means, that any class inherited from B is now responsible for creating A by itself, since B isn't going to do it automatically."
+
 ### type of inheritance
 
 Public Inheritance − When deriving a class from a public base class, public members of the base class become public members of the derived class and protected members of the base class become protected members of the derived class. A base class's private members are never accessible directly from a derived class, but can be accessed through calls to the public and protected members of the base class.
