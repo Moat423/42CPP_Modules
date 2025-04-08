@@ -2,6 +2,7 @@
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 #include <iostream>
+#include <memory>
 
 int	main( void )
 {
@@ -14,6 +15,7 @@ int	main( void )
 	ClapTrap	mutant(*pretender);
 	FragTrap	anon;
 	FragTrap	FR4G_TRAP(anon);
+	FragTrap	FR4G_TRAP2("Frederick");
 	pretender->takeDamage(50);
 	pretender->beRepaired(30);
 	pretender->beRepaired(30);
@@ -26,6 +28,7 @@ int	main( void )
 	anon.takeDamage(4);
 	anon.highFivesGuys();
 	FR4G_TRAP.highFivesGuys();
+	FR4G_TRAP2.highFivesGuys();
 	FR4G_TRAP.beRepaired(80);
 	mutant.takeDamage(20);
 	dummy.attack("his imagination");
@@ -42,7 +45,7 @@ int	main( void )
 	SC4V_TRAP.beRepaired(5);
 	for (int i = 0; i < 11; i++)
 		paul.beRepaired(20);
-	SC4V_TRAP.attack("one too many times WITH RANGE");
+	SC4V_TRAP.attack("again WITH RANGE");
 	paul.beRepaired(1);
 	SC4V_TRAP.guardGate();
 }

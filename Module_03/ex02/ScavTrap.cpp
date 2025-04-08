@@ -6,7 +6,7 @@
 
 ScavTrap::ScavTrap( void ): ClapTrap()
 {
-	_hitPoints = 100;
+	_hitPoints = SCAV_MAX_HP;
 	_energyPoints = 50;
 	_attackDamage = 20;
 	debug("[ ScavTrap ] constructed");
@@ -14,7 +14,7 @@ ScavTrap::ScavTrap( void ): ClapTrap()
 
 ScavTrap::ScavTrap( const char *name ): ClapTrap(name)
 {
-	_hitPoints = 100;
+	_hitPoints = SCAV_MAX_HP;
 	_energyPoints = 50;
 	_attackDamage = 20;
 	debug("[ ScavTrap ] constructed with name");
