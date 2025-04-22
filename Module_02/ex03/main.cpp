@@ -119,7 +119,7 @@ int	main( void )
     Point C21(0.0f, 0.0f);
     Point P21(100.0f, 100.0f);
     std::cout << "Expected: true, Result: " << bsp(A21, B21, C21, P21) << "\n" << std::endl;
-    /**/
+
     /*// Test that doesn't work for fixed points: Very tiny triangle to test precision*/
     /*std::cout << "Test " << ++testNr << ": Very tiny triangle to test precision" << std::endl;*/
     /*Point tinyA(0.0f, 0.0f);*/
@@ -127,13 +127,13 @@ int	main( void )
     /*Point tinyC(0.0f, 0.010f);*/
     /*Point tinyInside(0.00390625f, 0.00390625f);  // Inside the tiny triangle*/
     /*std::cout << "Expected: true, Result: " << bsp(tinyA, tinyB, tinyC, tinyInside) << "\n" << std::endl;*/
-    /**/
-    /*// Test that doesn't work for fixed points: Original test*/
-    /*std::cout << "Test " << ++testNr << ": Original test from example" << std::endl;*/
-    /*Point originalA(0.0f, 0.0f);*/
-    /*Point originalB(0.0f, 1.0f);*/
-    /*Point originalC(1.0f, 0.0f);*/
-    /*Point originalPoint(0.5f, 0.5f);*/
-    /*std::cout << "Expected: true, Result: " << bsp(originalA, originalB, originalC, originalPoint) << "\n" << std::endl;*/
+
+	// original Test of a right angle triangle with point outside
+    std::cout << "Test " << ++testNr << ": Original test from example" << std::endl;
+    Point originalA(0.0f, 0.0f);
+    Point originalB(0.0f, 1.0f);
+    Point originalC(1.0f, 0.0f);
+    Point originalPoint(0.5f, 0.5f);
+    std::cout << "Expected: false, Result: " << bsp(originalA, originalB, originalC, originalPoint) << "\n" << std::endl;
 	return 0;
 }

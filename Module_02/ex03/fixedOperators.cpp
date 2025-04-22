@@ -30,7 +30,7 @@ Fixed	&Fixed::operator--( void )
 Fixed	Fixed::operator-- ( int )
 {
 	Fixed ans(*this);
-	++(*this);
+	--(*this);
 	return (ans);
 }
 
