@@ -68,3 +68,20 @@ You can however call the base class funciton from the derived class pointer as w
 	FR4G_TRAP.ClapTrap::attack("another target");
 
 dereivedClassInstance.Base::functionFromBase();
+
+
+### construction and shadowing
+
+when i construct a diamond with a name, the purpose is to show, that the construction of the following constructors overwrites the first one.
+so when i construct one with a different name, i need to construct all others that would use the same field in the same manner, because they are using the same memory space. and therefore i do this:
+
+DiamondTrap::DiamondTrap( const std::string& name ): ClapTrap(name + "_clap_name"), ScavTrap(name + "_clap_name"), FragTrap(name + "_clap_name"), _name(name)
+
+if i only did it for the ClapTrap, which is the base that gets constructed, it will be overwritten by the others.
+I can acutally also just use the different name in the FragTrap constructer, because that would overwrite the field that all of the base classes use for the name.
+
+the other option is to just assign it "manually" after the initializiation.
+
+	ClapTrap::_name = "default_clap_name";
+
+then it will use the default contructers if not told otherwise, and overwrite the field, if it can be overwritten.

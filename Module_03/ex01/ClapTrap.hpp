@@ -21,10 +21,10 @@ class ClapTrap
 		void			exhaustMsg(const std::string action) const;
 		void			deadMsg(const std::string action) const;
 	protected:
-		const char *_name;
-		int			_hitPoints;
-		int			_energyPoints;
-		int			_attackDamage;
+		const char		*_name;
+		unsigned int	_hitPoints;
+		unsigned int	_energyPoints;
+		unsigned int	_attackDamage;
 };
 
 #endif // CLAPTRAP_HPP

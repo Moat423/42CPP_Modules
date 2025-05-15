@@ -5,7 +5,7 @@ MAKEFLAGS += --no-print-directory --warn-undefined-variables
 
 NAME := a.out
 CXX := c++
-CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98 -Wshadow -Wconversion -Wunreachable-code
 
 HDRS := ClapTrap.hpp ScavTrap.hpp FragTrap.hpp DiamondTrap.hpp
 

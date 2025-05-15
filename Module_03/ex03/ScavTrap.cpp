@@ -12,7 +12,7 @@ ScavTrap::ScavTrap( void ): ClapTrap()
 	debug("[ ScavTrap ] constructed");
 }
 
-ScavTrap::ScavTrap( const char *name ): ClapTrap(name)
+ScavTrap::ScavTrap( const std::string &name ): ClapTrap(name)
 {
 	_hitPoints = SCAV_MAX_HP;
 	_energyPoints = 50;
@@ -63,7 +63,7 @@ void	ScavTrap::attack(const std::string& target)
 	}
 	_energyPoints--;
 	std::cout << RED <<
-		"[ ScavTrap ] " << (_name ? _name : "null")  <<
+		"[ ScavTrap ] " << _name <<
 		" attacks " << target <<
 		", causing " << _attackDamage  <<
 		" points of damage!" <<

@@ -7,18 +7,18 @@
 
 DiamondTrap::DiamondTrap( void ): ClapTrap()
 {
-	_hitPoints = FRAG_MAX_HP;
-	_energyPoints = 50;
-	_attackDamage = 30;
+	ClapTrap::_name = "default_clap_name";
+	_hitPoints = FragTrap::_hitPoints;
+	_energyPoints = ScavTrap::_energyPoints;
+	_attackDamage = FragTrap::_attackDamage;
 	debug("# DiamondTrap # constructed");
 }
 
-DiamondTrap::DiamondTrap( const char *name ): ClapTrap(name), ScavTrap(name), FragTrap(name), _name(name)
+DiamondTrap::DiamondTrap( const std::string& name ): ClapTrap(name + "_clap_name"), ScavTrap(name + "_clap_name"), FragTrap(name + "_clap_name"), _name(name)
 {
-	// TODO strcpy name and append _clap_name to initialize ClapTrap
-	_hitPoints = FRAG_MAX_HP;
-	_energyPoints = 50;
-	_attackDamage = 30;
+	_hitPoints = FragTrap::_hitPoints;
+	_energyPoints = ScavTrap::_energyPoints;
+	_attackDamage = FragTrap::_attackDamage;
 	debug("# DiamondTrap # constructed with name");
 }
 
@@ -47,5 +47,5 @@ DiamondTrap &DiamondTrap::operator=( const DiamondTrap &rhs )
 void DiamondTrap::whoAmI() const
 {
 	std::cout << CYN << "I am a # DiamondTrap # named " << BOLD << _name << RESET << std::endl
-		<< CYN << "ClapTrap-Name: " << BOLD << DiamondTrap::ClapTrap::_name << RESET << std::endl;
+		<< CYN << "My ClapTrap-Name is: " << BOLD << DiamondTrap::ClapTrap::_name << RESET << std::endl;
 }

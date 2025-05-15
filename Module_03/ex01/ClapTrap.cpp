@@ -80,17 +80,14 @@ void	ClapTrap::attack(const std::string& target)
 
 void ClapTrap::takeDamage( unsigned int amount )
 {
-	int	tmp_hp;
-
 	if (_hitPoints == 0)
 	{
 		deadMsg("take damage");
 		return ;
 	}
-	tmp_hp = _hitPoints - amount;
-	_hitPoints = tmp_hp > 0 ? tmp_hp : 0;
+	_hitPoints = amount > _hitPoints ? 0 : _hitPoints - amount;
 	std::cout << YEL <<
-		"ClapTrap " << _name <<
+		"ClapTrap " << (_name ? _name : "null") <<
 		" got damaged for " << amount <<
 		" and has " << _hitPoints <<
 		" Hit Points left." <<

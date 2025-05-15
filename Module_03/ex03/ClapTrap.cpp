@@ -9,7 +9,7 @@ ClapTrap::ClapTrap( void ):
 	debug("ClapTrap constructed");
 }
 
-ClapTrap::ClapTrap( const char *name ):
+ClapTrap::ClapTrap(const std::string &name):
 	_name(name), _hitPoints(BASE_MAX_HP), _energyPoints(10), _attackDamage(0)
 {
 	debug("ClapTrap constructed with name");
@@ -71,7 +71,7 @@ void	ClapTrap::attack(const std::string& target)
 	}
 	_energyPoints--;
 	std::cout << RED <<
-		"ClapTrap " << (_name ? _name : "null")  <<
+		"ClapTrap " << (_name)  <<
 		" attacks " << target <<
 		", causing " << _attackDamage  <<
 		" points of damage!" <<
@@ -80,17 +80,14 @@ void	ClapTrap::attack(const std::string& target)
 
 void ClapTrap::takeDamage( unsigned int amount )
 {
-	int	tmp_hp;
-
 	if (_hitPoints == 0)
 	{
 		deadMsg("take damage");
 		return ;
 	}
-	tmp_hp = _hitPoints - amount;
-	_hitPoints = tmp_hp > 0 ? tmp_hp : 0;
+	_hitPoints = amount > _hitPoints ? 0 : _hitPoints - amount;
 	std::cout << YEL <<
-		"ClapTrap " << (_name ? _name : "null") <<
+		"ClapTrap " << _name <<
 		" got damaged for " << amount <<
 		" and has " << _hitPoints <<
 		" Hit Points left." <<
@@ -100,7 +97,7 @@ void ClapTrap::takeDamage( unsigned int amount )
 
 void ClapTrap::beRepaired( unsigned int amount )
 {
-	int	tmp_hp;
+	unsigned int	tmp_hp;
 
 	if (_hitPoints == 0)
 	{
@@ -116,7 +113,7 @@ void ClapTrap::beRepaired( unsigned int amount )
 	tmp_hp = _hitPoints + amount;
 	_hitPoints = tmp_hp >= 100 ? 100 : tmp_hp;
 	std::cout << GREEN <<
-		"ClapTrap " << (_name ? _name : "null") <<
+		"ClapTrap " << _name <<
 		" got repaired for " << amount <<
 		" and has " << _hitPoints <<
 		" Hit Points left." << 

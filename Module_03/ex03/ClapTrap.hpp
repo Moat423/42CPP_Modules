@@ -10,21 +10,21 @@
 class ClapTrap
 {
 	public:
-		ClapTrap();
-		ClapTrap(const char *name);
 		virtual ~ClapTrap();
-		ClapTrap(const ClapTrap &rhs);
-		ClapTrap &operator=(const ClapTrap &rhs);
-		void	attack(const std::string& target);
-		void			takeDamage(unsigned int amount);
-		void			beRepaired(unsigned int amount);
-		void			exhaustMsg(const std::string action) const;
-		void			deadMsg(const std::string action) const;
+		ClapTrap();
+		ClapTrap(const std::string& name);
+		ClapTrap(const ClapTrap& rhs);
+		ClapTrap	&operator=(const ClapTrap& rhs);
+		void		attack(const std::string& target);
+		void		takeDamage(unsigned int amount);
+		void		beRepaired(unsigned int amount);
+		void		exhaustMsg(const std::string action) const;
+		void		deadMsg(const std::string action) const;
 	protected:
-		const char *_name;
-		int			_hitPoints;
-		int			_energyPoints;
-		int			_attackDamage;
+		std::string 		_name;
+		unsigned int		_hitPoints;
+		unsigned int		_energyPoints;
+		unsigned int		_attackDamage;
 };
 
 #endif // CLAPTRAP_HPP

@@ -12,7 +12,8 @@ FragTrap::FragTrap( void ): ClapTrap()
 	debug("< FragTrap > constructed");
 }
 
-FragTrap::FragTrap( const char *name ): ClapTrap(name)
+
+FragTrap::FragTrap(const std::string& name): ClapTrap(name)
 {
 	_hitPoints = FRAG_MAX_HP;
 	_energyPoints = 100;
@@ -60,7 +61,7 @@ void	FragTrap::attack(const std::string& target)
 	}
 	_energyPoints--;
 	std::cout << RED <<
-		"< FragTrap > " << (_name ? _name : "null")  <<
+		"< FragTrap > " << _name <<
 		" attacks " << target <<
 		", causing " << _attackDamage  <<
 		" points of damage!" <<
