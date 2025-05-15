@@ -1,10 +1,4 @@
-#include "Debug.hpp"
 #include "DiamondTrap.hpp"
-#include "ScavTrap.hpp"
-#include "FragTrap.hpp"
-#include "ClapTrap.hpp"
-#include <iostream>
-#include <ostream>
 
 int	main( void )
 {
