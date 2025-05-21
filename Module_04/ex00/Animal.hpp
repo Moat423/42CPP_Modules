@@ -4,15 +4,15 @@
 
 class Animal
 {
-  public:
-    void makeSound( void );
-  protected:
-    std::string   name;
+	public:
+		Animal( void );
+		virtual ~Animal();
+		Animal(Animal &copy);
+		Animal& operator=( const Animal &assign);
+		void makeSound( void ) const;
+		virtual std::string getType( void ) const;
+	protected:
+		std::string	type;
 };
-
-class Cat : public Animal
-{
-  
-}
 
 #endif //ANIMAL_HPP
