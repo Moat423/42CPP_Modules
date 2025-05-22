@@ -7,9 +7,9 @@ class Animal
 	public:
 		Animal( void );
 		virtual ~Animal();
-		Animal(Animal &copy);
+		Animal(const Animal &copy);
 		Animal& operator=( const Animal &assign);
-		void makeSound( void ) const;
+		virtual void makeSound( void ) const;
 		virtual std::string getType( void ) const;
 	protected:
 		std::string	type;
