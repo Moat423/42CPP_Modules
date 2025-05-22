@@ -4,7 +4,7 @@
 #include <iostream>
 #include <ostream>
 
-void func(Animal *xyz) { xyz->makeSound(); }
+void func(const Animal *xyz) { xyz->makeSound(); }
 
 int main()
 {
@@ -26,13 +26,19 @@ int main()
 	mitzi->makeSound(); //will output the cat sound!
 	meta->makeSound();
 	
-	const Animal *animalCollection[6];
+	const Animal *animalCollection[4];
 	animalCollection[0] = new Cat;
 	animalCollection[1] = new Dog();
 	animalCollection[2] = new Animal(*mitzi);
 	animalCollection[3] = new Animal(*schnuffi);
 
-	// for (int i; i < sizeof(animalCollection); i++)
-	// 	func(animalCollection[i]);
+	for (size_t i = 0; i < sizeof(animalCollection); i++)
+		func(animalCollection[i]);
+	std::cout << std::endl << "Time to say goodbye........" << std::endl;
+	delete meta;
+	delete schnuffi;
+	delete mitzi;
+	for (size_t i = 0; i < 4; i++)
+		delete animalCollection[i];
 	return 0;
 }
