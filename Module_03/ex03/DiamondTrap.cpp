@@ -5,7 +5,7 @@
 #include "ScavTrap.hpp"
 #include <iostream>
 
-DiamondTrap::DiamondTrap( void ): ClapTrap()
+DiamondTrap::DiamondTrap( void ): ClapTrap(), _name("default")
 {
 	ClapTrap::_name = "default_clap_name";
 	_hitPoints = FragTrap::_hitPoints;

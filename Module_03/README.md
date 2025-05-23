@@ -85,3 +85,28 @@ the other option is to just assign it "manually" after the initializiation.
 	ClapTrap::_name = "default_clap_name";
 
 then it will use the default contructers if not told otherwise, and overwrite the field, if it can be overwritten.
+
+### initializer lists in inheriting
+
+You can only initialize YOUR OWN class members. if they are inherited, they can't be in the initializer list.
+therefore this wont work:
+```C++
+DiamondTrap::DiamondTrap( void ): ClapTrap(),
+	ClapTrap::_name("default_clap_name"),
+	_name("default"),
+	_hitPoints(FragTrap::_hitPoints),
+	_energyPoints(ScavTrap::_energyPoints),
+	_attackDamage(FragTrap::_attackDamage)
+{}
+```
+the only field DiamondTrap owns is _name, so it can init that one.
+```C++
+DiamondTrap::DiamondTrap( void ): ClapTrap(), _name("default")
+{
+	ClapTrap::_name = "default_clap_name";
+	_hitPoints = FragTrap::_hitPoints;
+	_energyPoints = ScavTrap::_energyPoints;
+	_attackDamage = FragTrap::_attackDamage;
+	debug("# DiamondTrap # constructed");
+}
+```
