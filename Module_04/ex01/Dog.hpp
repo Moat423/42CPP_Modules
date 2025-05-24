@@ -2,6 +2,7 @@
 # define DOG_HPP
 
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 class Dog: public Animal
 {
@@ -13,6 +14,11 @@ class Dog: public Animal
 
 		std::string getType( void ) const;
 		void makeSound() const;
+		void printIdeas( void ) const;
+		void setIdea(const size_t index, const std::string idea) const;
+		std::string	getIdea( const size_t index) const;
+	private:
+		Brain	*_brain;
 };
 
 #endif // !DOG_HPP

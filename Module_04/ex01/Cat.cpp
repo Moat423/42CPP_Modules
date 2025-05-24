@@ -28,8 +28,10 @@ Cat &Cat::operator=( const Cat &assign )
 {
 	std::cout << RED << "🐱 Assignment Operator called" << RESET << std::endl;
 	if (this != &assign)
+	{
 		type = assign.getType();
-	_brain = new Brain(*assign._brain);
+		_brain = assign._brain;
+	}
 	return (*this);
 }
 
