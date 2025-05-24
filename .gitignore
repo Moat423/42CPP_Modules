@@ -9,3 +9,7 @@ mySed
 Harl
 harlFilter
 test
+.json
+.log
+.cache
+.pdf
