@@ -47,3 +47,14 @@ this will lead to problems, because the destructor will ALSO not be overwritten 
 which can lead to undefined behaviour.
 
 --> Object slicing happens when copying derived objects into base class objects, losing derived-specific data and behavior
+
+## Memory allocation errors
+
+srcs: https://wiki.sei.cmu.edu/confluence/display/cplusplus/MEM52-CPP.+Detect+and+handle+memory+allocation+errors
+
+#### throwing an exception
+	try {
+	_brain = new Brain;
+	} catch (const std::bad_alloc &e) {
+		std::cerr << "Memory allocation failed" << e.what() << std::endl;
+	}
