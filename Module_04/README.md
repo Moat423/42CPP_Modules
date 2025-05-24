@@ -103,3 +103,29 @@ performs runtime type checking, if not as expected, returns a nullpointer for po
 ```C++ 
 	const Cat* cat = dynamic_cast<const Cat*>(animalArray[i]);
 ```
+
+
+## Abstract Classes
+
+srcs: https://en.wikibooks.org/wiki/C++_Programming/Classes/Abstract_Classes
+
+Have at least one pure virtual function:
+An abstract class must have at least one pure virtual function. This is a virtual function declared with = 0 in its declaration, meaning it has no implementation in the base class and must be implemented by derived classes.
+
+Cannot be instantiated:
+You cannot create objects of an abstract class directly. However, you can declare pointers and references to abstract classes, which is useful for polymorphism.
+
+Used as a base class:
+Abstract classes are designed to be inherited from. Any concrete (non-abstract) class derived from an abstract class must implement all pure virtual functions; otherwise, it remains abstract.
+
+Can have regular members:
+Abstract classes can have data members, constructors, destructors, and even non-pure (concrete) member functions in addition to pure virtual functions.
+
+
+src: https://www.simplilearn.com/tutorials/cpp-tutorial/abstract-class-in-cpp
+
+##### Why Can't We Make an Abstract Class Object?
+
+When we construct a pure virtual function in Abstract, we reserve a slot in the VTABLE(discussed in the previous topic) for a function, but we don't put any address in that slot. As a result, the VTABLE will be unfinished.
+
+Since the VTABLE for the Abstract class is missing, the compiler will refuse to let you create an object for it and will show an error message if you try.
