@@ -16,9 +16,10 @@ Cat::Cat( void ): Animal("Cat")
 Cat::~Cat( void )
 {
 	std::cout << RED << "🐱 Destructor called" << RESET << std::endl;
+	delete _brain;
 }
 
-Cat::Cat( const Cat &copy): Animal( copy )
+Cat::Cat( const Cat &copy): Animal( copy ), _brain(new Brain(*copy._brain))
 {
 	std::cout << RED << "🐱 Copy constructed" << RESET << std::endl;
 }
@@ -28,6 +29,7 @@ Cat &Cat::operator=( const Cat &assign )
 	std::cout << RED << "🐱 Assignment Operator called" << RESET << std::endl;
 	if (this != &assign)
 		type = assign.getType();
+	_brain = new Brain(*assign._brain);
 	return (*this);
 }
 
@@ -39,4 +41,21 @@ std::string Cat::getType() const
 void Cat::makeSound( void ) const
 {
 	std::cout << RED << "😺 MEOOOOW ("<< getType() << " is meowing)" << RESET << std::endl;
+}
+
+std::string	Cat::getIdea( const size_t index) const
+{
+	return (_brain->getIdea(index));
+}
+
+void Cat::setIdea(const size_t index, const std::string idea) const
+{
+	std::cout << RED << getType() << " is having an idea" << RESET << std::endl;
+	this->_brain->setIdea(index, idea);
+}
+
+void Cat::printIdeas( void ) const
+{
+	std::cout << RED << getType() << "'s idias:" << RESET << std::endl;
+	this->_brain->printIdeas();
 }

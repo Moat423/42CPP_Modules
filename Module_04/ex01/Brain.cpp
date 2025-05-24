@@ -22,8 +22,9 @@ Brain::Brain(const Brain &copy)
 Brain &Brain::operator=(const Brain &assignment)
 {
 	std::cout << BLUE << "Brain copy assignment constructor called" << RESET << std::endl;
-	for (size_t i = 0; i < 100; i++)
-		this->_ideas[i] = assignment._ideas[i];
+	if (this != &assignment)
+		for (size_t i = 0; i < 100; i++)
+			this->_ideas[i] = assignment._ideas[i];
 	return (*this);
 }
 
@@ -35,4 +36,18 @@ std::string	Brain::getIdea( const size_t index) const
 void Brain::setIdea(const size_t index, const std::string idea)
 {
 	this->_ideas[index] = idea;
+}
+
+void Brain::printIdeas( void ) const
+{
+	std::string tmpIdea;
+	for (size_t i = 0; i < 100; i++)
+	{
+		if (getIdea(i)[0] != 0)
+		{
+			std::cout << BLUE << 
+			getIdea(i) <<
+			RESET << std::endl;
+		}
+	}
 }

@@ -7,9 +7,9 @@ NAME := a.out
 CXX := c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 
-HDRS := Debug.hpp Animal.hpp Cat.hpp Dog.hpp
+HDRS := Debug.hpp Animal.hpp Cat.hpp Dog.hpp Brain.hpp
 
-SRCS := main.cpp Animal.cpp Cat.cpp Dog.cpp
+SRCS := main.cpp Animal.cpp Cat.cpp Dog.cpp Brain.cpp
 
 OBJS := $(SRCS:.cpp=.o)
 
@@ -37,7 +37,7 @@ $(NAME): $(OBJS)
 run: $(NAME)
 	./$(NAME)
 
-debug: CXXFLAGS += -DDEBUG
+debug: CXXFLAGS += -DDEBUG -g
 debug: re
 
 clean:

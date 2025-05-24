@@ -58,3 +58,48 @@ srcs: https://wiki.sei.cmu.edu/confluence/display/cplusplus/MEM52-CPP.+Detect+an
 	} catch (const std::bad_alloc &e) {
 		std::cerr << "Memory allocation failed" << e.what() << std::endl;
 	}
+
+
+## Casting
+
+srcs: https://arne-mertz.de/2015/01/a-casting-show/
+
+C style type casting is to be avoided, since it is not as memory safe, as there are no tests performed.
+$$(const Cat*) AnimalPointerToCat;$$
+
+there is also function style casting, which is basically the same as the C style typecasting
+$$double(getInt());$$
+
+there is also a C11 casting, which has some more restrictions for use, but is still very broad
+$$long{getInt()}$$
+
+### C++ explicit cast operators 
+
+#### `const_cast`
+
+```C++ 
+const Cat &constantCat;
+const_cast<Cat&>(constantCat);
+``` 
+
+Its only use is to remove or add the const qualifier to a pointer or reference.
+
+#### `reinterpret_cast`
+
+most unsafe cast, it just reinterprits the sequence of bits in a variable into another type (like pointer to int)
+can be used on completely unrelated types and has no checks.
+
+#### `static_cast`
+
+no runtime checks, so might lead to undefined behaviour, if downcasting and it's not actually the expected type.
+
+```C++ 
+
+```
+#### `dynamic_cast`
+
+performs runtime type checking, if not as expected, returns a nullpointer for pointers.
+
+```C++ 
+	const Cat* cat = dynamic_cast<const Cat*>(animalArray[i]);
+```
