@@ -15,14 +15,15 @@ int main()
 	// animals getting ideas:
 	mimi->setIdea(0, "I hate water.");
 	mimi->setIdea(1, "I am a most beautiful cat.");
+	wauwi->setIdea(0, "I am a good boy!");
+	wauwi->setIdea(1, "Something smells goooooood");
 	// Creating new animals to check if deep copied correctly
 	const Cat *mimisTwin = new Cat(*mimi);
 	mimisTwin->setIdea(1, "Your couch is mine, I peed on it.");
 	animalArray[2] = mimisTwin;
 	const Dog *wauwisTwin = new Dog(*wauwi);
+	wauwisTwin->setIdea(1, "Squirrel!!!!!");
 	animalArray[3] = wauwisTwin;
-	// animalArray[4] = new Cat();
-	// animalArray[5] = new Dog();
 	for (size_t i = 0; i < 4; (i += 2)) {
 			const Cat* cat = dynamic_cast<const Cat*>(animalArray[i]);
 			if (cat) {
@@ -32,13 +33,19 @@ int main()
 			const Dog* dog = dynamic_cast<const Dog*>(animalArray[i + 1]);
 			if (dog) {
 				dog->makeSound();
+				cat->printIdeas();
 				
 			}
 		}
+	//Making wauwi have the same ideas as his twin
+	std::cout << "setting the first dogs ideas to the same as the second dogs ideas" << std::endl;
+	wauwi = wauwisTwin;
+	std::cout << "printing first dogs ideas:" << std::endl;
+	wauwi->printIdeas();
+	std::cout << "printing second dogs ideas:" << std::endl;
+	wauwisTwin->printIdeas();
 	for (size_t i = 0; i < 4; ++i) {
 		delete animalArray[i];
 	}
-	// delete animalArray[4];
-	// delete animalArray[5];
 	return 0;
 }
