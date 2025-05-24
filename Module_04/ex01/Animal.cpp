@@ -6,6 +6,11 @@ Animal::Animal( void ): type("Animal")
 	std::cout << "Animal: Default constructor called" << std::endl;
 }
 
+Animal::Animal( std::string type ): type(type)
+{
+	std::cout << "Animal: named constructor called" << std::endl;
+}
+
 Animal::~Animal( void )
 {
 	std::cout << "Animal: Destructor called" << std::endl;

@@ -7,7 +7,9 @@ NAME := a.out
 CXX := c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 
-SRCS := Fixed.cpp main.cpp fixedOperators.cpp bsp.cpp Point.cpp
+HDRS := Debug.hpp Animal.hpp Cat.hpp Dog.hpp
+
+SRCS := main.cpp Animal.cpp Cat.cpp Dog.cpp
 
 OBJS := $(SRCS:.cpp=.o)
 
@@ -20,7 +22,7 @@ CLEAR_LINE := $(shell printf '\033[2K')
 CURSOR_UP := $(shell printf '\033[1A')
 PHONY := all clean fclean re
 
-all: $(NAME)
+all: $(NAME) $(HDRS)
 
 $(NAME): $(OBJS)
 	@printf "\n$(BOLD)Linking $(NAME)$(RESET)\n"

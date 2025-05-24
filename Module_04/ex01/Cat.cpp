@@ -1,11 +1,16 @@
 #include "Cat.hpp"
 #include <iostream>
+#include <new>
 #include "Debug.hpp"
 
-Cat::Cat( void )
+Cat::Cat( void ): Animal("Cat")
 {
-	type = "Cat";
 	std::cout << RED << "🐱 Default constructor called" << RESET << std::endl;
+	try {
+	_brain = new Brain;
+	} catch (const std::bad_alloc &e) {
+		std::cerr << "Memory allocation failed" << e.what() << std::endl;
+	}
 }
 
 Cat::~Cat( void )

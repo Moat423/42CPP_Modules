@@ -17,21 +17,24 @@ int main()
 	const Animal* schnuffi = new Dog();
 	std::cout << std::endl;
 	std::cout << "creating a cat:" << std::endl;
-	const Animal* mitzi = new Cat();
+	const Animal* mietzi = new Cat();
 	std::cout << std::endl;
 	std::cout << "Type of dog:" << std::endl;
 	std::cout << schnuffi->getType() << " " << std::endl;
 	std::cout << "Type of cat:" << std::endl;
-	std::cout << mitzi->getType() << " " << std::endl;
+	std::cout << mietzi->getType() << " " << std::endl;
 	schnuffi->makeSound();
-	mitzi->makeSound(); //will output the cat sound!
+	mietzi->makeSound(); //will output the cat sound!
 	meta->makeSound();
 	const Cat	orangeTabby = Cat();
 	func(&orangeTabby);
 	std::cout << std::endl << "Time to say goodbye........" << std::endl;
 	delete meta;
 	delete schnuffi;
-	delete mitzi;
+	delete mietzi;
+
+
+
 	std::cout << std::endl << "closing the ANIMAL CREATOR" << std::endl;
 	std::cout << "WELCOME to the WRONG ANIMAL CREATOR. You  are loged in as the creator" << std::endl << std::endl;
 	std::cout << "creating a generic Animal:" << std::endl;

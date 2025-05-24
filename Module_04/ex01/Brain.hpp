@@ -9,8 +9,10 @@ class Brain
 		~Brain();
 		Brain(const Brain &copy);
 		Brain &operator=(const Brain &assignment);
+		void setIdea(const size_t index, const std::string idea);
+		std::string getIdea(const size_t index) const;
 	private:
-		std::string ideas[100];
+		std::string _ideas[100];
 };
 
 #endif // !BRAIN_HPP
