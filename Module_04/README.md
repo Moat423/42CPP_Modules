@@ -129,3 +129,15 @@ src: https://www.simplilearn.com/tutorials/cpp-tutorial/abstract-class-in-cpp
 When we construct a pure virtual function in Abstract, we reserve a slot in the VTABLE(discussed in the previous topic) for a function, but we don't put any address in that slot. As a result, the VTABLE will be unfinished.
 
 Since the VTABLE for the Abstract class is missing, the compiler will refuse to let you create an object for it and will show an error message if you try.
+
+So tldr:
+An abstract class cannot be instantiated directly, but it can be used as a parent.
+
+
+## ex03: "interfaces"
+
+I disagree with implementing a getter like this:
+
+$$std::string const &AMateria::getType() const;$$
+since the whole point of having seperate getters and setters is, to have the getter return a value that is different from the actual field in the class,
+so one can not accidentally set that field when it's not inteded. In this case, there is no setter, because the getter does it all.

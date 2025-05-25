@@ -12,7 +12,7 @@ class AMateria
 	public:
 		AMateria();
 		AMateria(std::string const & type);
-		~AMateria();
+		virtual ~AMateria();
 		AMateria(const AMateria &copy);
 		//basic operator overloads
 		AMateria& operator=(const AMateria &assign);
