@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Debug.hpp"
 
-Dog::Dog( void ): A_Animal("Dog")
+Dog::Dog( void ): AAnimal("Dog")
 {
 	std::cout << CYN << "🐶 Default constructor called" << RESET << std::endl;
 	try {
@@ -18,7 +18,7 @@ Dog::~Dog( void )
 	delete _brain;
 }
 
-Dog::Dog( const Dog &copy): A_Animal( copy ), _brain(new Brain(*copy._brain))
+Dog::Dog( const Dog &copy): AAnimal( copy ), _brain(new Brain(*copy._brain))
 {
 	std::cout << CYN << "🐶 Copy constructed" << RESET << std::endl;
 }

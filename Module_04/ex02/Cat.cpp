@@ -3,7 +3,7 @@
 #include <new>
 #include "Debug.hpp"
 
-Cat::Cat( void ): A_Animal("Cat")
+Cat::Cat( void ): AAnimal("Cat")
 {
 	std::cout << RED << "🐱 Default constructor called" << RESET << std::endl;
 	try {
@@ -19,7 +19,7 @@ Cat::~Cat( void )
 	delete _brain;
 }
 
-Cat::Cat( const Cat &copy): A_Animal( copy ), _brain(new Brain(*copy._brain))
+Cat::Cat( const Cat &copy): AAnimal( copy ), _brain(new Brain(*copy._brain))
 {
 	std::cout << RED << "🐱 Copy constructed" << RESET << std::endl;
 }

@@ -7,9 +7,9 @@ NAME := a.out
 CXX := c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 
-HDRS := Debug.hpp A_Animal.hpp Cat.hpp Dog.hpp Brain.hpp
+HDRS := Debug.hpp AAnimal.hpp Cat.hpp Dog.hpp Brain.hpp
 
-SRCS := main.cpp A_Animal.cpp Cat.cpp Dog.cpp Brain.cpp
+SRCS := main.cpp AAnimal.cpp Cat.cpp Dog.cpp Brain.cpp
 
 OBJS := $(SRCS:.cpp=.o)
 
