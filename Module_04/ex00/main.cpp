@@ -26,6 +26,8 @@ int main()
 	schnuffi->makeSound();
 	mietzi->makeSound(); //will output the cat sound!
 	meta->makeSound();
+	std::cout << std::endl;
+	std::cout << "another cat walks by:" << std::endl;
 	const Cat	orangeTabby = Cat();
 	func(&orangeTabby);
 	std::cout << std::endl << "Time to say goodbye........" << std::endl;

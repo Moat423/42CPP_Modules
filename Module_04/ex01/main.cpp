@@ -33,7 +33,7 @@ int main()
 			const Dog* dog = dynamic_cast<const Dog*>(animalArray[i + 1]);
 			if (dog) {
 				dog->makeSound();
-				cat->printIdeas();
+				dog->printIdeas();
 				
 			}
 		}
