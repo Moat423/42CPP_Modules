@@ -51,7 +51,9 @@ std::string const &Character::getName() const
 
 void Character::use(int idx, ICharacter& target)
 {
-	if (this->_inventory[idx])
+	if (idx < 0 || idx >= 4)
+		std::cout << "Please give " << _name << " a valid index to one of her Materias" << std::endl;
+	else if (this->_inventory[idx])
 		this->_inventory[idx]->use(target);
 	else
 	 	std::cout << _name << "'s Materia at index " << idx << " does not exist yet!" << std::endl;

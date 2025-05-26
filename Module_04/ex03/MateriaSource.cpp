@@ -65,7 +65,11 @@ void MateriaSource::learnMateria(AMateria* blueprint)
 		i++;
 	}
 	if (blueprint)
+	{
 		std::cout << "can not learn Materia, " << blueprint->getType() << " inventory is full!" << std::endl;
+		std::cout << "MateriaSource dissolved the Materia " << blueprint->getType() << " because it could not hold it" << std::endl;
+		delete blueprint;
+	}
 }
 
 /*Returns a new Materia. The latter is a copy of the Materia previously learned by
@@ -78,6 +82,8 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 	{
 		if (this->_learnInventory[i] && this->_learnInventory[i]->getType() == type)
 			return (_learnInventory[i]->clone());
+		i++;
 	}
+	std::cout << "MateriaSource does not have a blueprint of the type " << type << std::endl;
 	return (NULL);
 }
