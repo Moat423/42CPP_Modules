@@ -1,4 +1,4 @@
-#include "A_Animal.hpp"
+#include "AAnimal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
 #include <iostream>
@@ -6,7 +6,7 @@
 int main()
 {
 	std::cout << "--------------------Please don't set the world on fire--------------------" << std::endl << std::endl;
-	const A_Animal	*animalArray[4];
+	const AAnimal	*animalArray[4];
 	const Cat		*mimi = new Cat();
 	const Dog		*wauwi = new Dog();
 

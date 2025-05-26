@@ -62,7 +62,6 @@ void MateriaSource::learnMateria(AMateria* blueprint)
 			std::cout << "MateriaSource learned the blueprint for " << blueprint->getType() << std::endl;
 			return ;
 		}
-		i++;
 	}
 	if (blueprint)
 	{
@@ -82,7 +81,6 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 	{
 		if (this->_learnInventory[i] && this->_learnInventory[i]->getType() == type)
 			return (_learnInventory[i]->clone());
-		i++;
 	}
 	std::cout << "MateriaSource does not have a blueprint of the type " << type << std::endl;
 	return (NULL);
