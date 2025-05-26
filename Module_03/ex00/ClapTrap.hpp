@@ -28,13 +28,13 @@ class ClapTrap
 		void	attack(const std::string& target);
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
-		void	exhaustMsg(const std::string action) const;
-		void	deadMsg(const std::string action) const;
 	private:
 		const char *_name;
 		int			_hitPoints;
 		int			_energyPoints;
 		int			_attackDamage;
+		void		exhaustMsg(const std::string action) const;
+		void		deadMsg(const std::string action) const;
 };
 
 #endif // CLAPTRAP_HPP

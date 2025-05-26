@@ -69,7 +69,13 @@ void	FragTrap::attack(const std::string& target)
 
 void	FragTrap::highFivesGuys(void) const
 {
-	
+	if (_hitPoints == 0)
+	{
+		std::cout << BRED <<
+		"< FragTrap > " << _name << " is dead and can't high-five anymore!" <<
+		RESET << std::endl;
+		return ;
+	}
 	std::cout << CYN <<
 		"< FragTrap > " << _name  <<
 		" is cheerfully requesting a high-five!" <<

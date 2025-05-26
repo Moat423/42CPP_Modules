@@ -20,6 +20,7 @@ int	main( void )
 		npc.takeDamage(1);
 		helper.takeDamage(2);
 	}
+	helper.beRepaired(10);
 	dummy.beRepaired(5);
 	npc.beRepaired(5);
 	for (int i = 0; i < 7; i++)
