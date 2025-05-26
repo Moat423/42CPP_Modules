@@ -1,30 +1,31 @@
 #include "AMateria.hpp"
 #include <iostream>
 #include "ICharacter.hpp"
+#include "Debug.hpp"
 
 AMateria::AMateria(): _type("")
 {
-	std::cout << "AMateria is created" << std::endl;
+	debug("AMateria is created");
 }
 
 AMateria::AMateria(std::string const & type): _type(type)
 {
-	std::cout << "AMateria of " << this->_type << " is created" << std::endl;
+	debug("AMateria of " << this->_type << " is created");
 }
 
 AMateria::~AMateria()
 {
-	std::cout << "AMateria of " << this->_type << " destroyed" << std::endl;
+	debug("AMateria of " << this->_type << " destroyed");
 }
 
 AMateria::AMateria(const AMateria &copy): _type(copy._type)
 {
-	std::cout << "AMateria copy constructor called" << std::endl;
+	debug("AMateria copy constructor called");
 }
 
 AMateria  &AMateria::operator=(const AMateria &assign)
 {
-	std::cout << "AMateria assignment operator called" << std::endl;
+	debug("AMateria assignment operator called");
 	if (this != &assign)
 		this->_type = assign._type;
 	return (*this);

@@ -1,16 +1,15 @@
-
+#include "Debug.hpp"
 #include "AMateria.hpp"
-#include <iostream>
 #include "MateriaSource.hpp"
 
 MateriaSource::MateriaSource(): _learnInventory()
 {
-	std::cout << "MateriaSource constructor called" << std::endl;
+	debug("MateriaSource constructor called");
 }
 
 MateriaSource::~MateriaSource()
 {
-	std::cout << "MateriaSource destructor called" << std::endl;
+	debug("MateriaSource destructor called");
 	for (size_t i = 0; i < 4; i++)
 	{
 		if (this->_learnInventory[i])
@@ -20,7 +19,7 @@ MateriaSource::~MateriaSource()
 
 MateriaSource::MateriaSource(const MateriaSource &copy): _learnInventory()
 {
-	std::cout << "MateriaSource copy constructor called" << std::endl;
+	debug("MateriaSource copy constructor called");
 	for (size_t i = 0; i < 4; i++)
 	{
 		if (copy._learnInventory[i])
@@ -32,7 +31,7 @@ MateriaSource  &MateriaSource::operator=(const MateriaSource &assign)
 {
 	if (this != &assign)
 	{
-		std::cout << "MateriaSource assignment operator called" << std::endl;
+		debug("MateriaSource assignment operator called");
 		for (size_t i = 0; i < 4; i++)
 		{
 			if (assign._learnInventory[i])
@@ -51,7 +50,7 @@ void MateriaSource::learnMateria(AMateria* blueprint)
 {
 	if (!blueprint)
 	{
-		std::cout << "MateriaSource can not learn from nothing" << std::endl;
+		debug("MateriaSource can not learn from nothing");
 		return ;
 	}
 	for (size_t i = 0; i < 4; i++)
@@ -59,14 +58,14 @@ void MateriaSource::learnMateria(AMateria* blueprint)
 		if (this->_learnInventory[i] == NULL)
 		{
 			this->_learnInventory[i] = blueprint;
-			std::cout << "MateriaSource learned the blueprint for " << blueprint->getType() << std::endl;
+			debug("MateriaSource learned the blueprint for " << blueprint->getType());
 			return ;
 		}
 	}
 	if (blueprint)
 	{
-		std::cout << "can not learn Materia, " << blueprint->getType() << " inventory is full!" << std::endl;
-		std::cout << "MateriaSource dissolved the Materia " << blueprint->getType() << " because it could not hold it" << std::endl;
+		debug("can not learn Materia, " << blueprint->getType() << " inventory is full!");
+		debug("MateriaSource dissolved the Materia " << blueprint->getType() << " because it could not hold it");
 		delete blueprint;
 	}
 }
@@ -82,6 +81,6 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 		if (this->_learnInventory[i] && this->_learnInventory[i]->getType() == type)
 			return (_learnInventory[i]->clone());
 	}
-	std::cout << "MateriaSource does not have a blueprint of the type " << type << std::endl;
+	debug("MateriaSource does not have a blueprint of the type " << type);
 	return (NULL);
 }

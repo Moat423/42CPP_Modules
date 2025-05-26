@@ -12,7 +12,7 @@ int extensiveTestfuntion();
 
 int	main()
 {
-	// return subjectFunction();
+	subjectFunction();
 	return extensiveTestfuntion();
 }
 

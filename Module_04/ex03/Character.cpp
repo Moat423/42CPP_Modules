@@ -1,15 +1,15 @@
 #include "Character.hpp"
 #include "ICharacter.hpp"
-#include <iostream>
+#include "Debug.hpp"
 
 Character::Character(std::string const name): _name(name), _inventory()
 {
-	std::cout << "Character " << _name << " is created" << std::endl;
+	debug("Character " << _name << " is created");
 }
 
 Character::~Character()
 {
-	std::cout << "Character " << _name << " destroyed" << std::endl;
+	debug("Character " << _name << " destroyed");
 	for (size_t i = 0; i < 4; i++)
 	{
 		if (this->_inventory[i])
@@ -29,7 +29,7 @@ Character::Character(const Character &copy): _name(copy._name)
 
 Character  &Character::operator=(const Character &assign)
 {
-	std::cout << "Character assignment operator called" << std::endl;
+	debug("Character assignment operator called");
 	if (this != &assign)
 	{
 		this->_name = assign._name;
@@ -51,12 +51,14 @@ std::string const &Character::getName() const
 
 void Character::use(int idx, ICharacter& target)
 {
-	if (idx < 0 || idx >= 4)
-		std::cout << "Please give " << _name << " a valid index to one of her Materias" << std::endl;
+	if (idx < 0 || idx >= 4){
+		debug("Please give " << _name << " a valid index to one of her Materias");
+	}
 	else if (this->_inventory[idx])
 		this->_inventory[idx]->use(target);
-	else
-	 	std::cout << _name << "'s Materia at index " << idx << " does not exist yet!" << std::endl;
+	else{
+		debug("" << _name << "'s Materia at index " << idx << " does not exist yet!");
+	}
 }
 
 void Character::equip(AMateria* materia)
@@ -64,7 +66,7 @@ void Character::equip(AMateria* materia)
 	int	i = 0;
 	if (!materia)
 	{
-		std::cout << _name << " cannot equip empty materia" << std::endl;
+		debug(" cannot equip empty materia");
 		return ;
 	}
 	while (i < 4)
@@ -72,32 +74,35 @@ void Character::equip(AMateria* materia)
 		if (!this->_inventory[i])
 		{
 			this->_inventory[i] = materia;
-			std::cout << "Materia "
+			debug("Materia "
 				<< this->_inventory[i]->getType()
 				<< " equipped to "
 				<< this->_name
 				<< "'s inventory at index "
-				<< i << std::endl;
+				<< i);
 			return ;
 		}
 		i++;
 	}
-	if (i == 4)
-		std::cout << _name << " cannot equip the materia, their inventory is full !!" << std::endl;
+	if (i == 4){
+		debug(" cannot equip the materia, their inventory is full !!");
+	}
 }
 
 void Character::unequip(int idx)
 {
 	if (idx >= 0 && idx < 4 && this->_inventory[idx])
 	{
-		std::cout << "Unequipped "
+		debug("Unequipped "
 			<< this->_inventory[idx]->getType() << " from "
 			<< this->_name << "'s inventory at index "
-			<< idx << std::endl;
+			<< idx);
 		this->_inventory[idx] = NULL;
 	}
-	else if (idx < 0 || idx >= 4)
-		std::cout << "Cannot unequip materia, invalid index " << idx << std::endl;
-	else
-		std::cout << "Cannot unequip materia, index " << idx << " is empty!" << std::endl;
+	else if (idx < 0 || idx >= 4){
+		debug("Cannot unequip materia, invalid index " << idx);
+	}
+	else{
+		debug("Cannot unequip materia, index " << idx << " is empty!");
+	}
 }

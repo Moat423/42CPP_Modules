@@ -12,7 +12,7 @@
 # define RESET "\033[0m"
 # define BOLD "\033[1m"
 
-# ifndef NODEBUG
+# ifdef DEBUG
 # include <iostream>
 # include <sstream>
 

@@ -2,35 +2,36 @@
 #include "AMateria.hpp"
 #include <iostream>
 #include "Cure.hpp"
+#include "Debug.hpp"
 
 Cure::Cure(): AMateria("cure")
 {
-	std::cout << "Cure constructor called" << std::endl;
+	debug("Cure constructor called");
 }
 
 Cure::~Cure()
 {
-	std::cout << "Cure destructor called" << std::endl;
+	debug("Cure destructor called");
 }
 
 Cure::Cure(const Cure &copy): AMateria(copy)
 {
-	std::cout << "Cure copy constructor called" << std::endl;
+	debug("Cure copy constructor called");
 }
 
 Cure  &Cure::operator=(const Cure &assign)
 {
 	if (this != &assign)
-		std::cout << "Cure assignment operator called" << std::endl;
+		debug("Cure assignment operator called");
 	return (*this);
 }
 Cure* Cure::clone() const
 {
-	std::cout << "Cure cloned" << std::endl;
+	debug("Cure cloned");
 	return (new Cure(*this));
 }
 void Cure::use(ICharacter& target)
 {
 
-	std::cout <<  "* heals " << target.getName() << "’s wounds *" << " *" << std::endl;
+	std::cout <<  "* heals " << target.getName() << "’s wounds *" << std::endl;
 }
