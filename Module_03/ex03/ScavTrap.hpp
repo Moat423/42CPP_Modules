@@ -19,7 +19,8 @@ class ScavTrap : virtual public ClapTrap
 		ScavTrap &operator=(const ScavTrap &rhs);
 		void	attack(const std::string& target);
 		void	guardGate(void) const;
-	private:
+	protected:
+		unsigned int		_energyPoints;
 };
 
 #endif // SCAVTRAP_HPP

@@ -19,7 +19,9 @@ class FragTrap : virtual public ClapTrap
 		FragTrap &operator=(const FragTrap& rhs);
 		void	attack(const std::string& target);
 		void	highFivesGuys(void) const;
-	private:
+	protected:
+		unsigned int		_hitPoints;
+		unsigned int		_attackDamage;
 };
 
 #endif // FRAGTRAP_HPP
