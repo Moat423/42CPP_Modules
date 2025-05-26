@@ -141,3 +141,11 @@ I disagree with implementing a getter like this:
 $$std::string const &AMateria::getType() const;$$
 since the whole point of having seperate getters and setters is, to have the getter return a value that is different from the actual field in the class,
 so one can not accidentally set that field when it's not inteded. In this case, there is no setter, because the getter does it all.
+
+
+## initializing arras in C++
+
+in C++ you can actually initialize an array to null pointer simply by doing:
+$$ _inventory()$$
+in the initializer list like so:
+$$Character::Character(std::string const name): _name(name), _inventory()$$

@@ -17,9 +17,9 @@ Character::~Character()
 	}
 }
 
-Character::Character(const Character &copy): _name(copy._name)
+Character::Character(const Character &copy): _name(copy._name), _inventory()
 {
-	std::cout << "Character copy constructor called" << std::endl;
+	debug("Character copy constructor called");
 	for (size_t i = 0; i < 4; i++)
 	{
 		if (copy._inventory[i])
