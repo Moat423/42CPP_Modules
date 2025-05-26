@@ -3,7 +3,7 @@
 #include <iostream>
 #include "Cure.hpp"
 
-Cure::Cure(): AMateria("ice")
+Cure::Cure(): AMateria("cure")
 {
 	std::cout << "Cure constructor called" << std::endl;
 }

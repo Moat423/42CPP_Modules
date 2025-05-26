@@ -4,6 +4,7 @@
 #include "Ice.hpp"
 #include "Cure.hpp"
 #include "iostream"
+#include <ostream>
 
 int	subjectFunction();
 int extensiveTestfuntion();
@@ -23,6 +24,8 @@ int	subjectFunction()
 	tmp = src->createMateria("ice");
 	me->equip(tmp);
 	tmp = src->createMateria("cure");
+	if (!tmp)
+		std::cout << "tmp for cure is NULL" << std::endl;
 	me->equip(tmp);
 	ICharacter* bob = new Character("bob");
 	me->use(0, *bob);

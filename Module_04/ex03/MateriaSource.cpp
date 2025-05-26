@@ -49,17 +49,23 @@ are not necessarily unique
 */
 void MateriaSource::learnMateria(AMateria* blueprint)
 {
+	if (!blueprint)
+	{
+		std::cout << "MateriaSource can not learn from nothing" << std::endl;
+		return ;
+	}
 	for (size_t i = 0; i < 4; i++)
 	{
-		if (blueprint && this->_learnInventory[i] == NULL)
+		if (this->_learnInventory[i] == NULL)
 		{
 			this->_learnInventory[i] = blueprint;
 			std::cout << "MateriaSource learned the blueprint for " << blueprint->getType() << std::endl;
+			return ;
 		}
-		return ;
+		i++;
 	}
 	if (blueprint)
-		std::cout << "can not learn Materia, inventory is full!" << std::endl;
+		std::cout << "can not learn Materia, " << blueprint->getType() << " inventory is full!" << std::endl;
 }
 
 /*Returns a new Materia. The latter is a copy of the Materia previously learned by

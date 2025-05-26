@@ -51,14 +51,20 @@ std::string const &Character::getName() const
 
 void Character::use(int idx, ICharacter& target)
 {
-	this->_inventory[idx]->use(target);
+	if (this->_inventory[idx])
+		this->_inventory[idx]->use(target);
+	else
+	 	std::cout << _name << "'s Materia at index " << idx << " does not exist yet!" << std::endl;
 }
 
 void Character::equip(AMateria* materia)
 {
 	int	i = 0;
 	if (!materia)
+	{
 		std::cout << _name << " cannot equip empty materia" << std::endl;
+		return ;
+	}
 	while (i < 4)
 	{
 		if (!this->_inventory[i])
