@@ -3,6 +3,15 @@
 #include "IMateriaSource.hpp"
 #include "Ice.hpp"
 #include "Cure.hpp"
+#include "iostream"
+
+int	subjectFunction();
+int extensiveTestfuntion();
+
+int	main()
+{
+	return subjectFunction();
+}
 
 int	subjectFunction()
 {
@@ -24,7 +33,7 @@ int	subjectFunction()
 	return 0;
 }
 
-int main() 
+int extensiveTestfuntion()
 {
 	{
 		IMateriaSource* src = new MateriaSource();

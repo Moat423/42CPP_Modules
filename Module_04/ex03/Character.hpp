@@ -19,9 +19,9 @@ class Character: public ICharacter
 
 		std::string const & getName() const;
 
-		void equip(AMateria* m);
+		void equip(AMateria* materia);
 		void unequip(int idx);
-		void use(int idx, Character& target);
+		void use(int idx, ICharacter& target);
 	private:
 		std::string	_name;
 		AMateria	*_inventory[4];

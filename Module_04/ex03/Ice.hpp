@@ -6,6 +6,7 @@
 
 class Ice: public AMateria
 {
+	public:
 		Ice();
 		~Ice();
 		Ice(const Ice &copy);

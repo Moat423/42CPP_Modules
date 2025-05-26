@@ -7,7 +7,9 @@ NAME := a.out
 CXX := c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 
-SRCS := Fixed.cpp main.cpp fixedOperators.cpp bsp.cpp Point.cpp
+HDRS := AMateria.hpp Charater.hpp ICharater.hpp Ice.hpp Cure.hpp MateriaSource.hpp IMateriaSource.hpp
+
+SRCS := AMateria.cpp Character.cpp Ice.cpp Cure.cpp MateriaSource.cpp main.cpp
 
 OBJS := $(SRCS:.cpp=.o)
 
@@ -35,7 +37,7 @@ $(NAME): $(OBJS)
 run: $(NAME)
 	./$(NAME)
 
-debug: CXXFLAGS += -DDEBUG
+debug: CXXFLAGS += -DDEBUG -g3
 debug: re
 
 clean:

@@ -4,7 +4,7 @@
 #include "AMateria.hpp"
 #include "IMateriaSource.hpp"
 
-class MateriaSource: IMateriaSource
+class MateriaSource: public IMateriaSource
 {
 	public:
 		MateriaSource();
