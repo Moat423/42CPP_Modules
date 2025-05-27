@@ -4,7 +4,7 @@
 #include <iostream>
 #include <ostream>
 
-FragTrap::FragTrap( void ): ClapTrap()
+FragTrap::FragTrap( void ): ClapTrap(), _hitPoints(FRAG_MAX_HP), _attackDamage(30)
 {
 	_hitPoints = FRAG_MAX_HP;
 	_energyPoints = 100;
@@ -13,7 +13,7 @@ FragTrap::FragTrap( void ): ClapTrap()
 }
 
 
-FragTrap::FragTrap(const std::string& name): ClapTrap(name)
+FragTrap::FragTrap(const std::string& name): ClapTrap(name), _hitPoints(FRAG_MAX_HP), _attackDamage(30)
 {
 	_hitPoints = FRAG_MAX_HP;
 	_energyPoints = 100;

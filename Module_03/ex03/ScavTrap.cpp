@@ -4,7 +4,7 @@
 #include <iostream>
 #include <ostream>
 
-ScavTrap::ScavTrap( void ): ClapTrap()
+ScavTrap::ScavTrap( void ): ClapTrap(), _energyPoints(50)
 {
 	_hitPoints = SCAV_MAX_HP;
 	_energyPoints = 50;
@@ -12,7 +12,7 @@ ScavTrap::ScavTrap( void ): ClapTrap()
 	debug("[ ScavTrap ] constructed");
 }
 
-ScavTrap::ScavTrap( const std::string &name ): ClapTrap(name)
+ScavTrap::ScavTrap( const std::string &name ): ClapTrap(name), _energyPoints(50)
 {
 	_hitPoints = SCAV_MAX_HP;
 	_energyPoints = 50;
