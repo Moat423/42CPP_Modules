@@ -10,7 +10,7 @@ class AAnimal
 		virtual ~AAnimal();
 		AAnimal(const AAnimal &copy);
 		AAnimal& operator=( const AAnimal &assign);
-		virtual void makeSound( void ) const;
+		virtual void makeSound( void ) const = 0;
 		virtual void printIdeas( void ) const = 0;
 		virtual std::string getType( void ) const;
 	protected:
