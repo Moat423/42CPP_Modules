@@ -8,8 +8,9 @@ int main()
 	std::cout << "--------------------Please don't set the world on fire--------------------" << std::endl << std::endl;
 	const Animal	*animalArray[4];
 	const Cat		*mimi = new Cat();
-	const Dog		*wauwi = new Dog();
+	Dog		*wauwi = new Dog();
 
+	std::cout << std::endl;
 	animalArray[0] = mimi;
 	animalArray[1] = wauwi;
 	// animals getting ideas:
@@ -21,9 +22,10 @@ int main()
 	const Cat *mimisTwin = new Cat(*mimi);
 	mimisTwin->setIdea(1, "Your couch is mine, I peed on it.");
 	animalArray[2] = mimisTwin;
-	const Dog *wauwisTwin = new Dog(*wauwi);
+	Dog *wauwisTwin = new Dog(*wauwi);
 	wauwisTwin->setIdea(1, "Squirrel!!!!!");
 	animalArray[3] = wauwisTwin;
+	std::cout << std::endl;
 	for (size_t i = 0; i < 4; (i += 2)) {
 			const Cat* cat = dynamic_cast<const Cat*>(animalArray[i]);
 			if (cat) {
@@ -38,12 +40,24 @@ int main()
 			}
 		}
 	//Making wauwi have the same ideas as his twin
+	//making references
+	Dog &wauwiRef = *wauwi;
+	Dog &wauwisTwinRef = *wauwisTwin;
+	std::cout << std::endl;
 	std::cout << "setting the first dogs ideas to the same as the second dogs ideas" << std::endl;
-	wauwi = wauwisTwin;
-	std::cout << "printing first dogs ideas:" << std::endl;
+	wauwiRef = wauwisTwinRef;
+	std::cout << "printing wauwis ideas:" << std::endl;
 	wauwi->printIdeas();
-	std::cout << "printing second dogs ideas:" << std::endl;
+	std::cout << "printing wauwisTwins ideas:" << std::endl;
 	wauwisTwin->printIdeas();
+	std::cout << std::endl;
+	wauwi->setIdea(1, "Dig dig dig!");
+	wauwi->setIdea(2, "When will Human come back?");
+	std::cout << "printing wauwis ideas:" << std::endl;
+	wauwi->printIdeas();
+	std::cout << "printing wauwisTwins ideas:" << std::endl;
+	wauwisTwin->printIdeas();
+	std::cout << std::endl;
 	for (size_t i = 0; i < 4; ++i) {
 		delete animalArray[i];
 	}

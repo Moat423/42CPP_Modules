@@ -30,7 +30,7 @@ Cat &Cat::operator=( const Cat &assign )
 	if (this != &assign)
 	{
 		type = assign.getType();
-		_brain = assign._brain;
+		*_brain = *assign._brain;
 	}
 	return (*this);
 }

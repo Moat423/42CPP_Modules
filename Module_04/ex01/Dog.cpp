@@ -30,7 +30,7 @@ Dog &Dog::operator=( const Dog &assign )
 	if (this != &assign)
 	{
 		type = assign.getType();
-		_brain = assign._brain;
+		*_brain = *assign._brain;
 	}
 	return (*this);
 }
