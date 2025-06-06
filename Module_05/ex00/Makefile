@@ -7,9 +7,9 @@ NAME := a.out
 CXX := c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 
-HDRS := AMateria.hpp Charater.hpp ICharater.hpp Ice.hpp Cure.hpp MateriaSource.hpp IMateriaSource.hpp
+HDRS := Bureaucrat.cpp Exception.cpp main.cpp
 
-SRCS := AMateria.cpp Character.cpp Ice.cpp Cure.cpp MateriaSource.cpp main.cpp
+SRCS := Bureaucrat.hpp
 
 OBJS := $(SRCS:.cpp=.o)
 
