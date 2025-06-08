@@ -5,8 +5,18 @@
 int main( void )
 {
 	try {
-	Bureaucrat Joe();
+	Bureaucrat joe;
 	} catch (std::exception &e) {
-		std::cout << "Bureaucrat creation failed" << std::endl;
+		std::cout << "Bureaucrat (default) creation failed" << std::endl;
+	}
+	try {
+	Bureaucrat paul("Paul", 2);
+	} catch (std::exception &e) {
+		std::cout << "Bureaucrat (grade 2) creation failed" << std::endl;
+	}
+	try {
+	Bureaucrat tim("tim", 150);
+	} catch (std::exception &e) {
+		std::cout << "Bureaucrat (grade 2) creation failed" << std::endl;
 	}
 }

@@ -10,7 +10,11 @@ Bureaucrat::Bureaucrat( void )
 // Parameterized Constructor
 Bureaucrat::Bureaucrat( std::string name, size_t grade ): _name(name), _grade(grade)
 {
-	debug("Bureaucrat constructed with name: " << name << " and grade " << grade);
+	debug("Bureaucrat constroctor called with name: " << name << " and grade " << grade);
+	if (grade < 1)
+		throw(GradeTooHighException);
+	else if (grade > 150)
+		throw(GradeTooLowException);
 }
 
 // Destructor
