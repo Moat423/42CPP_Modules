@@ -20,10 +20,7 @@ Bureaucrat::~Bureaucrat()
 }
 
 // Copy Constructor
-Bureaucrat::Bureaucrat(const Bureaucrat &copy)
-{
-	*this = copy;
-}
+Bureaucrat::Bureaucrat(const Bureaucrat &copy): _grade(copy.getGrade()), _name(copy.getName()) {}
 
 // Copy Assignment Operator
 Bureaucrat& Bureaucrat::operator=( const Bureaucrat &assign )
@@ -60,3 +57,8 @@ void Bureaucrat::setGrade( const size_t grade )
 	this->_grade = grade;
 }
 
+std::ostream &operator<<(std::ostream& os, const Bureaucrat& obj)
+{
+	os << obj.getName() << " , bureaucrat grade " << obj.getGrade() << "." << std::endl;
+	return (os);
+}

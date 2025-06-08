@@ -3,6 +3,7 @@
 
 #include <cstddef>
 #include <exception>
+#include <ostream>
 #include <string>
 
 class Bureaucrat {
@@ -38,5 +39,7 @@ class Bureaucrat {
 		void	setName( const std::string name );
 		void	setGrade( const size_t grade );
 };
+
+std::ostream &operator<<(std::ostream& os, const Bureaucrat obj);
 
 #endif // !BUREAUCRAT_HPP
