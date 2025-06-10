@@ -3,13 +3,13 @@ SHELL := /bin/bash
 MAKEFILES :=
 MAKEFLAGS += --no-print-directory --warn-undefined-variables
 
-NAME := a.out
+NAME := Bureaucracy
 CXX := c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 
-HDRS := Bureaucrat.cpp Exception.cpp main.cpp
+SRCS := Bureaucrat.cpp main.cpp
 
-SRCS := Bureaucrat.hpp
+HDRS := Bureaucrat.hpp Debug.hpp
 
 OBJS := $(SRCS:.cpp=.o)
 

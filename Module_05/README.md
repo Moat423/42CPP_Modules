@@ -48,6 +48,7 @@ int main () {
   return 0;
 }
 
+```
 
 so for this project I am creating a new class in my bureaucrat:
 
@@ -68,6 +69,86 @@ yey, let's nest classes and make an endless row of classes inside classes XD
 
 this class is using the "throw" to declare that this function will call std::unexpected.
 However, I can change the return of the error. it is the return of this function (const char *)
+
+### Exception specification
+
+[history of exception specifications](https://devblogs.microsoft.com/oldnewthing/20180928-00/?p=99855)
+C++98 introduced exception specifications like throw(int, char*), which declare what types of exceptions a function might throw
+exception specifications: throw(int, char*)
+These were removed in C++17 and deprecated in C++11. For portable, modern code, you should not use them
+
+#### But why are they BAD?
+[reason you shouldn't use exception specifications](https://softwareengineering.stackexchange.com/questions/114338/why-are-exception-specifications-bad)
+
+- Weak Enforcement:
+Compilers do not strictly enforce these specifications. If a function throws an exception not listed, the program calls std::unexpected() and usually terminates, which is not much safer than undefined behavior.
+
+- Performance Overhead:
+They require runtime checks for unexpected exceptions, which can slow down your program and increase code complexity, with little practical benefit.
+
+- Fragile and Dangerous:
+If you throw an exception type not listed, your program will terminate in a hard-to-debug way, rather than just propagating the error. This makes code maintenance and evolution risky.
+
+- Removed for Good Reason:
+Because of these issues, dynamic exception specifications were deprecated and then removed in modern C++ standards. Only throw() (meaning “does not throw”) survived, and in C++11 and later, it’s replaced by noexcept.
+
+Avoid using exception specifications like throw(int, char*) in any new code. They are unreliable, add overhead, and have been removed from the language for good reason
+
+### marking with throw()
+
+Best Practice for C++98
+Always mark destructors as throw()
+Even if empty:
+
+```cpp
+~MyClass() throw() {}
+```
+Handle errors internally
+Use logging/cleanup instead of exceptions:
+
+```cpp
+~FileHandler() throw() {
+    if (!_isClosed) {
+        ::close(_fd); // Non-throwing fallback
+    }
+}
+```
+the above code is something to remember, I need to handle things that CAN throw exceptions, like the closing of files or other mechanism like threads with more care in destructors.
+
+**Destructors should never throw exceptions.**
+This is a fundamental C++ guideline, especially in C++98 and later standards.
+
+Why?
+- Stack Unwinding Danger:
+If an exception is already active (e.g., during stack unwinding due to another exception) and a destructor throws a new exception, this leads to two active exceptions.
+This situation is illegal in C++ and causes std::terminate to be called, abruptly ending your program.
+
+- Resource Management:
+Destructors are typically used to clean up resources. If they throw, it’s unclear whether the resource was properly released, leading to leaks or undefined behavior.
+
+- Exception Specifications and Optimization
+Marking with throw():
+In C++98, marking a destructor with throw() tells the compiler that the destructor does not throw exceptions:
+
+```cpp
+~MyClass() throw() { /* cleanup code */ }
+```
+This is not just for style—compilers can optimize more aggressively:
+
+- They may omit exception-handling code paths for such destructors.
+- They can safely assume that stack unwinding won’t be interrupted by further exceptions.
+- This can enable register/cache optimizations and reduce code size.
+
+Error Handling Inside Destructor:
+By marking with throw(), you force yourself to handle all errors inside the destructor (e.g., logging, cleanup), rather than propagating them out.
+
+Is throw() Dead Weight?
+Not Dead Weight in C++98:
+In C++98, throw() is valuable for both documentation and optimization.
+It explicitly communicates intent and enables compiler optimizations.
+
+Modern C++:
+In C++11 and later, destructors are implicitly noexcept (non-throwing), so the explicit throw() is less necessary, but in C++98 it is good practice
 
 ## other Learnings
 

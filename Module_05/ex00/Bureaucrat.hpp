@@ -10,14 +10,27 @@ class Bureaucrat {
 	public:
 		Bureaucrat( void );
 		Bureaucrat( std::string name, size_t grade );
-		virtual ~Bureaucrat();
+		virtual ~Bureaucrat() throw();
 
 		Bureaucrat(const Bureaucrat &copy);
+
+		//operator overloads
 		Bureaucrat& operator=( const Bureaucrat &assign );
 
+		Bureaucrat	&operator++( void ); // precrement Grade
+		Bureaucrat	operator++( int ); //postcrement
+		Bureaucrat	&operator--( void ); // precrement Grade
+		Bureaucrat	operator--( int ); //postcrement
+
 		//getters
-		const size_t	getGrade() const;
-		const std::string getName() const;
+		size_t 		getGrade() const;
+		std::string	getName() const;
+		//setters
+		void		setName( const std::string name );
+
+		//member functions
+		void		incrementGrade( void );
+		void		decrementGrade( void );
 
 		// exceptions
 		class GradeTooHighException : public std::exception
@@ -36,10 +49,11 @@ class Bureaucrat {
 		size_t		_grade;
 
 		//setters
-		void	setName( const std::string name );
-		void	setGrade( const size_t grade );
+		void		setGrade( const size_t grade );
+
+		void		checkGrade( const int grade ) const;
 };
 
-std::ostream &operator<<(std::ostream& os, const Bureaucrat obj);
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& obj);
 
 #endif // !BUREAUCRAT_HPP
