@@ -49,7 +49,7 @@ class Bureaucrat {
 		//setters
 		void		setGrade( const size_t grade );
 
-		void checkGrade( const size_t grade ) const;
+		void		checkGrade( const size_t grade ) const;
 };
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& obj);
