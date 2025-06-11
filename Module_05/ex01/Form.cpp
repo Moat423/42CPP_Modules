@@ -1,5 +1,6 @@
 #include "Form.hpp"
 #include "Debug.hpp"
+#include <locale>
 #include <string>
 
 // Default Constructor
@@ -38,44 +39,50 @@ Form::Form(const Form &copy):
 	checkGrade(copy.getGradeToExecute());
 }
 
-// TODO: cant assign grades
-// Copy Assignment Operator
 Form& Form::operator=( const Form &assign )
 {
 	if (this != &assign)
-	{
-		this->setName(assign.getName());
-		// this->_gradeToSign = (assign.getGradeToSign());
-	}
+		this->setSigned(assign.getSigned());
 	return *this;
+}
+
+// takes a bureaucrat and sets the form signed true,
+// if the bureaucrats grade greater or equal to enough
+// throws Form::GradeTooLowException if grade not enough
+void	Form::beSigned(Bureaucrat &bureaucrat)
+{
+	if (bureaucrat.getGrade() <= this->getGradeToSign())
+		this->setSigned(true);
+	else
+		throw Form::GradeTooLowException();
 }
 
 //--------------------setters and getters--------------------
 
-// Getter
 std::string Form::getName( void ) const
 {
 	return this->_name;
 }
 
-// Setter
-void Form::setName( std::string name )
-{
-	this->_name = name;
-}
-
-// Getter
 size_t Form::getGradeToSign( void ) const
 {
 	return this->_gradeToSign;
 }
 
-// Getter
 size_t Form::getGradeToExecute( void ) const
 {
 	return this->_gradeToExecute;
 }
 
+bool Form::getSigned( void ) const
+{
+	return this->_signed;
+}
+
+void Form::setSigned( const bool signedness)
+{
+	this->_signed = signedness;
+}
 
 void Form::checkGrade( const int grade ) const
 {
