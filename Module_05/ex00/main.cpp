@@ -1,32 +1,33 @@
 #include "Bureaucrat.hpp"
 #include <exception>
 #include <iostream>
+#include "Debug.hpp"
 
-void	testing_creation(std::string text);
-void	testing_copying(std::string text);
-void	testing_assignment(std::string text);
-void	testing_invalid_grades(std::string text);
-void	testingDemotionOp(std::string text);
-void	testingDemotion(std::string text);
-void	testingPromotion(std::string text);
-void	testingPromotionOp(std::string text);
-
+static void	testing_creation(std::string text);
+static void	testing_copying(std::string text);
+static void	testing_assignment(std::string text);
+static void	testing_invalid_grades(std::string text);
+static void	testingDemotionOp(std::string text);
+static void	testingDemotion(std::string text);
+static void	testingPromotion(std::string text);
+static void	testingPromotionOp(std::string text);
 
 int main( void )
 {
+	std::cout << BLUE << "====================Bureaucracy Testing====================" << RESET << std::endl;
 	testing_creation("testing Bureaucrat creation");
 	testing_copying("testing copying");
 	testing_assignment("assignment copying");
 	testing_invalid_grades("testing invalid grades");
 	testingPromotion("testing Promotion");
 	testingDemotion("testing Demotion");
-	testingDemotionOp("testing Demotion Operations");
 	testingPromotionOp("testing Promotion Operations");
+	testingDemotionOp("testing Demotion Operations");
 }
 
-void	testing_creation(std::string text)
+static void	testing_creation(std::string text)
 {
-	std::cout << "====================" << text << "====================" << std::endl;
+	std::cout << std::endl << "====================" << text << "====================" << std::endl;
 	try {
 	Bureaucrat joe;
 	std::cout << joe << std::endl;
@@ -47,28 +48,26 @@ void	testing_creation(std::string text)
 	}
 }
 
-void	testing_copying(std::string text)
+static void	testing_copying(std::string text)
 {
-	std::cout << "====================" << text << "====================" << std::endl;
+	std::cout << std::endl << "====================" << text << "====================" << std::endl;
 	try {
 	Bureaucrat tim("Tim", 150);
 	std::cout << tim << std::endl;
 	Bureaucrat tom(tim);
 	std::cout << "copying tim to tom" << std::endl;
 	std::cout << tom << std::endl;
-	std::cout << "changing his name:" << std::endl;
-	tom.setName("Tom");
-	std::cout << tom << std::endl;
+	std::cout << "No exception occured." << std::endl;
 	}
 	catch ( std::exception &e){
 		std::cout << e.what() << std::endl;
 	}
 }
 
-void	testing_assignment(std::string text)
+static void	testing_assignment(std::string text)
 {
 	try {
-	std::cout << "====================" << text << "====================" << std::endl;
+	std::cout << std::endl << "====================" << text << "====================" << std::endl;
 	Bureaucrat tim("Tim", 150);
 	Bureaucrat toby("Toby", 30);
 	tim = toby;
@@ -76,14 +75,15 @@ void	testing_assignment(std::string text)
 	std::cout << toby << std::endl;
 	std::cout << "output:" << std::endl;
 	std::cout << tim << std::endl;
+	std::cout << "No exception occured." << std::endl;
 	} catch (std::exception &e) {
 		std::cout << std::endl << e.what() << std::endl;
 	}
 }
 
-void	testing_invalid_grades(std::string text)
+static void	testing_invalid_grades(std::string text)
 {
-	std::cout << "====================" << text << "====================" << std::endl;
+	std::cout << std::endl << "====================" << text << "====================" << std::endl;
 	try {
 	Bureaucrat stean("Stean", 151);
 	std::cout << stean << std::endl;
@@ -100,13 +100,13 @@ void	testing_invalid_grades(std::string text)
 	Bureaucrat stean("Stean", -1);
 	std::cout << stean << std::endl;
 	} catch (std::exception &e) {
-		std::cout << "Bureaucrat (grade -1) creation failed. Reason:" << std::endl << e.what() << std::endl;
+		std::cout << "Bureaucrat (grade 18446744073709551615) creation failed. Reason:" << std::endl << e.what() << std::endl;
 	}
 }
 
-void	testingPromotion(std::string text)
+static void	testingPromotion(std::string text)
 {
-	std::cout << "====================" << text << "====================" << std::endl;
+	std::cout << std::endl << "====================" << text << "====================" << std::endl;
 	try {
 	Bureaucrat stean("Stean", 3);
 	std::cout << "original stean: " << stean << std::endl;
@@ -114,6 +114,7 @@ void	testingPromotion(std::string text)
 		stean.incrementGrade();
 		std::cout << stean;
 	}
+	std::cout << "No exception occured." << std::endl;
 	} catch (Bureaucrat::GradeTooHighException &e) {
 		std::cout << "increment failed: " << e.what() << std::endl;
 	} catch (Bureaucrat::GradeTooLowException &e) {
@@ -123,9 +124,9 @@ void	testingPromotion(std::string text)
 	}
 }
 
-void	testingDemotion(std::string text)
+static void	testingDemotion(std::string text)
 {
-	std::cout << "====================" << text << "====================" << std::endl;
+	std::cout << std::endl << "====================" << text << "====================" << std::endl;
 	try {
 	Bureaucrat stean("Stean", 148);
 	std::cout << "original stean: " << stean << std::endl;
@@ -145,9 +146,35 @@ void	testingDemotion(std::string text)
 	}
 }
 
-void	testingDemotionOp(std::string text)
+static void	testingPromotionOp(std::string text)
 {
-	std::cout << "====================" << text << "====================" << std::endl;
+	std::cout << std::endl << "====================" << text << "====================" << std::endl;
+	try {
+	Bureaucrat stean("Stean", 3);
+	Bureaucrat danie("danie", 3);
+	std::cout << "original stean: " << stean << std::endl;
+	std::cout << "original danie: " << danie << std::endl;
+	for (int i = 0; i <= 3; i++) {
+		stean++;
+		std::cout << stean;
+		++danie;
+		std::cout << danie;
+	}
+
+	std::cout << "this won't get printed if an error occured" << std::endl;
+
+	} catch (Bureaucrat::GradeTooHighException &e) {
+		std::cout << "increment failed: " << e.what() << std::endl;
+	} catch (Bureaucrat::GradeTooLowException &e) {
+		std::cout << "decrement failed: " << e.what() << std::endl;
+	} catch (std::exception &e) {
+		std::cout << "other error: " << e.what() << std::endl;
+	}
+}
+
+static void	testingDemotionOp(std::string text)
+{
+	std::cout << std::endl << "====================" << text << "====================" << std::endl;
 	try {
 	Bureaucrat stean("Stean", 148);
 	Bureaucrat danie("Danie", 148);
@@ -171,28 +198,3 @@ void	testingDemotionOp(std::string text)
 	}
 }
 
-void	testingPromotionOp(std::string text)
-{
-	std::cout << "====================" << text << "====================" << std::endl;
-	try {
-	Bureaucrat stean("Stean", 3);
-	Bureaucrat danie("danie", 3);
-	std::cout << "original stean: " << stean << std::endl;
-	std::cout << "original danie: " << danie << std::endl;
-	for (int i = 0; i <= 3; i++) {
-		stean++;
-		std::cout << stean;
-		++danie;
-		std::cout << danie;
-	}
-
-	std::cout << "this won't get printed if an error occured" << std::endl;
-
-	} catch (Bureaucrat::GradeTooHighException &e) {
-		std::cout << "increment failed: " << e.what() << std::endl;
-	} catch (Bureaucrat::GradeTooLowException &e) {
-		std::cout << "decrement failed: " << e.what() << std::endl;
-	} catch (std::exception &e) {
-		std::cout << "other error: " << e.what() << std::endl;
-	}
-}

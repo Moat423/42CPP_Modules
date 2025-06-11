@@ -8,7 +8,7 @@ Form::Form( void ):
 	_gradeToSign(1),
 	_gradeToExecute(1)
 {
-	debug(Default Constructor called);
+	debug(Form Default Constructor called);
 }
 
 // Parameterized Constructor
@@ -17,14 +17,15 @@ Form::Form( std::string name, size_t gradeToSign, size_t gradeToExecute ):
 	_gradeToSign(gradeToSign),
 	_gradeToExecute(gradeToExecute)
 {
-	debug(Parameterized Constructor called);
+	debug(Form Parameterized Constructor called);
 	checkGrade(gradeToSign);
+	checkGrade(gradeToExecute);
 }
 
 // Destructor
 Form::~Form()
 {
-	debug(Destructor called);
+	debug(Form Destructor called);
 }
 
 // Copy Constructor
@@ -74,6 +75,7 @@ size_t Form::getGradeToExecute( void ) const
 {
 	return this->_gradeToExecute;
 }
+
 
 void Form::checkGrade( const int grade ) const
 {

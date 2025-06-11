@@ -28,16 +28,13 @@ Bureaucrat::Bureaucrat(const Bureaucrat &copy):  _name(copy.getName()), _grade(c
 Bureaucrat& Bureaucrat::operator=( const Bureaucrat &assign )
 {
 	if (this != &assign)
-	{
 		this->setGrade(assign.getGrade());
-		this->setName(assign.getName());
-	}
 	return *this;
 }
 
 // --------------------Member functions--------------------
 
-void Bureaucrat::checkGrade( const int grade ) const
+void Bureaucrat::checkGrade( const size_t grade ) const
 {
 	if (grade < 1) throw Bureaucrat::GradeTooHighException();
 	if (grade > 150) throw Bureaucrat::GradeTooLowException();
@@ -95,12 +92,6 @@ Bureaucrat Bureaucrat::operator--( int )
 std::string Bureaucrat::getName( void ) const
 {
 	return this->_name;
-}
-
-// Setter
-void Bureaucrat::setName( const std::string name )
-{
-	this->_name = name;
 }
 
 //----------grade----------

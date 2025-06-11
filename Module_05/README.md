@@ -150,6 +150,21 @@ It explicitly communicates intent and enables compiler optimizations.
 Modern C++:
 In C++11 and later, destructors are implicitly noexcept (non-throwing), so the explicit throw() is less necessary, but in C++98 it is good practice
 
+## things specific to this task
+
+A Bureaucrat had to have:
+• A **constant** name
+• A grade that ranges from 1 (highest possible grade) to 150 (lowest possible grade)
+
+therefore i could not change the name without recreating the object.
+
+The Form class has:
+• A constant name
+• A boolean indicating whether it is signed (at construction, it is not)
+• A constant grade required to sign it
+• A constant grade required to execute it
+All these attributes are private.
+
 ## other Learnings
 
 ### getters and getters

@@ -25,8 +25,6 @@ class Bureaucrat {
 		//getters
 		size_t 		getGrade() const;
 		std::string	getName() const;
-		//setters
-		void		setName( const std::string name );
 
 		//member functions
 		void		incrementGrade( void );
@@ -45,13 +43,13 @@ class Bureaucrat {
 		};
 
 	private:
-		std::string	_name;
-		size_t		_grade;
+		const std::string	_name;
+		size_t				_grade;
 
 		//setters
 		void		setGrade( const size_t grade );
 
-		void		checkGrade( const int grade ) const;
+		void checkGrade( const size_t grade ) const;
 };
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& obj);
