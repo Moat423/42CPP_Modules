@@ -167,6 +167,31 @@ All these attributes are private.
 
 ## other Learnings
 
+### C vs C++
+
+in C you can create compount literals:
+$$(struct Point){1, 2}$$
+which you can't do in C++.
+
+C++11 and later allows for this syntax:
+$$Form{"tempForm", 140, 145}$$
+
+so I am left with three choices for assigning:
+
+```C++
+// Option 1
+Form timsForm(Form("tempForm", 140, 145));
+
+// Option 2
+Form timsForm = Form("tempForm", 140, 145);
+
+// Option 3 (C++11 and above!)
+Form timsForm = Form{"tempForm", 140, 145};
+```
+
+However note, that Option 2 is **equivilant** to option 3.
+Even though it uses an equal, it's actually also copy constructing.
+
 ### getters and getters
 
 encasulation is the reason why one would use getters and setters.
@@ -177,4 +202,6 @@ Encapsuation means, that eveything is spererated well.
 
 so for this project, I decided to have read only classes basicaly.
 
+### Error: Member access into incomplete type
 
+this usually means, that the file is missing some headers that should be inscluded. in this case, in an included header, there is only a forward declaration of another class, but not its full declaration.
