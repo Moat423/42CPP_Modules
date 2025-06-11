@@ -1,8 +1,9 @@
 #ifndef FORM_HPP
 # define FORM_HPP
-#include "Bureaucrat.hpp"
-#include <ostream>
+# include <ostream>
 # include <string>
+
+class Bureaucrat;
 
 class Form {
 	public:
@@ -13,7 +14,7 @@ class Form {
 		Form(const Form &copy);
 		Form& operator=( const Form &assign );
 
-		void				beSigned(Bureaucrat &bureaucrat);
+		void				beSigned(const Bureaucrat &bureaucrat);
 
 		// Getters and setters
 		std::string			getName( void ) const;

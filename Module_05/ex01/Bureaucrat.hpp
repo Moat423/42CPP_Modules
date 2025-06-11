@@ -1,10 +1,10 @@
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 
-#include <cstddef>
 #include <exception>
 #include <ostream>
 #include <string>
+#include "Form.hpp"
 
 class Bureaucrat {
 	public:
@@ -29,6 +29,7 @@ class Bureaucrat {
 		//member functions
 		void		incrementGrade( void );
 		void		decrementGrade( void );
+		void		signForm( Form &form ) const;
 
 		// exceptions
 		class GradeTooHighException : public std::exception

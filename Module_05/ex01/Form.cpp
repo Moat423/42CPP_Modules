@@ -1,6 +1,8 @@
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 #include "Debug.hpp"
 #include <string>
+#include <iostream>
 
 // Default Constructor
 Form::Form( void ):
@@ -51,10 +53,13 @@ Form& Form::operator=( const Form &assign )
 // takes a bureaucrat and sets the form signed true,
 // if the bureaucrats grade greater or equal to enough
 // throws Form::GradeTooLowException if grade not enough
-void	Form::beSigned(Bureaucrat &bureaucrat)
+void	Form::beSigned(const Bureaucrat &bureaucrat)
 {
 	if (bureaucrat.getGrade() <= this->getGradeToSign())
+	{
 		this->setSigned(true);
+		std::cout << this->getName() << " has been signed by " << bureaucrat.getName() << std::endl;
+	}
 	else
 		throw Form::GradeTooLowException();
 }

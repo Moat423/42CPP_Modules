@@ -58,6 +58,15 @@ void Bureaucrat::decrementGrade( void )
 	setGrade(grade);
 }
 
+void Bureaucrat::signForm( Form &form) const
+{
+	try {
+	form.beSigned(*this);
+	} catch () {
+	
+	}
+}
+
 //---------------------------------------pre- and postcrement---------------------------------------
 
 Bureaucrat &Bureaucrat::operator++( void )
