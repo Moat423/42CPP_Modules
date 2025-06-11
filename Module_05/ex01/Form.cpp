@@ -1,13 +1,13 @@
 #include "Form.hpp"
 #include "Debug.hpp"
-#include <locale>
 #include <string>
 
 // Default Constructor
 Form::Form( void ):
-	_name("Zaphod Beeblebrox"),
-	_gradeToSign(1),
-	_gradeToExecute(1)
+	_name("testForm"),
+	_gradeToSign(150),
+	_gradeToExecute(150),
+	_signed(false)
 {
 	debug(Form Default Constructor called);
 }
@@ -16,7 +16,8 @@ Form::Form( void ):
 Form::Form( std::string name, size_t gradeToSign, size_t gradeToExecute ):
 	_name(name),
 	_gradeToSign(gradeToSign),
-	_gradeToExecute(gradeToExecute)
+	_gradeToExecute(gradeToExecute),
+	_signed(false)
 {
 	debug(Form Parameterized Constructor called);
 	checkGrade(gradeToSign);
@@ -33,7 +34,8 @@ Form::~Form()
 Form::Form(const Form &copy):
 	_name(copy.getName()),
 	_gradeToSign(copy.getGradeToSign()),
-	_gradeToExecute(copy.getGradeToExecute())
+	_gradeToExecute(copy.getGradeToExecute()),
+	_signed(copy.getSigned())
 {
 	checkGrade(copy.getGradeToSign());
 	checkGrade(copy.getGradeToExecute());
@@ -100,4 +102,15 @@ const char *Form::GradeTooHighException::what() const throw()
 const char *Form::GradeTooLowException::what() const throw()
 {
 	return ("Grade too low");
+}
+
+// Stream operator overloads
+
+std::ostream& operator<<(std::ostream& os, const Form& form)
+{
+	os << "📑" << form.getName()
+		<< ", grade to sign: " << form.getGradeToSign()
+		<< ", grade to execute: " << form.getGradeToExecute()
+		<< ", is signed: " << form.getSigned() << std::endl;
+	return (os);
 }

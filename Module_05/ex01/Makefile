@@ -7,9 +7,9 @@ NAME := Bureaucracy
 CXX := c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 
-SRCS := Bureaucrat.cpp main.cpp
+SRCS := Bureaucrat.cpp main.cpp Form.cpp
 
-HDRS := Bureaucrat.hpp Debug.hpp
+HDRS := Bureaucrat.hpp Debug.hpp Form.hpp
 
 OBJS := $(SRCS:.cpp=.o)
 

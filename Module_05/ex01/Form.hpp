@@ -1,6 +1,7 @@
 #ifndef FORM_HPP
 # define FORM_HPP
 #include "Bureaucrat.hpp"
+#include <ostream>
 # include <string>
 
 class Form {
@@ -40,6 +41,7 @@ class Form {
 		const size_t		_gradeToExecute;
 };
 
+std::ostream& operator<<(std::ostream& os, const Form& obj);
 
 #endif // !FORM_HPP
 
