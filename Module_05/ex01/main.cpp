@@ -2,32 +2,27 @@
 #include "Bureaucrat.hpp"
 #include <exception>
 #include <iostream>
-#include <regex>
 #include "Debug.hpp"
 
-static void	testing_creation(std::string text);
-static void	testing_copying(std::string text);
-static void	testing_assignment(std::string text);
-static void	testing_invalid_grades(std::string text);
-static void	testingDemotionOp(std::string text);
-static void	testingDemotion(std::string text);
-static void	testingPromotion(std::string text);
-static void	testingPromotionOp(std::string text);
+static void	testingCreation(std::string text);
+static void	testingCopying(std::string text);
+static void	testingAssignment(std::string text);
+static void	testingInvalidGrades(std::string text);
+static void testingBureaucratSignForm(std::string text);
+static void	testingSigning(std::string text);
 
 int main( void )
 {
 	std::cout << BLUE << "====================Bureaucracy Testing====================" << RESET << std::endl;
-	testing_creation("testing Form creation");
-	testing_invalid_grades("testing creating forms with invalid grades");
-	testing_copying("testing copying");
-	testing_assignment("assignment copying");
-	testingPromotion("testing Promotion");
-	testingDemotion("testing Demotion");
-	testingPromotionOp("testing Promotion Operations");
-	testingDemotionOp("testing Demotion Operations");
+	testingCreation("testing Form creation");
+	testingInvalidGrades("testing creating forms with invalid grades");
+	testingCopying("testing copying");
+	testingAssignment("assignment copying");
+	testingSigning("test the beSigned function of Form");
+	testingBureaucratSignForm("test the Bureaucreats signForm function");
 }
 
-static void	testing_creation(std::string text)
+static void	testingCreation(std::string text)
 {
 	std::cout << std::endl << "====================" << text << "====================" << std::endl;
 	try {
@@ -50,7 +45,7 @@ static void	testing_creation(std::string text)
 	}
 }
 
-static void	testing_invalid_grades(std::string text)
+static void	testingInvalidGrades(std::string text)
 {
 	std::cout << std::endl << "====================" << text << "====================" << std::endl;
 	try {
@@ -80,7 +75,7 @@ static void	testing_invalid_grades(std::string text)
 }
 
 // using different forms of copy construction
-static void	testing_copying(std::string text)
+static void	testingCopying(std::string text)
 {
 	std::cout << std::endl << "====================" << text << "====================" << std::endl;
 	try {
@@ -120,7 +115,7 @@ static void	testing_copying(std::string text)
 	}
 }
 
-static void	testing_assignment(std::string text)
+static void	testingAssignment(std::string text)
 {
 	try {
 	std::cout << std::endl << "====================" << text << "====================" << std::endl;
@@ -141,7 +136,7 @@ static void	testing_assignment(std::string text)
 	}
 }
 
-static void	testing_signing(std::string text)
+static void	testingSigning(std::string text)
 {
 	std::cout << std::endl << "====================" << text << "====================" << std::endl;
 	try {
@@ -162,6 +157,39 @@ static void	testing_signing(std::string text)
 	std::cout << GREEN << "next one should throw an error" << RESET << std::endl;
 	highGradeForm.beSigned(stean);
 	std::cout << highGradeForm << std::endl;
+	} catch (std::exception &e) {
+		std::cout << std::endl << e.what() << std::endl;
+	}
+	try {
+	} catch (std::exception &e) {
+		std::cout << std::endl << e.what() << std::endl;
+	}
+}
+
+static void testingBureaucratSignForm(std::string text)
+{
+	std::cout << std::endl << "====================" << text << "====================" << std::endl;
+	try {
+	Bureaucrat stean("Stean", 150);
+	std::cout << stean << std::endl;
+	Bureaucrat king("King", 1);
+	std::cout << king << std::endl;
+	Form lowGradeForm("lowGradeForm", 150, 100);
+	std::cout << lowGradeForm << std::endl;
+	stean.signForm(lowGradeForm);
+	std::cout << lowGradeForm << std::endl;
+	king.signForm(lowGradeForm);
+	std::cout << lowGradeForm << std::endl;
+	Form highGradeForm("highGradeForm", 2, 1);
+	std::cout << highGradeForm << std::endl;
+	king.signForm(highGradeForm);
+	std::cout << highGradeForm << std::endl;
+	std::cout << GREEN << "next one should throw an error" << RESET << std::endl;
+	stean.signForm(highGradeForm);
+	std::cout << highGradeForm << std::endl;
+	std::cout << GREEN <<
+		"since normal execution has resumed and the error was caught in signForm, this line will be printed, if no abnormal error occured"
+		<< RESET << std::endl;
 	} catch (std::exception &e) {
 		std::cout << std::endl << e.what() << std::endl;
 	}

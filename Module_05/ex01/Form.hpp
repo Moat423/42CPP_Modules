@@ -37,9 +37,9 @@ class Form {
 		};
 	private:
 		const std::string	_name;
-		bool				_signed;
 		const size_t		_gradeToSign;
 		const size_t		_gradeToExecute;
+		bool				_signed;
 };
 
 std::ostream& operator<<(std::ostream& os, const Form& obj);

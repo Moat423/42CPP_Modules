@@ -101,12 +101,12 @@ void Form::checkGrade( const int grade ) const
 
 const char *Form::GradeTooHighException::what() const throw()
 {
-	return ("Grade too high");
+	return ("Grade is too high");
 }
 
 const char *Form::GradeTooLowException::what() const throw()
 {
-	return ("Grade too low");
+	return ("Grade is too low");
 }
 
 // Stream operator overloads

@@ -1,5 +1,7 @@
 #include "Bureaucrat.hpp"
 #include "Debug.hpp"
+#include <exception>
+#include <iostream>
 
 // Default Constructor
 Bureaucrat::Bureaucrat( void ): _name("Biggus Diccus"), _grade(1)
@@ -62,8 +64,13 @@ void Bureaucrat::signForm( Form &form) const
 {
 	try {
 	form.beSigned(*this);
-	} catch () {
-	
+	std::cout << "✍ " << this->getName()
+		<< " signed " << form.getName() << std::endl;
+	} catch (Form::GradeTooLowException &e){
+	std::cout << this->getName()
+		<< " couldn’t sign " << form.getName()
+		<< " because their " << e.what()
+		<< "." << std::endl;
 	}
 }
 
@@ -129,10 +136,10 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat& obj)
 
 const char *Bureaucrat::GradeTooHighException::what() const throw()
 {
-	return ("Grade too high");
+	return ("Grade is too high");
 }
 
 const char *Bureaucrat::GradeTooLowException::what() const throw()
 {
-	return ("Grade too low");
+	return ("Grade is too low");
 }
