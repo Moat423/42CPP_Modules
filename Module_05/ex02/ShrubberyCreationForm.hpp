@@ -6,7 +6,7 @@ class ShrubberyCreationForm: public AForm
 {
 	public:
 		ShrubberyCreationForm( void );
-		~ShrubberyCreationForm();
+		virtual ~ShrubberyCreationForm();
 
 		ShrubberyCreationForm(const ShrubberyCreationForm &copy);
 		ShrubberyCreationForm& operator=( const ShrubberyCreationForm &assign );
