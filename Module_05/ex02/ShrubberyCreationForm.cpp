@@ -3,11 +3,26 @@
 #include "Debug.hpp"
 #include "Bureaucrat.hpp"
 #include <fstream>
+#include <string>
 
 ShrubberyCreationForm::ShrubberyCreationForm( void ):
-	AForm("ShrubberyCreationForm", 145, 137)
+	AForm("BaseShrubberyCreationForm", 145, 137),
+	_name("ShrubberyCreationForm"),
+	_gradeToSign(145),
+	_gradeToExecute(137),
+	_target("home")
 {
-	debug("ShrubberyCreationForm Constructor called");
+	debug("ShrubberyCreationForm default Constructor called");
+}
+
+ShrubberyCreationForm::ShrubberyCreationForm( std::string target):
+	AForm("BaseShrubberyCreationForm", 145, 137),
+	_name("ShrubberyCreationForm"),
+	_gradeToSign(145),
+	_gradeToExecute(137),
+	_target(target)
+{
+	debug("ShrubberyCreationForm named Constructor called");
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
@@ -16,11 +31,22 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &copy):
-AForm(copy) {}
+	AForm(copy),
+	_name(copy.getName()),
+	_gradeToSign(copy.getGradeToSign()),
+	_gradeToExecute(copy.getGradeToExecute()),
+	_signed(copy.getSigned()),
+	_target(copy.getTarget())
+{}
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=( const ShrubberyCreationForm &assign )
 {
 	return (*this);
+}
+
+std::string ShrubberyCreationForm::getTarget( void ) const
+{
+	return (this->_target);
 }
 
 void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
