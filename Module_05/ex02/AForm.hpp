@@ -1,5 +1,6 @@
 #ifndef AFORM_HPP
 # define AFORM_HPP
+#include <exception>
 # include <ostream>
 # include <string>
 
@@ -32,6 +33,11 @@ class AForm {
 				virtual const char *what() const throw();
 		};
 		class GradeTooLowException : public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		};
+		class NotSignedException : public std::exception
 		{
 			public:
 				virtual const char *what() const throw();

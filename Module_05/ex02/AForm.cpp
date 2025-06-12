@@ -107,6 +107,11 @@ const char *AForm::GradeTooLowException::what() const throw()
 	return ("Grade is too low");
 }
 
+const char *AForm::NotSignedException::what() const throw()
+{
+	return ("not signed");
+}
+
 // Stream operator overloads
 
 std::ostream& operator<<(std::ostream& os, const AForm& form)
