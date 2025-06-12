@@ -45,8 +45,6 @@ Form::Form(const Form &copy):
 
 Form& Form::operator=( const Form &assign )
 {
-	if (this != &assign)
-		this->setSigned(assign.getSigned());
 	return *this;
 }
 

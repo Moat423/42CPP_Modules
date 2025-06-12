@@ -45,8 +45,6 @@ AForm::AForm(const AForm &copy):
 
 AForm& AForm::operator=( const AForm &assign )
 {
-	if (this != &assign)
-		this->setSigned(assign.getSigned());
 	return *this;
 }
 
