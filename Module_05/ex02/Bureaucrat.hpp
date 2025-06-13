@@ -29,7 +29,7 @@ class Bureaucrat {
 		//member functions
 		void		incrementGrade( void );
 		void		decrementGrade( void );
-		void		signAForm( AForm &form ) const;
+		void		signForm( AForm &form ) const;
 
 		// exceptions
 		class GradeTooHighException : public std::exception

@@ -45,6 +45,7 @@ AForm::AForm(const AForm &copy):
 
 AForm& AForm::operator=( const AForm &assign )
 {
+	static_cast<void>(assign);
 	return *this;
 }
 
