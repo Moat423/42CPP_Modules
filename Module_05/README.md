@@ -150,6 +150,30 @@ It explicitly communicates intent and enables compiler optimizations.
 Modern C++:
 In C++11 and later, destructors are implicitly noexcept (non-throwing), so the explicit throw() is less necessary, but in C++98 it is good practice
 
+## Exceptions on IO streams
+
+[adding exceptions to streams](https://akrzemi1.wordpress.com/2019/05/23/operation-cancelling-and-stdfstream/)
+
+I learned that:
+"In fact IO streams were designed before we had exceptions in C++. So, in order to have our ofstream throw exceptions we have to instruct it to do so before we even open the file".
+
+```C++
+void save()
+{
+  std::ofstream f; 
+  f.exceptions(ios_base::failbit | ios_base::badbit);
+ 
+  f.open("work.txt");
+  f << provideA();
+  f << provideB();
+  f.flush(); // write data (can throw)
+} // only close
+```
+
+1. declare a stream (f)
+2. tell it to report the following errors (using a mask with failbit or badbit)
+3. flush in function, not in destructor, as destructor can never throw.
+
 ## things specific to this task
 
 A Bureaucrat had to have:

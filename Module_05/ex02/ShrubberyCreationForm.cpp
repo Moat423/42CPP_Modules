@@ -3,6 +3,7 @@
 #include "Debug.hpp"
 #include "Bureaucrat.hpp"
 #include <fstream>
+#include <ios>
 #include <string>
 
 ShrubberyCreationForm::ShrubberyCreationForm( void ):
@@ -41,6 +42,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &copy):
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=( const ShrubberyCreationForm &assign )
 {
+	static_cast<void>(assign);
 	return (*this);
 }
 
@@ -55,7 +57,9 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 		throw(AForm::NotSignedException());
 	if (this->getGradeToExecute() < executor.getGrade())
 		throw(AForm::GradeTooLowException());
-	std::ofstream file( this->getName() + "_shrubbery");
+	std::ofstream file;
+	file.exceptions(std::ios_base::failbit | std::ios_base::badbit);
+	file.open( (this->getName() + "_shrubbery").c_str());
 	file << "\
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡴⠋⠓⠤⠾⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\
 ⠀⠀⠀⠀⠀⠀⢠⠴⠋⠙⣦⠔⢎⡀⠀⠀⠀⠘⠖⠋⠚⠦⡄⠀⠀⠀⠀⠀⠀⠀\
@@ -88,4 +92,6 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
                               ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠒⠾⡇⠀⠈⠉⠉⠉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀                    \
                               ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⣢⠂⠀⠀⠀⠀⠀⠀⠀⠀                           \
 " << std::endl;
+	file.flush();
+	file.close();
 }
