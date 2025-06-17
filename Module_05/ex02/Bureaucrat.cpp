@@ -5,20 +5,20 @@
 // Default Constructor
 Bureaucrat::Bureaucrat( void ): _name("Biggus Diccus"), _grade(1)
 {
-	debug("Bureaucrat Constructor called");
+	debug("👔Bureaucrat Constructor called");
 }
 
 // Parameterized Constructor
 Bureaucrat::Bureaucrat( std::string name, size_t grade ): _name(name), _grade(grade)
 {
-	debug("Bureaucrat constructor called with name: " << name << " and grade " << grade);
+	debug("👔Bureaucrat constructor called with name: " << name << " and grade " << grade);
 	checkGrade(grade);
 }
 
 // Destructor
 Bureaucrat::~Bureaucrat() throw()
 {
-	debug("Bureaucrat Destructor called");
+	debug("👔Bureaucrat Destructor called");
 }
 
 // Copy Constructor
@@ -63,11 +63,30 @@ void Bureaucrat::signForm( AForm &form) const
 {
 	try {
 	form.beSigned(*this);
-	std::cout << "✍ " << this->getName()
+	std::cout << "👔✍ " << this->getName()
 		<< " signed " << form.getName() << std::endl;
 	} catch (AForm::GradeTooLowException &e){
 	std::cout << this->getName()
 		<< " couldn’t sign " << form.getName()
+		<< " because their " << e.what()
+		<< "." << std::endl;
+	}
+}
+
+void Bureaucrat::executeForm( AForm const & form ) const
+{
+	try {
+	form.execute(*this);
+	std::cout << "👔" << this->getName()
+		<< " executed " << form.getName() << std::endl;
+	} catch (AForm::GradeTooLowException &e) {
+	std::cout << "👔" << this->getName()
+		<< " couldn’t execute " << form.getName()
+		<< " because their " << e.what()
+		<< "." << std::endl;
+	} catch (AForm::NotSignedException &e) {
+	std::cout << "👔" << this->getName()
+		<< " couldn’t execute " << form.getName()
 		<< " because their " << e.what()
 		<< "." << std::endl;
 	}

@@ -11,7 +11,7 @@ AForm::AForm( void ):
 	_gradeToExecute(150),
 	_signed(false)
 {
-	debug(AForm Default Constructor called);
+	debug("AForm Default Constructor called");
 }
 
 // Parameterized Constructor
@@ -21,7 +21,7 @@ AForm::AForm( std::string name, size_t gradeToSign, size_t gradeToExecute ):
 	_gradeToExecute(gradeToExecute),
 	_signed(false)
 {
-	debug(AForm Parameterized Constructor called);
+	debug("AForm Parameterized Constructor called");
 	checkGrade(gradeToSign);
 	checkGrade(gradeToExecute);
 }
@@ -29,7 +29,7 @@ AForm::AForm( std::string name, size_t gradeToSign, size_t gradeToExecute ):
 // Destructor
 AForm::~AForm()
 {
-	debug(AForm Destructor called);
+	debug("AForm Destructor called");
 }
 
 // Copy Constructor
@@ -110,7 +110,7 @@ const char *AForm::GradeTooLowException::what() const throw()
 
 const char *AForm::NotSignedException::what() const throw()
 {
-	return ("not signed");
+	return ("Form is not signed");
 }
 
 // Stream operator overloads

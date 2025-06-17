@@ -42,13 +42,14 @@ static void	testingCopying(std::string text)
 	try {
 	ShrubberyCreationForm A24("litterbox");
 	std::cout << "A24:\n" << A24 << std::endl;
+	std::cout << "new shrubbery form saved in AForm pointer:" << std::endl;
 	AForm *timsForm = new ShrubberyCreationForm(A24);
 	std::cout << *timsForm << std::endl;
 	std::cout << "copy constructing" << std::endl;
 	ShrubberyCreationForm A25(A24);
 	std::cout << "A25:\n" << A25 << std::endl;
 	ShrubberyCreationForm A26;
-	std::cout << "setting two shrubfroms equal (they will have different targets, cause const" << std::endl;
+	std::cout << "setting two shrubfroms equal (they will have different targets, cause const)" << std::endl;
 	std::cout << "A26 = A25" << std::endl;
 	A26 = A25;
 	std::cout << "A26:\n" << A26 << std::endl;
@@ -155,7 +156,9 @@ static void testingShrubberyFormValues(std::string text)
 	Bureaucrat king("King", 1);
 	std::cout << king << std::endl;
 	AForm *shrubberyCreationForm = new ShrubberyCreationForm("Backyard");
+	ShrubberyCreationForm treeForm("Mollystreet");
 	std::cout << shrubberyCreationForm << std::endl;
+	std::cout << "----------signing the form with the Bureaucrat function----------" << std::endl;
 	std::cout << GREEN << "expected to fail:" << RESET << std::endl;
 	tomLow.signForm(*shrubberyCreationForm);
 	std::cout << GREEN << "expected to work:" << RESET << std::endl;
@@ -163,18 +166,25 @@ static void testingShrubberyFormValues(std::string text)
 	std::cout << GREEN << "expected to work:" << RESET << std::endl;
 	king.signForm(*shrubberyCreationForm);
 	std::cout << *shrubberyCreationForm << std::endl;
-	shrubberyCreationForm->execute(king);
-	std::cout << GREEN << "next one should throw an error" << RESET << std::endl;
-	shrubberyCreationForm->execute(stean);
-	std::cout << *shrubberyCreationForm << std::endl;
+	std::cout << GREEN << "expected to work:" << RESET << std::endl;
+	stean.signForm(treeForm);
+	std::cout << treeForm << std::endl;
+	std::cout << "----------executing the form with the Bureaucrat function----------" << std::endl;
+	king.executeForm(ShrubberyCreationForm("unsigned"));
+	king.executeForm(*shrubberyCreationForm);
+	stean.executeForm(*shrubberyCreationForm);
+	delete shrubberyCreationForm;
 	std::cout << GREEN <<
 		"since normal execution has resumed and the error was caught in signForm, this line will be printed, if no abnormal error occured"
 		<< RESET << std::endl;
-	delete shrubberyCreationForm;
-	} catch (std::exception &e) {
-		std::cout << std::endl << e.what() << std::endl;
-	}
-	try {
+	std::cout << "----------executing the form with the form function----------" << std::endl;
+	treeForm.execute(king);
+	std::cout << GREEN << "next one should throw an error" << RESET << std::endl;
+	treeForm.execute(stean);
+	std::cout << treeForm << std::endl;
+	std::cout << GREEN <<
+		"this will not be printed, because of the error before"
+		<< RESET << std::endl;
 	} catch (std::exception &e) {
 		std::cout << std::endl << e.what() << std::endl;
 	}

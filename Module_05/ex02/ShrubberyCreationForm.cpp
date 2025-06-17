@@ -7,7 +7,7 @@
 #include <string>
 
 ShrubberyCreationForm::ShrubberyCreationForm( void ):
-	AForm("BaseShrubberyCreationForm", 145, 137),
+	AForm("ShrubberyCreationForm", 145, 137),
 	_name("ShrubberyCreationForm"),
 	_gradeToSign(145),
 	_gradeToExecute(137),
@@ -17,7 +17,7 @@ ShrubberyCreationForm::ShrubberyCreationForm( void ):
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm( std::string target):
-	AForm("BaseShrubberyCreationForm", 145, 137),
+	AForm("ShrubberyCreationForm", 145, 137),
 	_name("ShrubberyCreationForm"),
 	_gradeToSign(145),
 	_gradeToExecute(137),
@@ -57,9 +57,10 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 		throw(AForm::NotSignedException());
 	if (this->getGradeToExecute() < executor.getGrade())
 		throw(AForm::GradeTooLowException());
+	debug("📑🌳 ShrubberyCreationForm executed");
 	std::ofstream file;
 	file.exceptions(std::ios_base::failbit | std::ios_base::badbit);
-	file.open( (this->getName() + "_shrubbery").c_str());
+	file.open( (this->getTarget() + "_shrubbery").c_str());
 
 	file << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡴⠋⠓⠤⠾⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << std::endl;
 	file << "⠀⠀⠀⠀⠀⢠⠴⠋⠙⣦⠔⢎⡀⠀⠀⠀⠘⠖⠋⠚⠦⡄⠀⠀⠀⠀⠀⠀⠀" << std::endl;
@@ -94,3 +95,14 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 	file.flush();
 	file.close();
 }
+
+std::ostream& operator<<(std::ostream& os, const ShrubberyCreationForm& form)
+{
+	os << "📑" << form.getName()
+		<< ", grade to sign: " << form.getGradeToSign()
+		<< ", grade to execute: " << form.getGradeToExecute()
+		<< ", is signed: " << form.getSigned()
+		<< ", has target: " << form.getTarget() << std::endl;
+	return (os);
+}
+
