@@ -98,7 +98,7 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 
 std::ostream& operator<<(std::ostream& os, const ShrubberyCreationForm& form)
 {
-	os << "📑" << form.getName()
+	os << "📑🌳" << form.getName()
 		<< ", grade to sign: " << form.getGradeToSign()
 		<< ", grade to execute: " << form.getGradeToExecute()
 		<< ", is signed: " << form.getSigned()

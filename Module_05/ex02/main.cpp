@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include "Debug.hpp"
+#include "PresidentialPardonForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 
 static void	testingCreation(std::string text);
@@ -11,6 +12,7 @@ static void	testingCopying(std::string text);
 // static void	testingAssignment(std::string text);
 // static void testingBureaucratSignForm(std::string text);
 // static void	testingSigning(std::string text);
+static void testingPresidentialPardonForm(std::string text);
 static void testingShrubberyFormValues(std::string text);
 
 int main( void )
@@ -22,6 +24,7 @@ int main( void )
 	// testingSigning("test the beSigned function of Form");
 	// testingBureaucratSignForm("test the Bureaucreats signForm function");
 	testingShrubberyFormValues("testing shrubberyForm Values");
+	testingPresidentialPardonForm("testing PresidentialPardonForm");
 }
 
 static void	testingCreation(std::string text)
@@ -189,3 +192,57 @@ static void testingShrubberyFormValues(std::string text)
 		std::cout << std::endl << e.what() << std::endl;
 	}
 }
+
+static void testingPresidentialPardonForm(std::string text)
+{
+	std::cout << std::endl << "====================" << text << "====================" << std::endl;
+	try {
+	Bureaucrat lowSign("lowSign", 26);
+	Bureaucrat exactSign("exactSign", 25);
+	Bureaucrat lowExec("lowExec", 6);
+	Bureaucrat exactExec("exactExec", 5);
+	Bureaucrat king("King", 1);
+	std::cout << king << std::endl;
+	PresidentialPardonForm form("Cat Felix");
+	std::cout << form << std::endl;
+
+	std::cout << "----------signing the form with the Bureaucrat function----------" << std::endl;
+	std::cout << GREEN << "expected to fail:" << RESET << std::endl;
+	lowSign.signForm(form);
+	std::cout << form << std::endl;
+	std::cout << GREEN << "expected to work:" << RESET << std::endl;
+	exactSign.signForm(form);
+	std::cout << GREEN << "expected to work:" << RESET << std::endl;
+	lowExec.signForm(form);
+	std::cout << GREEN << "expected to work:" << RESET << std::endl;
+	exactExec.signForm(form);
+	std::cout << form << std::endl;
+
+	std::cout << "----------executing the form with the Bureaucrat function----------" << std::endl;
+	king.executeForm(PresidentialPardonForm("unsigned"));
+	std::cout << GREEN << "expected to fail:" << RESET << std::endl;
+	lowSign.executeForm(form);
+	exactSign.executeForm(form);
+	lowExec.executeForm(form);
+	std::cout << GREEN << "expected to work:" << RESET << std::endl;
+	exactExec.executeForm(form);
+	std::cout << GREEN <<
+		"since normal execution has resumed and the error was caught in signForm, this line will be printed, if no abnormal error occured"
+		<< RESET << std::endl;
+	std::cout << "----------executing the form with the form function----------" << std::endl;
+	form.execute(exactExec);
+	std::cout << GREEN << "next one should throw an error" << RESET << std::endl;
+	form.execute(lowExec);
+	std::cout << GREEN <<
+		"this will not be printed, because of the error before"
+		<< RESET << std::endl;
+	} catch (std::exception &e) {
+		std::cout << std::endl << e.what() << std::endl;
+	}
+}
+
+// static void testingAllForms(std::string text)
+// {
+// 	std::cout << std::endl << "====================" << text << "====================" << std::endl;
+//
+// }
