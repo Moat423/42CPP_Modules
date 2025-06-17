@@ -126,7 +126,7 @@ static void	testingAssignment(std::string text)
 	Form paulsForm("PaulsForm", 2, 1);
 	std::cout << paulsForm << std::endl;
 	paulsForm = timsForm;
-	std::cout << "copying non constant members from(meaning only signedness):" << std::endl;
+	std::cout << "copying non constant members from timsForm (does nothing cause it makes no sense, all members other that signed are const):" << std::endl;
 	std::cout << timsForm << std::endl;
 	std::cout << "output:" << std::endl;
 	std::cout << paulsForm << std::endl;
