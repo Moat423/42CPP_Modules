@@ -1,3 +1,4 @@
+# TODO: make the debug.hpp disappear
 # 42CPP_Module05
 An artificial nightmare of offices, corridors, classes and others with the purpose of getting familiar with C++
 
@@ -188,6 +189,18 @@ The Form class has:
 • A constant grade required to sign it
 • A constant grade required to execute it
 All these attributes are private.
+
+## RNG
+
+since I am not allowed to use c11 random libraries or C libraries, I will code my own RNG.
+Since i just need a bool, let's not make it too complicated, i will go with Pseudo Random Number Generators.
+
+I could go with this:
+https://en.wikipedia.org/wiki/Linear_congruential_generator
+
+
+or an Xorshift seems fine:
+https://en.wikipedia.org/wiki/Xorshift
 
 ## other Learnings
 
