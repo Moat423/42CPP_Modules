@@ -45,6 +45,7 @@ Form::Form(const Form &copy):
 
 Form& Form::operator=( const Form &assign )
 {
+	static_cast<void>(assign);
 	return *this;
 }
 

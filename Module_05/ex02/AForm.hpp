@@ -49,7 +49,7 @@ class AForm {
 		bool				_signed;
 };
 
-std::ostream& operator<<(std::ostream& os, const AForm& obj);
+std::ostream& operator<<(std::ostream& os, const AForm& form);
 
 #endif // !AFORM_HPP
 

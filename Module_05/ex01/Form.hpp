@@ -42,7 +42,7 @@ class Form {
 		bool				_signed;
 };
 
-std::ostream& operator<<(std::ostream& os, const Form& obj);
+std::ostream& operator<<(std::ostream& os, const Form& form);
 
 #endif // !FORM_HPP
 

@@ -7,7 +7,7 @@
 #include "ShrubberyCreationForm.hpp"
 
 static void	testingCreation(std::string text);
-// static void	testingCopying(std::string text);
+static void	testingCopying(std::string text);
 // static void	testingAssignment(std::string text);
 // static void testingBureaucratSignForm(std::string text);
 // static void	testingSigning(std::string text);
@@ -40,17 +40,18 @@ static void	testingCopying(std::string text)
 {
 	std::cout << std::endl << "====================" << text << "====================" << std::endl;
 	try {
-	ShrubberyCreationForm A24;
-	std::cout << A24 << std::endl;
+	ShrubberyCreationForm A24("litterbox");
+	std::cout << "A24:\n" << A24 << std::endl;
 	AForm *timsForm = new ShrubberyCreationForm(A24);
 	std::cout << *timsForm << std::endl;
 	std::cout << "copy constructing" << std::endl;
 	ShrubberyCreationForm A25(A24);
-	std::cout << A25 << std::endl;
+	std::cout << "A25:\n" << A25 << std::endl;
 	ShrubberyCreationForm A26;
-	std::cout << "setting two shrubfroms equal" << std::endl;
+	std::cout << "setting two shrubfroms equal (they will have different targets, cause const" << std::endl;
+	std::cout << "A26 = A25" << std::endl;
 	A26 = A25;
-	std::cout << A26 << std::endl;
+	std::cout << "A26:\n" << A26 << std::endl;
 	delete timsForm;
 	std::cout << "No exception occured." << std::endl;
 	}
@@ -153,7 +154,7 @@ static void testingShrubberyFormValues(std::string text)
 	std::cout << stean << std::endl;
 	Bureaucrat king("King", 1);
 	std::cout << king << std::endl;
-	AForm *shrubberyCreationForm= new ShrubberyCreationForm();
+	AForm *shrubberyCreationForm = new ShrubberyCreationForm("Backyard");
 	std::cout << shrubberyCreationForm << std::endl;
 	std::cout << GREEN << "expected to fail:" << RESET << std::endl;
 	tomLow.signForm(*shrubberyCreationForm);
