@@ -6,10 +6,9 @@
 #include "Debug.hpp"
 #include "ShrubberyCreationForm.hpp"
 
-// static void	testingCreation(std::string text);
+static void	testingCreation(std::string text);
 // static void	testingCopying(std::string text);
 // static void	testingAssignment(std::string text);
-// static void	testingInvalidGrades(std::string text);
 // static void testingBureaucratSignForm(std::string text);
 // static void	testingSigning(std::string text);
 static void testingShrubberyFormValues(std::string text);
@@ -17,108 +16,49 @@ static void testingShrubberyFormValues(std::string text);
 int main( void )
 {
 	std::cout << BLUE << "====================Bureaucracy Testing====================" << RESET << std::endl;
-	// testingCreation("testing Form creation");
-	// testingInvalidGrades("testing creating forms with invalid grades");
-	// testingCopying("testing copying");
+	testingCreation("testing Form creation");
+	testingCopying("testing copying");
 	// testingAssignment("assignment copying");
 	// testingSigning("test the beSigned function of Form");
 	// testingBureaucratSignForm("test the Bureaucreats signForm function");
 	testingShrubberyFormValues("testing shrubberyForm Values");
 }
 
-// static void	testingCreation(std::string text)
-// {
-// 	std::cout << std::endl << "====================" << text << "====================" << std::endl;
-// 	try {
-// 	Form joe;
-// 	std::cout << joe << std::endl;
-// 	} catch (std::exception &e) {
-// 		std::cout << e.what() << std::endl;
-// 	}
-// 	try {
-// 	Form paulsForm("PaulsForm", 2, 1);
-// 	std::cout << paulsForm << std::endl;
-// 	} catch (std::exception &e) {
-// 		std::cout << e.what() << std::endl;
-// 	}
-// 	try {
-// 	Form timsForm("TimsForm", 150, 100);
-// 	std::cout << timsForm << std::endl;
-// 	} catch (std::exception &e) {
-// 		std::cout << e.what() << std::endl;
-// 	}
-// }
-//
-// static void	testingInvalidGrades(std::string text)
-// {
-// 	std::cout << std::endl << "====================" << text << "====================" << std::endl;
-// 	try {
-// 	Form timsForm("TimsForm", -1, 100);
-// 	std::cout << timsForm << std::endl;
-// 	} catch (std::exception &e) {
-// 		std::cout << "form (gradetosign 18446744073709551615) creation failed. Reason:" << std::endl << e.what() << std::endl;
-// 	}
-// 	try {
-// 	Form timsForm("TimsForm", 0, 100);
-// 	std::cout << timsForm << std::endl;
-// 	} catch (std::exception &e) {
-// 		std::cout << "form (gradetosign 0) creation failed. Reason:" << std::endl << e.what() << std::endl;
-// 	}
-// 	try {
-// 	Form timsForm("TimsForm", 1, 151);
-// 	std::cout << timsForm << std::endl;
-// 	} catch (std::exception &e) {
-// 		std::cout << "form (gradetoexecute 151) creation failed. Reason:" << std::endl << e.what() << std::endl;
-// 	}
-// 	try {
-// 	Form timsForm("TimsForm", 1, 0);
-// 	std::cout << timsForm << std::endl;
-// 	} catch (std::exception &e) {
-// 		std::cout << "form (gradetoexecute 0) creation failed. Reason:" << std::endl << e.what() << std::endl;
-// 	}
-// }
-//
-// // using different forms of copy construction
-// static void	testingCopying(std::string text)
-// {
-// 	std::cout << std::endl << "====================" << text << "====================" << std::endl;
-// 	try {
-// 	Form timsForm("TimsForm", 150, 100);
-// 	std::cout << timsForm << std::endl;
-// 	std::cout << "copy constructing timsForms form to paulsForms form" << std::endl;
-// 	Form paulsForm(timsForm);
-// 	std::cout << paulsForm << std::endl;
-// 	std::cout << "No exception occured." << std::endl;
-// 	}
-// 	catch ( std::exception &e){
-// 		std::cout << e.what() << std::endl;
-// 	}
-// 	try {
-// 	Form timsForm = (Form("tempForm", 140, 160));
-// 	std::cout << timsForm << std::endl;
-// 	} catch (std::exception &e) {
-// 		std::cout << "form (gradetoexecute 160) creation failed. Reason:" << std::endl << e.what() << std::endl;
-// 	}
-// 	try {
-// 	Form timsForm(Form("tempForm", 160, 140));
-// 	std::cout << timsForm << std::endl;
-// 	} catch (std::exception &e) {
-// 		std::cout << "form (gradetoSign 160) creation failed. Reason:" << std::endl << e.what() << std::endl;
-// 	}
-// 	try {
-// 	Form timsForm = (Form("tempForm", 0, 140));
-// 	std::cout << timsForm << std::endl;
-// 	} catch (std::exception &e) {
-// 		std::cout << "form (gradetoSign 0) creation failed. Reason:" << std::endl << e.what() << std::endl;
-// 	}
-// 	try {
-// 	Form timsForm(Form("tempForm", 140, 0));
-// 	std::cout << timsForm << std::endl;
-// 	} catch (std::exception &e) {
-// 		std::cout << "form (gradetoExecute 0) creation failed. Reason:" << std::endl << e.what() << std::endl;
-// 	}
-// }
-//
+static void	testingCreation(std::string text)
+{
+	std::cout << std::endl << "====================" << text << "====================" << std::endl;
+	try {
+	ShrubberyCreationForm A24;
+	std::cout << A24 << std::endl;
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
+}
+
+// using different forms of copy construction
+static void	testingCopying(std::string text)
+{
+	std::cout << std::endl << "====================" << text << "====================" << std::endl;
+	try {
+	ShrubberyCreationForm A24;
+	std::cout << A24 << std::endl;
+	AForm *timsForm = new ShrubberyCreationForm(A24);
+	std::cout << *timsForm << std::endl;
+	std::cout << "copy constructing" << std::endl;
+	ShrubberyCreationForm A25(A24);
+	std::cout << A25 << std::endl;
+	ShrubberyCreationForm A26;
+	std::cout << "setting two shrubfroms equal" << std::endl;
+	A26 = A25;
+	std::cout << A26 << std::endl;
+	delete timsForm;
+	std::cout << "No exception occured." << std::endl;
+	}
+	catch ( std::exception &e){
+		std::cout << e.what() << std::endl;
+	}
+}
+
 // static void	testingAssignment(std::string text)
 // {
 // 	try {
