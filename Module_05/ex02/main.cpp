@@ -5,10 +5,12 @@
 #include <string>
 #include "Debug.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 
 static void	testingCreation(std::string text);
 static void	testingCopying(std::string text);
+static void testingAllForms(std::string text);
 // static void	testingAssignment(std::string text);
 // static void testingBureaucratSignForm(std::string text);
 // static void	testingSigning(std::string text);
@@ -20,6 +22,7 @@ int main( void )
 	std::cout << BLUE << "====================Bureaucracy Testing====================" << RESET << std::endl;
 	testingCreation("testing Form creation");
 	testingCopying("testing copying");
+	testingAllForms("TESTING ALL of the FORMS");
 	// testingAssignment("assignment copying");
 	// testingSigning("test the beSigned function of Form");
 	// testingBureaucratSignForm("test the Bureaucreats signForm function");
@@ -241,8 +244,41 @@ static void testingPresidentialPardonForm(std::string text)
 	}
 }
 
-// static void testingAllForms(std::string text)
-// {
-// 	std::cout << std::endl << "====================" << text << "====================" << std::endl;
-//
-// }
+static void testingAllForms(std::string text)
+{
+	std::cout << std::endl << "====================" << text << "====================" << std::endl;
+	try {
+		AForm *forms[6];
+		forms[0] = new ShrubberyCreationForm();
+		forms[1] = new ShrubberyCreationForm("firstHouse");
+		forms[2] = new PresidentialPardonForm();
+		forms[3] = new PresidentialPardonForm("Fiffi");
+		forms[4] = new RobotomyRequestForm();
+		forms[5] = new RobotomyRequestForm("Sullivan");
+		Bureaucrat *workers[8];
+		workers[0] = new Bureaucrat("Steve", 150);
+		workers[0] = new Bureaucrat("Magda", 72);
+		workers[0] = new Bureaucrat("PlowSign", 26);
+		workers[0] = new Bureaucrat("PexactSign", 25);
+		workers[0] = new Bureaucrat("PlowExec", 6);
+		workers[0] = new Bureaucrat("PexactExec", 5);
+		workers[0] = new Bureaucrat("King", 1);
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 8; j++) {
+				forms[i]->beSigned(*workers[j]);
+			}
+			for (int j = 0; j < 8; j++) {
+				workers[j]->executeForm(*forms[i]);
+			}
+		}
+		for (int i = 0; i < 6; i++) {
+			delete forms[i];
+		}
+		for (int i = 0; i < 8; i++) {
+			delete workers[i];
+		}
+	} catch (std::exception &e) {
+		std::cout << std::endl << e.what() << std::endl;
+	}
+
+}

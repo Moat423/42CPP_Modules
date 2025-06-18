@@ -2,8 +2,10 @@
 #include "AForm.hpp"
 #include "Debug.hpp"
 #include "Bureaucrat.hpp"
-#include <fstream>
-#include <ios>
+#include <algorithm>
+#include <ctime>
+#include <iostream>
+#include <ostream>
 #include <string>
 
 RobotomyRequestForm::RobotomyRequestForm( void ):
@@ -57,8 +59,13 @@ void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 		throw(AForm::NotSignedException());
 	if (this->getGradeToExecute() < executor.getGrade())
 		throw(AForm::GradeTooLowException());
-	debug("📑🤖 RobotomyRequestForm executed");
-	// implement random
+	debug("📑🤖 RobotomyRequestForm execution in progress");
+	if (BoolGenerator(std::time(NULL)).next())
+		std::cout << BLUE << this->getTarget() << " has been robotomized sucessfully!" << std::endl
+			<< "🤖 BEEP BOOP 🤖" << RESET << std::endl;
+	else
+		std::cout << RED << "Robotomy failed..." << std::endl;
+
 }
 
 std::ostream& operator<<(std::ostream& os, const RobotomyRequestForm& form)
@@ -70,19 +77,3 @@ std::ostream& operator<<(std::ostream& os, const RobotomyRequestForm& form)
 		<< ", has target: " << form.getTarget() << std::endl;
 	return (os);
 }
-
-class BoolGenerator {
-    unsigned int state;
-public:
-    explicit BoolGenerator(unsigned int seed = 1) : state(seed) {
-        if (seed == 0) state = 1;  // Prevent invalid zero seed
-    }
-    
-    bool next() {
-        // XORshift32 algorithm (George Marsaglia)
-        state ^= state << 13;
-        state ^= state >> 17;
-        state ^= state << 5;
-        return state & 1;  // Extract least significant bit
-    }
-};

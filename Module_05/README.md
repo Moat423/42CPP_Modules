@@ -201,7 +201,23 @@ https://en.wikipedia.org/wiki/Linear_congruential_generator
 
 or an Xorshift seems fine:
 https://en.wikipedia.org/wiki/Xorshift
-
+```C++
+class BoolGenerator {
+    unsigned int state;
+public:
+    explicit BoolGenerator(unsigned int seed = 1) : state(seed) {
+        if (seed == 0) state = 1;  // Prevent invalid zero seed
+    }
+    
+    bool next() {
+        // XORshift32 algorithm (George Marsaglia)
+        state ^= state << 13;
+        state ^= state >> 17;
+        state ^= state << 5;
+        return state & 1;  // Extract least significant bit
+    }
+};
+```
 ## other Learnings
 
 ### C vs C++

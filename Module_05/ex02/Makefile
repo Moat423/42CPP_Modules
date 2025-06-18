@@ -7,9 +7,9 @@ NAME := Bureaucracy
 CXX := c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 
-SRCS := Bureaucrat.cpp main.cpp AForm.cpp ShrubberyCreationForm.cpp PresidentialPardonForm.cpp
+SRCS := Bureaucrat.cpp main.cpp AForm.cpp ShrubberyCreationForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp
 
-HDRS := Bureaucrat.hpp Debug.hpp AForm.hpp ShrubberyCreationForm.hpp PresidentialPardonForm.hpp
+HDRS := Bureaucrat.hpp Debug.hpp AForm.hpp ShrubberyCreationForm.hpp PresidentialPardonForm.hpp RobotomyRequestForm.cpp
 
 OBJS := $(SRCS:.cpp=.o)
 
