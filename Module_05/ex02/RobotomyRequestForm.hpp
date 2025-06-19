@@ -27,14 +27,8 @@ class RobotomyRequestForm: public AForm
 		class BoolGenerator {
 			mutable unsigned int state;
 		public:
-			explicit BoolGenerator(unsigned int seed) : state(seed ? seed : 1) {}
-			bool next() {
-				// XORshift32 algorithm (George Marsaglia)
-				state ^= state << 13;
-				state ^= state >> 17;
-				state ^= state << 5;
-				return state & 1;  // Extract least significant bit
-			}
+			explicit BoolGenerator(unsigned int seed);
+			bool next();
 		};
 
 		mutable BoolGenerator _boolGen;

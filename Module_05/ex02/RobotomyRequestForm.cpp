@@ -4,7 +4,6 @@
 #include "Bureaucrat.hpp"
 #include <ctime>
 #include <iostream>
-#include <memory>
 #include <ostream>
 #include <string>
 
@@ -83,4 +82,19 @@ std::ostream& operator<<(std::ostream& os, const RobotomyRequestForm& form)
 		<< ", is signed: " << form.getSigned()
 		<< ", has target: " << form.getTarget() << std::endl;
 	return (os);
+}
+
+
+RobotomyRequestForm::BoolGenerator::BoolGenerator(unsigned int seed) : state(seed ? seed : 1) {
+	debug("BoolGenerator Constructor called");
+}
+
+// XORshift32 algorithm
+// extracting the least significant bit
+bool RobotomyRequestForm::BoolGenerator::next()
+{
+	state ^= state << 13;
+	state ^= state >> 17;
+	state ^= state << 5;
+	return state & 1;
 }
