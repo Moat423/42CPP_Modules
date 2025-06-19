@@ -244,6 +244,33 @@ When using it, it will throw an error if the constructor is given a wrong type, 
 
 			explicit BoolGenerator(unsigned int seed) : state(seed ? seed : 1) {}
 
+### Factories
+
+exercise 03 is about making a kind of factory that returns an object and saves it in a pointer of the parent class.
+
+#### typedef vs. no typedef
+
+	typedef AForm* (*formMaker)( std::string target );
+	formMaker formMakers[3] = {
+		makeRobotomyRequestForm,
+		makeShrubberyCreationForm,
+		makePresidentialPardonForm
+	};
+
+is the same as:
+
+	AForm *(*formMakers[3])(const std::string target ) = {
+		makeRobotomyRequestForm,
+		makeShrubberyCreationForm,
+		makePresidentialPardonForm
+	}
+
+the syntax for a function pointer is this:
+AForm* (*formMaker)( std::string target )
+
+and you can declare an array of function pointers in one go. the acutal "function pointer part" is the one in the first brackets: (*formMaker)
+and either declare an array or use a typedef to call a type of that form and make an array.
+
 ## other Learnings
 
 ### C vs C++

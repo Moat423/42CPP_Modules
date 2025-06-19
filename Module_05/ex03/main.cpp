@@ -7,6 +7,7 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "Intern.hpp"
 
 static void	testingCreation(std::string text);
 static void	testingCopying(std::string text);
@@ -29,9 +30,10 @@ int main( void )
 static void	testingCreation(std::string text)
 {
 	std::cout << std::endl << "====================" << text << "====================" << std::endl;
+	Intern damien;
 	try {
-	ShrubberyCreationForm A24;
-	std::cout << A24 << std::endl;
+		AForm *form1 = damien.makeForm("ShrubberyCreationForm", "pool");
+	std::cout << *form1 << std::endl;
 	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
