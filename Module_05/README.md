@@ -218,6 +218,32 @@ public:
     }
 };
 ```
+
+on that note:
+
+
+### mutable
+
+mutable unsigned int state
+
+means that state is a variable, that can be modiefied from functions that are const!.
+its like a special exemption.
+it's handy if i have a const function, but down the line i want to change something. like here.
+
+### MOAR randomness
+
+      _boolGen(static_cast<unsigned int>(std::time(NULL) ^ reinterpret_cast<unsigned long>(this)))
+this is nice, it means XORing the time with the pointer to this, which is going to be different for each object created. so if ever two objs are created at the same time, they will have different seeds.
+
+### explicit
+
+In C++98, always use explicit for single-argument constructors unless you want implicit conversions.
+
+Explicit prevents accidental convertions and makes code more intentional and clear.
+When using it, it will throw an error if the constructor is given a wrong type, which is good, cause it prevents some accidental bugs.
+
+			explicit BoolGenerator(unsigned int seed) : state(seed ? seed : 1) {}
+
 ## other Learnings
 
 ### C vs C++

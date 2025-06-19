@@ -25,11 +25,9 @@ class RobotomyRequestForm: public AForm
 		const std::string	_target;
 
 		class BoolGenerator {
-			unsigned int state;
+			mutable unsigned int state;
 		public:
-			explicit BoolGenerator(unsigned int seed = 1) : state(seed) {
-				if (seed == 0) state = 1;  // Prevent invalid zero seed
-			}
+			explicit BoolGenerator(unsigned int seed) : state(seed ? seed : 1) {}
 			bool next() {
 				// XORshift32 algorithm (George Marsaglia)
 				state ^= state << 13;
@@ -38,6 +36,9 @@ class RobotomyRequestForm: public AForm
 				return state & 1;  // Extract least significant bit
 			}
 		};
+
+		mutable BoolGenerator _boolGen;
+		RobotomyRequestForm::BoolGenerator getBoolGen( void ) const;
 };
 
 std::ostream& operator<<(std::ostream& os, const RobotomyRequestForm& form);
