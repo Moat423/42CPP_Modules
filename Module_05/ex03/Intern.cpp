@@ -18,6 +18,7 @@ Intern::~Intern()
 
 Intern::Intern(const Intern &copy)
 {
+	static_cast<void>(copy);
 	debug("Intern cloned");
 }
 
@@ -44,7 +45,6 @@ static AForm *makeShrubberyCreationForm( std::string target )
 
 AForm* Intern::makeForm( std::string formname, std::string target )
 {
-	AForm *form;
 	std::string formnames[3] = {
 		"RobotomyRequestForm",
 		"ShrubberyCreationForm",
@@ -65,6 +65,11 @@ AForm* Intern::makeForm( std::string formname, std::string target )
 			return (formMakers[i](target));
 		}
 	}
-	std::cout << RED << "Intern could not create the form: " << formname << RESET << std::endl;
+	throw Intern::NonExistentFormException();
 	return (NULL);
+}
+
+const char *Intern::NonExistentFormException::what() const throw()
+{
+	return ("Formname does not exist");
 }

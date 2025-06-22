@@ -12,6 +12,12 @@ class Intern {
 		Intern& operator=( const Intern& assign );
 
 		AForm* makeForm( std::string formname, std::string target );
+
+		class NonExistentFormException : public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		};
 };
 
 
