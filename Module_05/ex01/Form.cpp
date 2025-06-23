@@ -11,7 +11,7 @@ Form::Form( void ):
 	_gradeToExecute(150),
 	_signed(false)
 {
-	debug(Form Default Constructor called);
+	debug("Form Default Constructor called");
 }
 
 // Parameterized Constructor
@@ -21,7 +21,7 @@ Form::Form( std::string name, size_t gradeToSign, size_t gradeToExecute ):
 	_gradeToExecute(gradeToExecute),
 	_signed(false)
 {
-	debug(Form Parameterized Constructor called);
+	debug("Form Parameterized Constructor called");
 	checkGrade(gradeToSign);
 	checkGrade(gradeToExecute);
 }
@@ -29,7 +29,7 @@ Form::Form( std::string name, size_t gradeToSign, size_t gradeToExecute ):
 // Destructor
 Form::~Form()
 {
-	debug(Form Destructor called);
+	debug("Form Destructor called");
 }
 
 // Copy Constructor
