@@ -19,23 +19,36 @@ static void testingRobotomyRequestForm(std::string text);
 int main( void )
 {
 	std::cout << BLUE << "====================Bureaucracy Testing====================" << RESET << std::endl;
-	testingCreation("testing Form creation");
 	testingCopying("testing copying");
 	testingAllForms("TESTING ALL of the FORMS");
 	testingShrubberyFormValues("testing shrubberyForm Values");
 	testingPresidentialPardonForm("testing PresidentialPardonForm");
 	testingRobotomyRequestForm("testing RobotomyRequestForm");
+	testingCreation("testing Form creation");
 }
 
 static void	testingCreation(std::string text)
 {
 	std::cout << std::endl << "====================" << text << "====================" << std::endl;
 	Intern damien;
+	Intern steve(damien);
+	Intern svenia;
+	svenia = steve;
 	try {
 		AForm *form1 = damien.makeForm("ShrubberyCreationForm", "pool");
 	std::cout << *form1 << std::endl;
+	delete form1;
+		AForm *form2 = steve.makeForm("PresidentialPardonForm", "Minty");
+	std::cout << *form2 << std::endl;
+	delete form2;
+		AForm *form3 = svenia.makeForm("ShrubberyCreationForm", "watchtower");
+	std::cout << *form3 << std::endl;
+	delete form3;
+		AForm *form4 = damien.makeForm("ChewinggumForm", "pool");
+	std::cout << *form4 << std::endl;
+	delete form4;
 	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+		std::cout << RED << e.what() << RESET << std::endl;
 	}
 }
 
@@ -61,7 +74,7 @@ static void	testingCopying(std::string text)
 	std::cout << "No exception occured." << std::endl;
 	}
 	catch ( std::exception &e){
-		std::cout << e.what() << std::endl;
+		std::cout << RED << e.what() << RESET << std::endl;
 	}
 }
 
@@ -106,7 +119,7 @@ static void testingShrubberyFormValues(std::string text)
 		"this will not be printed, because of the error before"
 		<< RESET << std::endl;
 	} catch (std::exception &e) {
-		std::cout << std::endl << e.what() << std::endl;
+		std::cout << RED << e.what() << RESET << std::endl;
 	}
 }
 
@@ -154,7 +167,7 @@ static void testingPresidentialPardonForm(std::string text)
 		"this will not be printed, because of the error before"
 		<< RESET << std::endl;
 	} catch (std::exception &e) {
-		std::cout << std::endl << e.what() << std::endl;
+		std::cout << RED << e.what() << RESET << std::endl;
 	}
 }
 
@@ -202,7 +215,7 @@ static void testingRobotomyRequestForm(std::string text)
 		"this will not be printed, because of the error before"
 		<< RESET << std::endl;
 	} catch (std::exception &e) {
-		std::cout << std::endl << e.what() << std::endl;
+		std::cout << RED << e.what() << RESET << std::endl;
 	}
 }
 static void testingAllForms(std::string text)
@@ -243,7 +256,7 @@ static void testingAllForms(std::string text)
 			delete workers[i];
 		}
 	} catch (std::exception &e) {
-		std::cout << std::endl << e.what() << std::endl;
+		std::cout << RED << e.what() << RESET << std::endl;
 	}
 
 }
