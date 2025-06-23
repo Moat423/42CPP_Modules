@@ -1,25 +1,44 @@
-# TODO: make the debug.hpp disappear
-# 42CPP_Module05
-An artificial nightmare of offices, corridors, classes and others with the purpose of getting familiar with C++
+# Module 05: C++ Exceptions
 
-## Exception classes
+<p align="center">
+  <img src="https://img.shields.io/badge/Language-C++-blue.svg" alt="Language">
+  <img src="https://img.shields.io/badge/Standard-C++98-orange.svg" alt="C++ Standard">
+  <img src="https://img.shields.io/badge/Status-Completed-brightgreen.svg" alt="Status">
+</p>
+
+## 📋 Overview
+
+Module 05 dives into the world of C++ exception handling. Through a series of increasingly complex exercises, I implemented artificial bureaucratic forms and hierarchies with proper exception handling to understand:
+
+- Custom exception classes
+- Exception specifications in C++98
+- Handling and bubbling up exceptions
+- Object-oriented programming with exceptions
+- Design patterns like Factory Method
+
+## 🚀 Exercises
+
+### Ex00: Bureaucrat Basics
+*Creating a foundation for exception handling*
+
+#### Exception classes
 
 [stackoverflow-exception-class](https://stackoverflow.com/questions/35215169/c-create-a-class-exception)
 
-## Exception specification
+#### Exception specification
 
-https://cplusplus.com/doc/tutorial/exceptions/
+[cplusplus excetions](https://cplusplus.com/doc/tutorial/exceptions/)
 
-something one might come accross in older codebases and maybe even std98 coding: **dynamic exception handling**
+Something one might come across in older codebases and maybe even std98 coding: **dynamic exception handling**
 
 $$double myfunction (char param) throw (int);$$
 
-this throws std::unexpected for any thing other than int.
-if int is not given and left ampty, it throws std::unexpected for all.
+This throws std::unexpected for any thing other than int.
+If int is not given and left empty, it throws std::unexpected for all.
 
-normally functions don't throw std::unexpected right away but instead follow the normal path, looking for their exception handler.
+Normally functions don't throw std::unexpected right away but instead follow the normal path, looking for their exception handler.
 
-from [cplusplus](https://cplusplus.com/doc/tutorial/exceptions/)
+From [cplusplus](https://cplusplus.com/doc/tutorial/exceptions/)
 "The C++ Standard library provides a base class specifically designed to declare objects to be thrown as exceptions. It is called std::exception and is defined in the <exception> header. This class has a virtual member function called what that returns a null-terminated character sequence (of type char *) and that can be overwritten in derived classes to contain some sort of description of the exception.
 "
 ```C++
@@ -31,9 +50,9 @@ class myexception: public exception
   }
 } myex;
 ```
-this is really coo cause we can just overwrite "what" to give it a meaningful and explanatory exception name.
+This is really cool cause we can just overwrite "what" to give it a meaningful and explanatory exception name.
 
-to catch derived exeption casses, we can catch them by reference of the exception class
+To catch derived exeption casses, we can catch them by reference of the exception class
 just like how a pointer of a base class can hold all derived classes, we can get the value of a class with the base reference.
 
 ```c++
@@ -51,7 +70,7 @@ int main () {
 
 ```
 
-so for this project I am creating a new class in my bureaucrat:
+So for this project I am creating a new class in my bureaucrat:
 
 		class GradeTooHighException : public std::exception
 		{
@@ -59,17 +78,19 @@ so for this project I am creating a new class in my bureaucrat:
 				virtual const char *what() const throw();
 		};
 
-Did you know, that when created nested classes, and you wnat to put the implementation somehwere, you have to use the "qualified name" meaning including the outer classes?
+Did you know, that when created nested classes, and you want to put the implementation somewhere, you have to use the "qualified name" meaning including the outer classes?
 
+```C++
 const char *Bureaucrat::GradeTooHighException::what() const throw()
 {
 	return ("Grade too high");
 }
+```
 
-yey, let's nest classes and make an endless row of classes inside classes XD
+Let's nest classes and make an endless row of classes inside classes XD
 
-this class is using the "throw" to declare that this function will call std::unexpected.
-However, I can change the return of the error. it is the return of this function (const char *)
+This class is using the "throw" to declare that this function will call std::unexpected.
+However, I can change the return of the error. It is the return of this function (const char *)
 
 ### Exception specification
 
@@ -192,14 +213,14 @@ All these attributes are private.
 
 ## RNG
 
-since I am not allowed to use c11 random libraries or C libraries, I will code my own RNG.
+Since I am not allowed to use c11 random libraries or C libraries, I will code my own RNG.
 Since i just need a bool, let's not make it too complicated, i will go with Pseudo Random Number Generators.
 
 I could go with this:
 https://en.wikipedia.org/wiki/Linear_congruential_generator
 
 
-or an Xorshift seems fine:
+Or an Xorshift seems fine:
 https://en.wikipedia.org/wiki/Xorshift
 ```C++
 class BoolGenerator {
@@ -219,30 +240,33 @@ public:
 };
 ```
 
-on that note:
+On that note:
+### The `mutable` Keyword
 
+The `mutable` keyword is a powerful feature:
 
-### mutable
+```cpp
+mutable unsigned int state;
+```
 
-mutable unsigned int state
-
-means that state is a variable, that can be modiefied from functions that are const!.
-its like a special exemption.
-it's handy if i have a const function, but down the line i want to change something. like here.
+means that state is a variable, that can be modified from functions that are const!.
+It's like a special exemption.
+It's handy if i have a const function, but down the line i want to change something, as seen in my `RobotomyRequestForm`.
 
 ### MOAR randomness
 
-      _boolGen(static_cast<unsigned int>(std::time(NULL) ^ reinterpret_cast<unsigned long>(this)))
-this is nice, it means XORing the time with the pointer to this, which is going to be different for each object created. so if ever two objs are created at the same time, they will have different seeds.
+	_boolGen(static_cast<unsigned int>(std::time(NULL) ^ reinterpret_cast<unsigned long>(this)))
+
+This is nice, it means XORing the time with the pointer to this, which is going to be different for each object created. So if ever two objs are created at the same time, they will have different seeds.
 
 ### explicit
 
 In C++98, always use explicit for single-argument constructors unless you want implicit conversions.
 
-Explicit prevents accidental convertions and makes code more intentional and clear.
+Explicit prevents accidental conversions and makes code more intentional and clear.
 When using it, it will throw an error if the constructor is given a wrong type, which is good, cause it prevents some accidental bugs.
 
-			explicit BoolGenerator(unsigned int seed) : state(seed ? seed : 1) {}
+	explicit BoolGenerator(unsigned int seed) : state(seed ? seed : 1) {}
 
 ### Factories
 
@@ -275,7 +299,7 @@ and either declare an array or use a typedef to call a type of that form and mak
 
 ### C vs C++
 
-in C you can create compount literals:
+in C you can create compound literals:
 $$(struct Point){1, 2}$$
 which you can't do in C++.
 
@@ -295,14 +319,14 @@ Form timsForm = Form("tempForm", 140, 145);
 Form timsForm = Form{"tempForm", 140, 145};
 ```
 
-However note, that Option 2 is **equivilant** to option 3.
+However note, that Option 2 is **equivalent** to option 3.
 Even though it uses an equal, it's actually also copy constructing.
 
 ### getters and getters
 
-encasulation is the reason why one would use getters and setters.
-the setters might even be private or protected and the vaue is always private or protected.
-Making the setter private bascially makes it read ony from the outside.
+Encasulation is the reason why one would use getters and setters.
+the setters might even be private or protected and the value is always private or protected.
+Making the setter private basically makes it read only from the outside.
 
 Encapsuation means, that eveything is spererated well.
 
