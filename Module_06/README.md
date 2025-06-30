@@ -1,5 +1,48 @@
 #Casts
 
+### NAN
+
+```C++
+f <= std::numeric_limits<int>::max() && f >= std::numeric_limits<int>::min()
+```
+We're checking if the float value is within the range that can be represented by an int. However:
+
+-When comparing NaN with any value (including min/max limits), the comparison always evaluates to false
+-When comparing positive infinity, f <= max evaluates to false
+-When comparing negative infinity, f >= min evaluates to false
+While mathematically these checks would exclude NaN and infinity, in C++ it's considered good practice to explicitly check for NaN and infinity for two reasons:
+
+Clarity: It makes the intent of the code more explicit
+Portability: Some compilers or floating-point implementations might have different behavior with these special values
+
+
+Therefore the reccomended pattern looks like this:
+
+	if (!std::isnan(fl)
+			&& !std::isinf(fl)
+			&& fl >= std::numeric_limits<int>::min()
+			&& fl <= static_cast<float>(std::numeric_limits<int>::max()))
+	{
+```C++
+
+```
+
+### Design Patterns
+
+#### a static class
+
+A static class is a class that cannot be instantiated and has only static members.
+It is advised against using this pattern, as a namespace is usually a better choice.
+
+[anti-pattern: static class](https://softwareengineering.stackexchange.com/questions/134540/are-utility-classes-with-nothing-but-static-members-an-anti-pattern-in-c)
+[static is bad](https://softwareengineering.stackexchange.com/questions/408193/should-i-use-a-class-with-only-static-members-to-encapsulate-my-program)
+The above link makes the argument, that static classes are basically globals and therefore come with all disadvantages like poor testablility and maintainability as them.
+
+However, they can be used, if you need them as template or want to protect certain things from the user of the class.
+[usecase: static template](https://www.embeddedrelated.com/showarticle/1598.php)
+
+I am doing this exercise in awareness, not to use namespaces. So I will use a static class to hold the converting methods.
+
 ### strings
 
 from [cplusplus.com](https://cplusplus.com/reference/string/string/npos/)
