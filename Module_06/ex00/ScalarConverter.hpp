@@ -3,14 +3,14 @@
 
 #include <string>
 
-enum eType{
+enum eScalarType{
 	ERROR,
-	CHAR,
-	INT,
-	FLOAT,
-	DOUBLE,
-	NAN,
-	INF
+	CHAR = 1,
+	INT = 2,
+	FLOAT = 4,
+	DOUBLE = 8,
+	NAN = 16,
+	INF = 32
 };
 
 class ScalarConverter {
@@ -20,11 +20,13 @@ class ScalarConverter {
 		ScalarConverter& operator=( const ScalarConverter &assignment );
 		static void convert( std::string );
 	private:
-		static eType	_type;
-		static char		_char;
-		static int		_int;
-		static float	_float;
-		static double	_double;
+		// Conversion functions 
+		static void printConversions(char c, int i, float f, double d, unsigned char possibilityFlags);
+		static void convertFromChar(const std::string &literal);
+		static void convertFromInt(const std::string &literal);
+		static void convertFromFloat(const std::string &literal);
+		static void convertFromDouble(const std::string &literal);
+		static void handleSpecialCases(const std::string &literal);
 		ScalarConverter();
 };
 

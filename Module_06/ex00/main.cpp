@@ -18,7 +18,7 @@ void	charTests( void )
 {
 	std::cout << "Testing Chars" << std::endl;
 	std::string all = "0a^ 	ü";
-	for (int i = 0; i < all.length(); i++)
+	for (unsigned int i = 0; i < all.length(); i++)
 	{
 		std::cout << "char: " << all[i] << std::endl;
 		ScalarConverter::convert(std::string(1, all[i]));
