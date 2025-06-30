@@ -135,11 +135,11 @@ static void	fromInt( std::string number )
 
 void ScalarConverter::convert( std::string number)
 {
-	// bool	displayableChar;
-	// char	c;
-	// int		nb;
-	// float	fl;
-	// double	db;
+	bool	displayableChar;
+	char	c;
+	int		nb;
+	float	fl;
+	double	db;
 
 	_type = checkType(number);
 	switch ( _type ){

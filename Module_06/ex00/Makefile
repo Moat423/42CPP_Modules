@@ -7,9 +7,9 @@ NAME := a.out
 CXX := c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 
-HDRS :=
+HDRS := ScalarConverter.hpp
 
-SRCS :=
+SRCS := ScalarConverter.cpp main.cpp
 
 OBJS := $(SRCS:.cpp=.o)
 

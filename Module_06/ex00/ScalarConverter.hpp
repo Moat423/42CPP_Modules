@@ -21,6 +21,10 @@ class ScalarConverter {
 		static void convert( std::string );
 	private:
 		static eType	_type;
+		static char		_char;
+		static int		_int;
+		static float	_float;
+		static double	_double;
 		ScalarConverter();
 };
 
