@@ -40,6 +40,8 @@ void	intTests( void )
 	testIntNumber("-42");
 	testIntNumber("2147483647");
 	testIntNumber("-2147483648");
+	std::cout << "should not be int, too big" << std::endl;
+	testIntNumber("21474836480");
 }
 
 
