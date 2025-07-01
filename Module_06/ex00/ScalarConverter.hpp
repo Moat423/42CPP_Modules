@@ -9,8 +9,7 @@ enum eScalarType{
 	INT = 2,
 	FLOAT = 4,
 	DOUBLE = 8,
-	NAN = 16,
-	INF = 32
+	SPECIAL = 32
 };
 
 class ScalarConverter {
