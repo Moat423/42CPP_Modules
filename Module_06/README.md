@@ -1,8 +1,65 @@
 #Casts
 
+## converter
+
+first draft:
+- If the string is a single printable character (and not a digit), treat as char.
+- If there is a leading + or - it might be int, float or double.
+- If all characters are digits (possibly with a leading + or -), treat as int.
+- If it contains exactly one . or an e/E (for scientific notation), and the rest are digits (with possible sign), treat as float/double.
+- Otherwise, invalid input.
+
+final checks:
+Char: single, nondigit, printable character.
+Int: - + at beginning, digits only.
+Float: - + at beginning, digits, possibly one dot, possibly one e/E followed by +-, ending with f.
+Double: - + at beginning, digits, possibly one dot, possibly one e/E followed by +-, no f at the end, if input too big for int.
+```C++
+static eScalarType checkType( std::string literal )
+{
+	size_t	i = 0;
+	bool	hasDot = false;
+	bool	hasF = false;
+	bool	hasDigit = false;
+	int		scientific = 0;
+
+	if (literal == ("nan") || literal == ("-inf") || literal == ("+inf"))
+			return (DOUBLE);
+	if (literal == ("nanf") || literal == ("-inff") || literal == ("+inff"))
+		return (FLOAT);
+	if (literal.length() == 1 && !(isdigit(literal[0])))
+		return (CHAR);
+	if (literal[i] == '-' || literal[i] == '+')
+		++i;
+	for (; i < literal.length(); i++)
+	{
+		if (isdigit(literal[i]))
+			hasDigit = true;
+		else if (literal[i] == '.' && !hasDot && !hasF)
+			hasDot = true;
+		else if ((literal[i] == 'e' || literal[i] == 'E') && (literal[i + 1] == '-' || literal[i + 1] == '+'))
+		{
+			i++;
+			scientific++;
+		}
+		else if (literal[i] == 'f' && !hasF && i == literal.length() - 1)
+			hasF = true;
+		else
+		 	return (ERROR);
+	}
+	if (!hasDigit || scientific > 1)
+		return (ERROR);
+	if (hasF)
+		return (FLOAT);
+	if (hasDot || scientific == 1)
+		return (DOUBLE);
+	else
+		return (INT);
+}
+```
 ### Char to any
 
-will always be safe.
+It will always be safe to cast a char to an int, float or double.
 
 ### Int
 
@@ -17,7 +74,7 @@ above 16,777,216 and below -16,777,216 the int will not represent the int value 
 floats can be much bigger and smaller than an int. They will also be truncated, but the bigger and smaller values will not fit into an int.
 
 #### float to double
-save, but will add bogus decimal places if the float is not a whole number.
+safe, but will add bogus decimal places if the float is not a whole number.
 ```C++
 
 ### NAN
@@ -124,18 +181,5 @@ It may be used like this:
 ```C++
 c = static_cast<char>(converter);
 ```
-## converter
-
-first draft:
-- If the string is a single printable character (and not a digit), treat as char.
-
-- If there is a leading + or - it might be int, float or double.
-
-- If all characters are digits (possibly with a leading + or -), treat as int.
-
-- If it contains exactly one . or an e/E (for scientific notation), and the rest are digits (with possible sign), treat as float/double.
-
-- Otherwise, invalid input.
-
 
 
