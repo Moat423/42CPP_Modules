@@ -39,12 +39,12 @@ static eScalarType checkType( std::string literal )
 	bool	hasDot = false;
 	bool	hasF = false;
 	bool	hasDigit = false;
-	if ((literal.compare("nan") == 0 || literal.compare("nanf") == 0)
-			||literal.compare("-inff") == 0
-			|| literal.compare("+inff") == 0
-			|| literal.compare("-inf") == 0
-			|| literal.compare("+inf") == 0)
-		return (SPECIAL);
+	int		scientific = 0;
+
+	if (literal == ("nan") || literal == ("-inf") || literal == ("+inf"))
+			return (DOUBLE);
+	if (literal == ("nanf") || literal == ("-inff") || literal == ("+inff"))
+		return (FLOAT);
 	if (literal.length() == 1 && !(isdigit(literal[0])))
 		return (CHAR);
 	if (literal[i] == '-' || literal[i] == '+')
@@ -55,39 +55,25 @@ static eScalarType checkType( std::string literal )
 			hasDigit = true;
 		else if (literal[i] == '.' && !hasDot && !hasF)
 			hasDot = true;
+		else if ((literal[i] == 'e' || literal[i] == 'E') && (literal[i + 1] == '-' || literal[i + 1] == '+'))
+		{
+			i++;
+			scientific++;
+		}
 		else if (literal[i] == 'f' && !hasF && i == literal.length() - 1)
 			hasF = true;
 		else
 		 	return (ERROR);
-		if (!hasDigit)
-			return (ERROR);
-		if (hasF)
-			return (FLOAT);
-		if (hasDot)
-			return (DOUBLE);
-		else
-			return (INT);
 	}
-	return (ERROR);
+	if (!hasDigit || scientific > 1)
+		return (ERROR);
+	if (hasF)
+		return (FLOAT);
+	if (hasDot || scientific == 1)
+		return (DOUBLE);
+	else
+		return (INT);
 }
-
-// static void	printNormalConversion(char *c, int *nb, float *fl, double db)
-// {
-// 	std::cout << "char: ";
-// 	if (!c)
-// 		std::cout << "impossible" << std::endl;
-// 	else if (std::isprint((*c)))
-// 			std::cout<< "'" << *c << "'";
-// 	else
-// 			std::cout << "Non displayable";
-// 	std::cout << std::endl;
-// 	std::cout << "int: "
-// 	<< nb << std::endl;
-// 	std::cout << "float: "
-// 	<< fl << "f" << std::endl;
-// 	std::cout << "double: "
-// 	<< db << std::endl;
-// }
 
 void ScalarConverter::printConversions(char c, int i, float f, double d, unsigned char possibilityFlags)
 {
@@ -105,11 +91,13 @@ void ScalarConverter::printConversions(char c, int i, float f, double d, unsigne
 	else
 		std::cout << i;
 	std::cout << std::endl;
+	std::cout << "float: ";
 	if (!(possibilityFlags & FLOAT))
 		std::cout << "impossible";
 	else
 		std::cout << f << "f";
 	std::cout << std::endl;
+	std::cout << "double: ";
 	if (!(possibilityFlags & DOUBLE))
 		std::cout << "impossible";
 	else
@@ -172,6 +160,7 @@ void	ScalarConverter::convertFromInt( const std::string &literal )
 {
 	char	c = 0;
 	long	nb = 0;
+	int		i = 0;
 	float	fl = 0;
 	double	db = 0;
 	char	*endptr;
@@ -180,7 +169,10 @@ void	ScalarConverter::convertFromInt( const std::string &literal )
 	nb = strtol(literal.c_str(), &endptr, 10);
 	if (nb >= std::numeric_limits<int>::min()
 		&& nb <= static_cast<float>(std::numeric_limits<int>::max()))
+	{
+		i = static_cast<int>(nb);
 		type |= INT;
+	}
 	if (*endptr != '\0')
 		return printErrorConversion();
 	if (nb > 0 && nb <= 127)
@@ -190,7 +182,7 @@ void	ScalarConverter::convertFromInt( const std::string &literal )
 	}
 	fl = static_cast<float>(nb);
 	db = static_cast<double>(nb);
-	printConversions(c, nb, fl, db, type);
+	printConversions(c, i, fl, db, type);
 }
 
 void	ScalarConverter::convertFromFloat( const std::string &literal )
@@ -203,7 +195,7 @@ void	ScalarConverter::convertFromFloat( const std::string &literal )
 	int		type = FLOAT | DOUBLE;
 
 	fl = strtof(literal.c_str(), &endptr);
-	if (*endptr != '\0' || (*endptr == 'f' && *(endptr + 1) == '\0'))
+	if (*endptr != '\0' && !(*endptr == 'f' && *(endptr + 1) == '\0'))
 		return printErrorConversion();
 	if (fl > 0 && fl <= 127)
 	{
@@ -237,30 +229,24 @@ void	ScalarConverter::convertFromDouble( const std::string &literal )
 			c = static_cast<char>(db);
 			type |= CHAR;
 		}
-	if (!std::isnan(db) && !std::isinf(db))
+	if (!std::isnan(db) && !std::isinf(db)
+		&& (db >= std::numeric_limits<int>::min()
+		&& db <= std::numeric_limits<int>::max()))
 	{
-		if (db >= std::numeric_limits<int>::min()
-			&& db <= static_cast<double>(std::numeric_limits<int>::max()))
-		{
-			i = static_cast<int>(db);
-			type |= INT;
-		}
-		if (db >= std::numeric_limits<float>::min()
-			&& db <= static_cast<double>(std::numeric_limits<float>::max()))
-		{
-			fl = static_cast<float>(db);
-			type |= FLOAT;
-		}
+		i = static_cast<int>(db);
+		type |= INT;
+	}
+	if (std::isnan(db) || std::isinf(db)
+		|| (db >= -std::numeric_limits<float>::max()
+		&& db <= std::numeric_limits<float>::max()))
+	{
+		fl = static_cast<float>(db);
+		type |= FLOAT;
 	}
 	printConversions(c, i, fl, db, type);
 }
 void ScalarConverter::convert( std::string literal)
 {
-	// bool	displayableChar;
-	// char	c;
-	// int		nb;
-	// float	fl;
-	// double	db;
 	eScalarType		type;
 
 	type = checkType(literal);
@@ -276,6 +262,12 @@ void ScalarConverter::convert( std::string literal)
 			break;
 		case INT:
 			convertFromInt(literal);
+			break;
+		case FLOAT:
+			convertFromFloat(literal);
+			break;
+		case DOUBLE:
+			convertFromDouble(literal);
 			break;
 		default:
 			printErrorConversion();

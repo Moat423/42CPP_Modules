@@ -1,5 +1,25 @@
 #Casts
 
+### Char to any
+
+will always be safe.
+
+### Int
+
+#### int to float
+very large or very small values will not be completely accurate, but will fit into a float.
+above 16,777,216 and below -16,777,216 the int will not represent the int value accurately anymore.
+
+### Float
+
+#### float to int
+--> check bounds of int
+floats can be much bigger and smaller than an int. They will also be truncated, but the bigger and smaller values will not fit into an int.
+
+#### float to double
+save, but will add bogus decimal places if the float is not a whole number.
+```C++
+
 ### NAN
 
 ```C++
