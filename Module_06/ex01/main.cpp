@@ -35,6 +35,10 @@ int main ( void )
 		<< deserializedMizi->animal << " has " << deserializedMizi->numberOfFeet << " feet." << std::endl;
 	std::cout << "Data at: " << deserializedRalf << " :"<< std::endl
 		<< deserializedRalf->animal << " has " << deserializedRalf->numberOfFeet << " feet." << std::endl;
+	if (deserializedMizi == mizi && deserializedRalf == &ralf)
+		std::cout << GREEN << "Deserialization successful, pointers match!" << RESET << std::endl;
+	else
+		std::cout << RED << "Deserialization failed, pointers do not match!" << RESET << std::endl;
 	delete mizi;
 	return (0);
 }

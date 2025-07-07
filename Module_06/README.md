@@ -26,8 +26,26 @@ Purpose: Safely casts pointers or references within an inheritance hierarchy (re
 Checks: Performs runtime checks;
 dynamic_cast behaves differently for pointers and references:
 With a *pointer*, if the cast fails, it returns NULL. It does not throw an exception in this case.
+```C++
+void identify(Base* p)
+{
+	if (dynamic_cast<A*>(p) != NULL) {
+		std::cout << "A" << std::endl;
+	}
+}
+```
 With a *reference*, if the cast fails, it throws a std::bad_cast exception.
-
+```C++
+void identify(Base& p)
+{
+	try {
+		static_cast<void>(dynamic_cast<A&>(p));
+		std::cout << "A" << std::endl;
+	} catch (const std::exception &e) {
+		std::cout << "not A" << std::endl;
+	}
+}
+```
 
 ## converter
 
