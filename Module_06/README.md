@@ -1,5 +1,34 @@
 #Casts
 
+C++ provides several cast operators. static_cast is for safe, standard conversions; reinterpret_cast is for low-level, risky reinterpretation; const_cast adds or removes constness; and dynamic_cast is for safe casting in class hierarchies. Prefer C++ casts over C-style casts for clarity and safety.
+
+#### static_cast
+Purpose: Performs well-defined conversions between compatible types (e.g., int to float, pointers within an inheritance hierarchy, etc.).
+Checks: Performs some compile-time checks to prevent unsafe conversions, but does not check at runtime.
+	static_cast<void>(copy);
+	fl = static_cast<float>(nb);
+
+#### reinterpret_cast
+Purpose: Reinterprets the bit pattern of a value as another type (e.g., pointer to integer, or between unrelated pointer types).
+Checks: No safety checks; very risky. Use only when you know exactly what you are doing.
+	reinterpret_cast<uintptr_t>(ptr); // converts from ptr to and int type
+	reinterpret_cast<Data*>(raw); // makes the int back into a usable pointer
+
+#### const_cast
+Purpose: Adds or removes const or volatile qualifiers from a variable.
+Checks: Only works with pointers or references.
+	const int* ci = ...;
+	int* i = const_cast<int*>(ci);
+Take heed: modifying a value originally declared const is undefined behavior.
+
+#### dynamic_cast
+Purpose: Safely casts pointers or references within an inheritance hierarchy (requires at least one virtual function in the base class).
+Checks: Performs runtime checks;
+dynamic_cast behaves differently for pointers and references:
+With a *pointer*, if the cast fails, it returns NULL. It does not throw an exception in this case.
+With a *reference*, if the cast fails, it throws a std::bad_cast exception.
+
+
 ## converter
 
 first draft:
