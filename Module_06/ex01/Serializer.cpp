@@ -17,12 +17,12 @@ Serializer& Serializer::operator=( const Serializer &assign )
 }
 
 
-uintptr_t serialize(Data* ptr)
+uintptr_t Serializer::serialize(Data* ptr)
 {
-	return (std::static_cast<uintptr_t>(ptr));
+	return (reinterpret_cast<uintptr_t>(ptr));
 }
 
-Data* deserialize(uintptr_t raw)
+Data* Serializer::deserialize(uintptr_t raw)
 {
-	return (std::static_cast<Data*>(raw));
+	return (reinterpret_cast<Data*>(raw));
 }

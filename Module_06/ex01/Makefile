@@ -7,9 +7,9 @@ NAME := a.out
 CXX := c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 
-HDRS := Debug.hpp Serializer.hpp Data.hpp
+HDRS := Debug.hpp Serializer.hpp
 
-SRCS := Serializer.cpp main.cpp Data.cpp
+SRCS := main.cpp Serializer.cpp
 
 OBJS := $(SRCS:.cpp=.o)
 

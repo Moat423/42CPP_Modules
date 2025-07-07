@@ -117,7 +117,6 @@ It is defined as bing able to hold a value that can be converted to a pointer an
 Normal ints can be too small to hold a pointer value, e.g. on a 64-bit system, an int might be 32 bits, while a pointer is 64 bits, so if you cast a pointer to an int, you might lose 32 bits of information.
 It is useful for pointer arithmetic, but it is not a pointer type itself.
 
-
 ### Design Patterns
 
 #### a static class
@@ -133,6 +132,23 @@ However, they can be used, if you need them as template or want to protect certa
 [usecase: static template](https://www.embeddedrelated.com/showarticle/1598.php)
 
 I am doing this exercise in awareness, not to use namespaces. So I will use a static class to hold the converting methods.
+
+### io manupulation
+
+[input/output manipulatiors](https://en.cppreference.com/w/cpp/io/manip.html)
+
+an excerpt:
+
+| Manupulator | Effect | Example Output |
+| ------------- | -------------- | -------------- |
+| Item1 | Item1 | Item1 |
+| std::hex | Hexadecimal output | ff
+| std::uppercase | Uppercase hex digits | FF
+| std::showbase | Adds 0x prefix | 0xff
+| std::setw(n) | Sets width (needs <iomanip>) | 00ff
+| std::setfill('0') | Fills with zeros | 00ff
+| std::dec | Switches back to decimal | 255
+
 
 ### strings
 
