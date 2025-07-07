@@ -104,6 +104,20 @@ Therefore the reccomended pattern looks like this:
 
 ```
 
+### Int pointers
+
+#### uintptr_t
+
+- requires the [cstdint](https://cplusplus.com/reference/cstdint/) (stdint.h) header
+
+just like intptr_t, this is a typedef for an unsigned integer type that is capable of holding a pointer.
+It is defined as bing able to hold a value that can be converted to a pointer and back without loss of information.
+
+[(u)intptr_t](https://cplusplus.com/forum/beginner/180101/) has the crucial difference to normal ints, that you will never loose information for pointer casting.
+Normal ints can be too small to hold a pointer value, e.g. on a 64-bit system, an int might be 32 bits, while a pointer is 64 bits, so if you cast a pointer to an int, you might lose 32 bits of information.
+It is useful for pointer arithmetic, but it is not a pointer type itself.
+
+
 ### Design Patterns
 
 #### a static class
