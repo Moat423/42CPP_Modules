@@ -17,15 +17,16 @@ class ScalarConverter {
 		~ScalarConverter();
 		ScalarConverter( const ScalarConverter &copy );
 		ScalarConverter& operator=( const ScalarConverter &assignment );
-		static void convert( std::string );
+		static void			convert( std::string );
 	private:
+		static eScalarType	checkType( std::string literal );
 		// Conversion functions 
-		static void printConversions(char c, int i, float f, double d, unsigned char possibilityFlags);
-		static void convertFromChar(const std::string &literal);
-		static void convertFromInt(const std::string &literal);
-		static void convertFromFloat(const std::string &literal);
-		static void convertFromDouble(const std::string &literal);
-		static void handleSpecialCases(const std::string &literal);
+		static void			printConversions(char c, int i, float f, double d, unsigned char possibilityFlags);
+		static void			convertFromChar(const std::string &literal);
+		static void			convertFromInt(const std::string &literal);
+		static void			convertFromFloat(const std::string &literal);
+		static void			convertFromDouble(const std::string &literal);
+		static void			handleSpecialCases(const std::string &literal);
 		ScalarConverter();
 };
 

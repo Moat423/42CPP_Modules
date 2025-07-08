@@ -189,12 +189,12 @@ an excerpt:
 | Manupulator | Effect | Example Output |
 | ------------- | -------------- | -------------- |
 | Item1 | Item1 | Item1 |
-| std::hex | Hexadecimal output | ff
-| std::uppercase | Uppercase hex digits | FF
-| std::showbase | Adds 0x prefix | 0xff
-| std::setw(n) | Sets width (needs <iomanip>) | 00ff
-| std::setfill('0') | Fills with zeros | 00ff
-| std::dec | Switches back to decimal | 255
+| std::hex | Hexadecimal output | ff |
+| std::uppercase | Uppercase hex digits | FF |
+| std::showbase | Adds 0x prefix | 0xff |
+| std::setw(n) | Sets width (needs <iomanip>) | 00ff |
+| std::setfill('0') | Fills with zeros | 00ff |
+| std::dec | Switches back to decimal | 255 |
 
 
 ### strings

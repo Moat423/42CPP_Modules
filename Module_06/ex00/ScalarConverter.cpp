@@ -1,6 +1,7 @@
 #include "ScalarConverter.hpp"
 #include "Debug.hpp"
 #include <cmath>
+#include <iomanip>
 #include <cstdlib>
 #include <limits>
 #include <string>
@@ -33,7 +34,7 @@ ScalarConverter& ScalarConverter::operator=( const ScalarConverter &assignment )
 	return (*this);
 }
 
-static eScalarType checkType( std::string literal )
+eScalarType ScalarConverter::checkType( std::string literal )
 {
 	size_t	i = 0;
 	bool	hasDot = false;
@@ -94,6 +95,8 @@ void ScalarConverter::printConversions(char c, int i, float f, double d, unsigne
 	std::cout << "float: ";
 	if (!(possibilityFlags & FLOAT))
 		std::cout << "impossible";
+	else if (std::fabs(f - std::floor(f)) < 1e-9)
+		std::cout << std::fixed << std::setprecision(1) << f << "f";
 	else
 		std::cout << f << "f";
 	std::cout << std::endl;
@@ -105,43 +108,9 @@ void ScalarConverter::printConversions(char c, int i, float f, double d, unsigne
 	std::cout << std::endl;
 }
 
-static void printNanInfConversion(std::string literal, float fl, double db)
-{
-	std::cout << "char: impossible" << std::endl;
-		std::cout << "int: impossible" << std::endl;
-	std::cout << "float: ";
-	if (literal.compare("nan") == 0 || literal.compare("nanf") == 0)
-		std::cout << "nanf" << std::endl;
-	else
-		// TODO: does this catch + and - inf?
-		std::cout << fl << "f" << std::endl;
-	std::cout << "double: ";
-	if (literal.compare("nan") == 0 || literal.compare("nanf") == 0)
-		//TODO: cant this print nan?
-		std::cout << db << std::endl;
-	else
-		std::cout << db << std::endl;
-}
-
 static void printErrorConversion( void )
 {
 	std::cerr << "Error: Invalid input" << std::endl;
-}
-
-static void	convertSpecial(std::string literal)
-{
-	char *endptr;
-	float	fl = strtof(literal.c_str(), &endptr);
-	if (*endptr != '\0')
-		return (printErrorConversion());
-	double	db = strtod(literal.c_str(), &endptr);
-	if (*endptr != '\0')
-		return (printErrorConversion());
-	printNanInfConversion(
-			literal, 
-			fl,
-			db
-			);
 }
 
 void	ScalarConverter::convertFromChar( const std::string &literal )
@@ -254,9 +223,6 @@ void ScalarConverter::convert( std::string literal)
 		case ERROR:
 			std::cerr << "Error: Invalid input" << std::endl;
 			break;
-		case SPECIAL:
-			convertSpecial(literal);
-			return;
 		case CHAR:
 			convertFromChar(literal);
 			break;
