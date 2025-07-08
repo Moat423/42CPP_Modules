@@ -23,3 +23,29 @@ void	swap(T &x, T &y)
 ```
 in the above example T is the name I gave the type that this function will take when it gets compiled and used.
 
+#### using templates for function pointers or passed functions
+
+you can just define it as a type too:
+```C++
+template <typename T, typename Func>
+void	iter(T *array, unsigned int length, Func func)
+{
+	for (unsigned int i = 0; i < length; i++)
+	{
+		func(array[i]);
+	}
+}
+ 
+```
+func can be any callable object: function pointer, functor (object with operator()), lambda, or any type that can be called with a single T argument.
+
+if someone passed something like an int as the func argument, one would get a confusing compiler warning, it has to be callable.
+
+but there is also the option of explicitly only allowing FUNCTION POINTERS:
+```C++
+template <typename T, typename Func>
+void	iter(T *array, unsigned int length, void (*func)(T))
+...
+```
+the downside (or maybe usecase dependent upside?) is that only free functions (not member functions or functors)
+with the exact signature void func(T) can be passed.
