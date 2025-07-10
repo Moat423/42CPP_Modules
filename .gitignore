@@ -15,3 +15,7 @@ test
 .pdf
 Bureaucracy
 *en.subject.pdf
+*.json
+*.log
+account
+
