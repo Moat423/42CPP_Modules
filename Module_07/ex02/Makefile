@@ -7,7 +7,7 @@ NAME := a.out
 CXX := c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 
-HDRS := Debug.hpp Array.hpp
+HDRS := Array.hpp
 
 SRCS := main.cpp
 
