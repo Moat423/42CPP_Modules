@@ -6,10 +6,8 @@
 // • construction with no parameter: creates an empty array.
 // • construction with an unsigned int n as a parameter: creates an array of n elements
 // initialized by default.
-// tip: try to compile int * a = new int(); then display *a.
-// • construction by copy and assignment operator. in both cases, modifying either the
-// original array or its copy after copying musn’t affect the other array.
-// • you must use the operator new[] to allocate memory. preventive allocation (allocating memory in advance) is forbidden. your program must never access nonallocated memory.
+// • construction by copy and assignment operator. as deep copy.
+// • operator new[] to allocate memory. preventive allocation (allocating memory in advance) is forbidden. your program must never access nonallocated memory.
 // • elements can be accessed through the subscript operator: [ ].
 // • when accessing an element with the [ ] operator, if its index is out of bounds, an
 // std::exception is thrown.
@@ -34,6 +32,7 @@ class Array
 };
 
 #include <stdexcept>
+#include <iostream>
 
 template <typename Type>
 Array<Type>::Array(): _size(0), _array(new Type[0]) {}
@@ -91,6 +90,27 @@ template <typename Type>
 unsigned int Array<Type>::size( void ) const
 {
 	return (_size);
+}
+
+template <typename Type>
+std::ostream &operator<<(std::ostream &os, const Array<Type> &array)
+{
+	unsigned int i = 0;
+	os << "[";
+	if (array.size() == 0)
+	{
+		os << "]";
+		return os;
+	}
+	while (i < array.size() - 1)
+	{
+		os << array[i];
+		os << ", ";
+		++i;
+	}
+	os << array[i];
+	os << "]";
+	return os;
 }
 
 #endif // !ARRAY_HPP

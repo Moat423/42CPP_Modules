@@ -6,6 +6,19 @@
 #define MAX_VAL 750
 int main(int, char**)
 {
+	Array<int> empty;
+	Array<int> three(3);
+	std::cout << "Empty array size: " << empty.size() << std::endl;
+	try
+	{
+		std::cout << "Accessing empty array: " << empty << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << "Exception caught: " << e.what() << std::endl;
+	}
+	std::cout << "Three number array size: " << three.size() << std::endl;
+	std::cout << "Three number array: " << three << std::endl;
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];
     srand(time(NULL));
