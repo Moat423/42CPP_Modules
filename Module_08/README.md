@@ -36,3 +36,26 @@ Example of an algorithm that requires the container to imeplement iterators is `
 
 	std::vector::iterator it = std::find(container.begin(), container.end(), value);
 this returns an iterator to the first element in the container that matches the value, or the end iterator if no such element exists.
+
+std::sort
+-requires container with random access iterator
+
+available containers that have random access iterators:
+-std::vector
+-std::deque
+-std::array (only in C++11 and onwards)
+
+
+std::min / std::max
+supported by 
+-std::vector
+-std::deque
+-std::array (only in C++11 and onwards)
+-lists
+
+
+### making classes that use the STL
+
+it is discouraged to inherit from the STL classes, they are [not designed for that](https://www.geeksforgeeks.org/cpp/why-should-we-not-inherit-std-vector-in-cpp/)
+
+the solution is to make it a private(or protected) member to improve encapsulation.
