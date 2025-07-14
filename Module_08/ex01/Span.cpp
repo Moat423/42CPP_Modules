@@ -42,6 +42,8 @@ Span& Span::operator=( const Span &rhs )
 
 void	Span::addNumber( int number )
 {
+	if (_maxSize == _vec.size())
+		throw Span::isFull();
 	_vec.push_back(number);
 }
 
@@ -50,6 +52,8 @@ unsigned int	Span::longestSpan( void )
 	int	max;
 	int min;
 
+	if (_vec.size() <= 1)
+		throw Span::notEnoughMembers();
 	max = *std::max_element(_vec.begin(), _vec.end());
 	min = *std::min_element(_vec.begin(), _vec.end());
 	return (max - min);
@@ -59,8 +63,11 @@ unsigned int	Span::shortestSpan( void )
 {
 	int	shortestSpan = std::numeric_limits<int>::max();
 	int	tmp;
+
+	if (_vec.size() <= 1)
+		throw Span::notEnoughMembers();
 	std::sort(_vec.begin(), _vec.end());
-	for (std::vector<int>::size_type i  = 0; i > _vec.size() - 1; i++)
+	for (std::vector<int>::size_type i  = 0; i < _vec.size() - 1; i++)
 	{
 		tmp = _vec[i + 1] - _vec[i];
 		if (tmp < shortestSpan)
@@ -71,9 +78,11 @@ unsigned int	Span::shortestSpan( void )
 
 void	Span::printSpan( void )
 {
+	std::vector<int>::size_type i = 0;
 	std::cout << "{";
-	for(std::vector<int>::size_type i = 0; i < _vec.size() - 1; i++)
-		std::cout << _vec[i] << ", ";
+	while (i < _vec.size() - 1)
+		std::cout << _vec[i++] << ", ";
+	std::cout << _vec[i];
 	std::cout << "}" << std::endl;
 }
 

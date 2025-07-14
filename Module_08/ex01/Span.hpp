@@ -26,10 +26,12 @@ class Span
 		unsigned int		shortestSpan( void );
 		void				printSpan( void );
 		class	isFull: std::exception {
-			const char *what() const throw();
+			public:
+				const char *what() const throw();
 		};
 		class	notEnoughMembers: std::exception {
-			const char *what() const throw();
+			public:
+				const char *what() const throw();
 		};
 	private:
 		Span();
