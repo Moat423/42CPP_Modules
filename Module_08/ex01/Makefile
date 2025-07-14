@@ -7,7 +7,7 @@ NAME := a.out
 CXX := c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 
-HDRS := Span.hpp
+HDRS := Debug.hpp Span.hpp
 
 SRCS := main.cpp Span.cpp
 
@@ -24,9 +24,9 @@ PHONY := all clean fclean re
 
 all: $(NAME) $(HDRS)
 
-$(NAME): $(OBJS) $(HDRS)
+$(NAME): $(OBJS)
 	@printf "\n$(BOLD)Linking $(NAME)$(RESET)\n"
-	$(CXX) $(CXXFLAGS) -o $@ $< && \
+	$(CXX) $(CXXFLAGS) -o $@ $^ && \
 	printf "\n$(GREEN)$(BOLD)Build successful!$(RESET)\n" || \
 	printf "$(RED)$(BOLD)Build failed!$(RESET)\n"
 

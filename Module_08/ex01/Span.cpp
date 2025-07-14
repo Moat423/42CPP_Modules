@@ -1,7 +1,9 @@
 #include "Span.hpp"
 #include "Debug.hpp"
+#include <iostream>
 #include <algorithm>
 #include <limits>
+#include <vector>
 
 // Default Constructor
 Span::Span( void )
@@ -65,6 +67,14 @@ unsigned int	Span::shortestSpan( void )
 			shortestSpan = tmp;
 	}
 	return (shortestSpan);
+}
+
+void	Span::printSpan( void )
+{
+	std::cout << "{";
+	for(std::vector<int>::size_type i = 0; i < _vec.size() - 1; i++)
+		std::cout << _vec[i] << ", ";
+	std::cout << "}" << std::endl;
 }
 
 const char *Span::isFull::what() const throw()

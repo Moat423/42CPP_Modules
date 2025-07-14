@@ -14,13 +14,13 @@
 // Of course, you will write your own tests, and they will be far more thorough than the
 // ones below. Test your Span with at least 10,000 numbers. More would be even better.
 
-void	randomFillSpan(Span sp, unsigned int size)
+void	randomFillSpan(Span &sp, unsigned int size)
 {
 	for (unsigned int i = 0; i < size; i++)
 		sp.addNumber(rand());
 }
 
-void	handleAddNumber(Span sp, int number)
+void	handleAddNumber(Span &sp, int number)
 {
 	try {
 	sp.addNumber(number);
@@ -29,7 +29,7 @@ void	handleAddNumber(Span sp, int number)
 	}
 }
 
-void	fillWithDist(Span sp, unsigned int size, int start, int distance)
+void	fillWithDist(Span &sp, unsigned int size, int start, int distance)
 {
 	for (unsigned int i = 0; i < size; i++)
 	{
@@ -45,12 +45,12 @@ int main ( void )
 	Span bigOne(20000);
 	unsigned int	someDistance;
 	fillWithDist(tenner, 10, 0, 2);
+	tenner.printSpan();
 	someDistance = tenner.longestSpan();
 	std::cout << "longest Span of an object where longest span is 2: " << someDistance << std::endl;
 	someDistance = tenner.shortestSpan();
 	std::cout << "shortest Span of an object where shortest span is 2: " << someDistance << std::endl;
 	handleAddNumber(tenner, 5);
 	randomFillSpan(bigOne, 20000);
-		
 	return (0);
 }

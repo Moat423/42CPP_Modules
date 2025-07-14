@@ -24,6 +24,7 @@ class Span
 		void	addNumber( int number );
 		unsigned int		longestSpan( void );
 		unsigned int		shortestSpan( void );
+		void				printSpan( void );
 		class	isFull: std::exception {
 			const char *what() const throw();
 		};
