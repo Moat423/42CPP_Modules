@@ -1,6 +1,5 @@
 #include <deque>
 #include <iostream>
-#include <stack>
 #include <vector>
 #include "easyfind.hpp"
 
