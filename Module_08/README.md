@@ -28,6 +28,36 @@ std::vector<int>::iterator it;
 
 it.end() is something that should never be printed, it is a special iterator that points to the end of the container, it is not a valid element in the container.
 
+#### learnings from making loops
+if we have a vector, and we want to walk over every sinlge element, we can do that in two ways:
+
+either using a size_type and indexing that vector provides [] (same as the .at() funtion)
+```C++
+std::sort(_vec.begin(), _vec.end());
+int shortestSpan = std::numeric_limits<int>::max();
+
+for (std::vector<int>::size_type i = 0; i < _vec.size() - 1; ++i) {
+    int tmp = _vec[i + 1] - _vec[i];
+    if (tmp < shortestSpan)
+        shortestSpan = tmp;
+}
+```
+
+or using index as the form of iteration
+```C++
+std::sort(_vec.begin(), _vec.end());
+int shortestSpan = std::numeric_limits<int>::max();
+
+for (std::vector<int>::iterator it = _vec.begin(); it != _vec.end() - 1; ++it) {
+    int tmp = *(it + 1) - *it;
+    if (tmp < shortestSpan)
+        shortestSpan = tmp;
+}
+```
+
+The last one looks confusing at first, but it's just using the classes own defined iterator till the end
+and getting the value to calculate with by dereferencing the iterator.
+
 ### algorithms
 
 There are many algorithms in the STL, they are supposted to impement the most efficient algorithms for the most common tasks.
@@ -59,3 +89,4 @@ supported by
 it is discouraged to inherit from the STL classes, they are [not designed for that](https://www.geeksforgeeks.org/cpp/why-should-we-not-inherit-std-vector-in-cpp/)
 
 the solution is to make it a private(or protected) member to improve encapsulation.
+

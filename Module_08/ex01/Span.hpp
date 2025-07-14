@@ -22,8 +22,8 @@ class Span
 		Span(const Span &rhs);
 		Span &operator=(const Span &rhs);
 		void	addNumber( int number );
-		void	shortestSpan( void );
-		void	longestSpan( void );
+		unsigned int		longestSpan( void );
+		unsigned int		shortestSpan( void );
 		class	isFull: std::exception {
 			const char *what() const throw();
 		};

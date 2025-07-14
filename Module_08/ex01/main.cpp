@@ -16,7 +16,7 @@
 
 void	randomFillSpan(Span sp, unsigned int size)
 {
-	for (int i; i < size; i++)
+	for (unsigned int i = 0; i < size; i++)
 		sp.addNumber(rand());
 }
 
@@ -25,7 +25,16 @@ void	handleAddNumber(Span sp, int number)
 	try {
 	sp.addNumber(number);
 	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+		std::cout << e.what() << "for the number " << number << std::endl;
+	}
+}
+
+void	fillWithDist(Span sp, unsigned int size, int start, int distance)
+{
+	for (unsigned int i = 0; i < size; i++)
+	{
+		sp.addNumber(start);
+		start += distance;
 	}
 }
 
@@ -34,6 +43,14 @@ int main ( void )
 	srand(time(NULL));
 	Span tenner(10);
 	Span bigOne(20000);
+	unsigned int	someDistance;
+	fillWithDist(tenner, 10, 0, 2);
+	someDistance = tenner.longestSpan();
+	std::cout << "longest Span of an object where longest span is 2: " << someDistance << std::endl;
+	someDistance = tenner.shortestSpan();
+	std::cout << "shortest Span of an object where shortest span is 2: " << someDistance << std::endl;
+	handleAddNumber(tenner, 5);
+	randomFillSpan(bigOne, 20000);
 		
 	return (0);
 }
