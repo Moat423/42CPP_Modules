@@ -7,9 +7,9 @@ NAME := ex01
 CXX := c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 
-HDRS := Debug.hpp Span.hpp
+HDRS := Debug.hpp MutantStack.hpp
 
-SRCS := main.cpp Span.cpp
+SRCS := main.cpp
 
 OBJS := $(SRCS:.cpp=.o)
 
