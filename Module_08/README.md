@@ -90,3 +90,46 @@ it is discouraged to inherit from the STL classes, they are [not designed for th
 
 the solution is to make it a private(or protected) member to improve encapsulation.
 
+### stack
+
+Template default: lets you write MutantStack<int> instead of MutantStack<int, std::deque<int>>.
+	template < class Type, class Container = std::deque<Type> >
+	lets users avoid specifying the container type unless they want to override it.
+Constructor default: lets you write MutantStack<int> s; instead of always having to pass a std::deque<int>.
+	explicit MutantStack(const container_type &rhs = container_type());
+	lets users avoid providing an initial container unless they have one already populated.
+explicit copy constructor to prevent unintended copying and creation of a new stack.
+```C++
+	explicit MutantStack(const container_type& ctnr = container_type()) : c(ctnr) {}
+```
+has a [typedef for the container type](https://learn.microsoft.com/en-us/cpp/standard-library/stack-class?view=msvc-170), which is usually a deque or a vector.
+```C++
+		typedef Container container_type;
+```
+
+
+#### specifying Member functions of template classes
+
+you must specify the [template parameter list and the function with class template and parameters](https://www.ibm.com/docs/en/zos/2.4.0?topic=only-member-functions-class-templates-c).
+```C++
+template <class Type, class Container>
+MutantStack<Type, Container>::MutantStack(const container_type &rhs) 
+{//definition}
+```
+
+### common practices
+
+##### where to put typedefs:
+```C++
+template < class T, class Container = std::deque<T> >
+class MutantStack {
+	public:
+		//Typedefs
+		typedef typename Container::size_type size_type;
+		typedef typename Container::value_type value_type;
+```
+apparently it is common to [put typedefs in the public section of the class](https://stackoverflow.com/questions/10144484/typedef-structs-declared-inside-class-or-outside).
+
+It improves Readability and Consistency: Defining types like value_type and size_type inside the class makes code more readable and self-documenting. These aliases clarify what types users of your class should expect.
+For templates, typedefs inside the class can reference dependent types (like Container::value_type). If you want to define such a typedef outside the class, you would have to repeat the template declaration and complicated syntax, which is error-prone and unwieldy.
+
