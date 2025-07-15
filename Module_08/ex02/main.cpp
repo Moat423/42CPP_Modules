@@ -2,6 +2,7 @@
 #include <iostream>
 #include <stack>
 #include <list>
+#include <vector>
 
 int	subject_main()
 {
@@ -26,6 +27,10 @@ int	subject_main()
 		++it;
 	}
 	std::stack<int> s(mstack);
+	// testing if i can init with vector
+	std::vector<int> v(2, 3);
+	MutantStack<int, std::vector<int> > ms(v);
+	std::cout << ms.top() << std::endl;
 	return 0;
 }
 
@@ -58,7 +63,10 @@ int	test_list()
 
 int main()
 {
+	std::cout << "Understanding the stack adaptive container and its iterators" << std::endl;
+	std::cout << "testing how normal behaviour would look, by testing lists" << std::endl;
 	test_list();
+	std::cout << "testing the actual MutantStack" << std::endl;
 	subject_main();
 	return 0;
 }

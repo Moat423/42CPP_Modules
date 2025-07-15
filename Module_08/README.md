@@ -92,6 +92,13 @@ the solution is to make it a private(or protected) member to improve encapsulati
 
 ### stack
 
+has a [typedef for the container type](https://learn.microsoft.com/en-us/cpp/standard-library/stack-class?view=msvc-170), which is usually a deque or a vector.
+```C++
+		typedef Container container_type;
+```
+and typedefs for the size_type, the value_type, the iterator, const_iterator, reverse_iterator, const_reverse_iterator,
+reference and const_reference.
+	all of these are typedefs to the container inherent types and values.
 Template default: lets you write MutantStack<int> instead of MutantStack<int, std::deque<int>>.
 	template < class Type, class Container = std::deque<Type> >
 	lets users avoid specifying the container type unless they want to override it.
@@ -102,10 +109,16 @@ explicit copy constructor to prevent unintended copying and creation of a new st
 ```C++
 	explicit MutantStack(const container_type& ctnr = container_type()) : c(ctnr) {}
 ```
-has a [typedef for the container type](https://learn.microsoft.com/en-us/cpp/standard-library/stack-class?view=msvc-170), which is usually a deque or a vector.
-```C++
-		typedef Container container_type;
-```
+push(const T&)	Adds an element to the top:	c.push_back()
+pop()	Removes element from the top:	c.pop_back()
+top()	Returns reference to top element:	c.back()
+empty() const	Whether the stack has no elements:	c.empty()
+size() const	Number of elements in the stack:	c.size()
+
+### Iterator functions:
+a lot of containers have iterators. These define the following functions:
+
+begin, end, rbegin, rend with their const and non const variants
 
 
 #### specifying Member functions of template classes
@@ -133,3 +146,10 @@ apparently it is common to [put typedefs in the public section of the class](htt
 It improves Readability and Consistency: Defining types like value_type and size_type inside the class makes code more readable and self-documenting. These aliases clarify what types users of your class should expect.
 For templates, typedefs inside the class can reference dependent types (like Container::value_type). If you want to define such a typedef outside the class, you would have to repeat the template declaration and complicated syntax, which is error-prone and unwieldy.
 
+### critique of this project:
+
+I had to inherit from stack so that i could copy construct from MutantStack to stack, as this was part of the task. and thats really ugly, especially, because it's not endorsed to inherit from these containers.
+	class MutantStack: public std::stack<Type, Container>
+although for this specific usecase it is ok to do.
+Also since stack is a container adapter, its contaienr is actually protected, not private. so its all good.
+[src](https://stackoverflow.com/questions/73440733/how-can-i-implement-my-own-stack-iterator-in-c)

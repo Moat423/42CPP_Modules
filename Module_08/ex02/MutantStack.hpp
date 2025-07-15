@@ -39,66 +39,73 @@ class MutantStack: public std::stack<Type, Container>
 		const_reverse_iterator	rbegin() const;
 		reverse_iterator		rend();
 		const_reverse_iterator	rend() const;
-	private:
-		Container _container;
+
+		container_type &getContainer();
 };
 
 template < class Type, class Container >
 MutantStack<Type, Container>::~MutantStack()
 {
-	_container.clear();
+	this->c.clear();
 }
 
 template < class Type, class Container >
 MutantStack<Type, Container>::MutantStack(const container_type& rhs)
-	: _container(rhs) {}
+	: std::stack<Type, Container>(rhs) {}
 
 template < class Type, class Container >
 MutantStack<Type, Container> &MutantStack<Type, Container>::operator=(const MutantStack& rhs)
 {
 	if (this != &rhs)
 	{
-		_container = rhs._container;
+		this->c = rhs->c;
 	}
 	return (*this);
 }
+
+template < class Type, class Container >
+typename MutantStack<Type, Container>::container_type &MutantStack<Type, Container>::getContainer()
+{
+	return (this->c);
+}
+
 
 /*==============================Member Functions==============================*/
 
 template < class Type, class Container >
 bool	MutantStack<Type, Container>::empty() const
 {
-	return (_container.empty());
+	return (this->c.empty());
 }
 
 template < class Type, class Container >
 void	MutantStack<Type, Container>::pop()
 {
-	_container.pop_back();
+	this->c.pop_back();
 }
 
 template < class Type, class Container >
 void MutantStack<Type, Container>::push(const Type& value)
 {
-	_container.push_back();
+	this->c.push_back(value);
 }
 
 template < class Type, class Container >
 typename Container::size_type MutantStack<Type, Container>::size() const
 {
-	return (_container.size());
+	return (this->c.size());
 }
 
 template < class Type, class Container >
 typename Container::const_reference MutantStack<Type, Container>::top() const
 {
-	return (_container.back());
+	return (this->c.back());
 }
 
 template < class Type, class Container >
 typename Container::reference MutantStack<Type, Container>::top()
 {
-	return (_container.back());
+	return (this->c.back());
 }
 
 /*==============================iterators==============================*/
@@ -106,49 +113,49 @@ typename Container::reference MutantStack<Type, Container>::top()
 template < class Type, class Container >
 typename MutantStack<Type, Container>::iterator	MutantStack<Type, Container>::begin()
 {
-	return (_container.begin());
+	return (this->c.begin());
 }
 
 template < class Type, class Container >
 typename MutantStack<Type, Container>::const_iterator MutantStack<Type, Container>::begin() const
 {
-	return (_container.begin());
+	return (this->c.begin());
 }
 
 template < class Type, class Container >
 typename MutantStack<Type, Container>::iterator MutantStack<Type, Container>::end()
 {
-	return (_container.end());
+	return (this->c.end());
 }
 
 template < class Type, class Container >
 typename MutantStack<Type, Container>::const_iterator MutantStack<Type, Container>::end() const
 {
-	return (_container.end());
+	return (this->c.end());
 }
 
 template < class Type, class Container >
 typename MutantStack<Type, Container>::reverse_iterator MutantStack<Type, Container>::rbegin()
 {
-	return (_container.rbegin());
+	return (this->c.rbegin());
 }
 
 template < class Type, class Container >
 typename MutantStack<Type, Container>::const_reverse_iterator MutantStack<Type, Container>::rbegin() const
 {
-	return (_container.rbegin());
+	return (this->c.rbegin());
 }
 
 template < class Type, class Container >
 typename MutantStack<Type, Container>::reverse_iterator MutantStack<Type, Container>::rend()
 {
-	return (_container.rend());
+	return (this->c.rend());
 }
 
 template < class Type, class Container >
 typename MutantStack<Type, Container>::const_reverse_iterator MutantStack<Type, Container>::rend() const
 {
-	return (_container.rend());
+	return (this->c.rend());
 }
 
 /*==============================Non-Member Functions belonging to the MutantStack class==============================*/
@@ -157,7 +164,7 @@ template < class Type, class Container >
 bool operator==( const MutantStack<Type, Container>& lhs,
                  const MutantStack<Type, Container>& rhs )
 {
-	return (lhs._container == rhs._container);
+	return (lhs.getContainer() == rhs.getContainer());
 }
 
 template < class Type, class Container >
@@ -171,28 +178,28 @@ template< class Type, class Container >
 bool operator< ( const MutantStack<Type, Container>& lhs,
                  const MutantStack<Type, Container>& rhs )
 {
-	return (lhs._container < rhs._container);
+	return (lhs.getContainer() < rhs.getContainer());
 }
 
 template< class Type, class Container >
 bool operator<=( const MutantStack<Type, Container>& lhs,
                  const MutantStack<Type, Container>& rhs )
 {
-	return (lhs._container <= rhs._container);
+	return (lhs.getContainer() <= rhs.getContainer());
 }
 
 template< class Type, class Container >
 bool operator> ( const MutantStack<Type, Container>& lhs,
                  const MutantStack<Type, Container>& rhs )
 {
-	return (lhs._container > rhs._container);
+	return (lhs.getContainer() > rhs.getContainer());
 }
 
 template< class Type, class Container >
 bool operator>=( const MutantStack<Type, Container>& lhs,
                  const MutantStack<Type, Container>& rhs )
 {
-	return (lhs._container >= rhs._container);
+	return (lhs.getContainer() >= rhs.getContainer());
 }
 
 #endif // !MUTANTSTACK_HPP
