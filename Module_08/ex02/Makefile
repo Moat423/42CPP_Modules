@@ -7,7 +7,7 @@ NAME := ex02
 CXX := c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 
-HDRS := Debug.hpp MutantStack.hpp
+HDRS := MutantStack.hpp
 
 SRCS := main.cpp
 

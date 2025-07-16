@@ -37,7 +37,7 @@ int main ( void )
 		it = easyfind(vec1, value);
 		std::cout << "found value: " << *it << std::endl;
 	} catch (std::exception &e) {
-		std::cout << "value = " << value << std::endl << e.what() << std::endl;
+		std::cout << "value = " << value << ": "<< e.what() << std::endl;
 	}
 	std::cout << "printing initialized vector:" << std::endl;
 	printVector(vec2);
@@ -46,7 +46,7 @@ int main ( void )
 		it = easyfind(vec2, value);
 		std::cout << "found value: " << *it << std::endl;
 	} catch (std::exception &e) {
-		std::cout << "value = " << value << std::endl << e.what() << std::endl;
+		std::cout << "value = " << value << ": "<< e.what() << std::endl;
 	}
 	return (0);
 }

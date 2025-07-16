@@ -7,7 +7,7 @@ NAME := ex01
 CXX := c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 
-HDRS := Debug.hpp Span.hpp
+HDRS := Span.hpp
 
 SRCS := main.cpp Span.cpp
 
