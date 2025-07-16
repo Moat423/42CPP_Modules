@@ -1,4 +1,5 @@
 #include "MutantStack.hpp"
+#include <exception>
 #include <iostream>
 #include <stack>
 #include <list>
@@ -27,12 +28,22 @@ int	subject_main()
 		++it;
 	}
 	std::stack<int> s(mstack);
+	return 0;
+}
+void	ownTests(void)
+{
+	MutantStack<int> emptyStack;
+	if (!emptyStack.empty())
+		std::cout << RED <<"Mutant stack error: not empty on initialization" << RESET << std::endl;
 	// testing if i can init with vector
 	std::cout << "my own test: tying to init Mutant stack not by default but with vector" << std::endl;
-	std::vector<int> v(2, 3);
+	std::vector<int> v(5, 9);
 	MutantStack<int, std::vector<int> > ms(v);
 	std::cout << ms.top() << std::endl;
-	return 0;
+	ms.push(5);
+	std::cout << "testing reverse iteration, 5 should be first number" << std::endl;
+	for (std::vector<int>::reverse_iterator rit = ms.rbegin(); rit != ms.rend(); ++rit)
+        std::cout << *rit << " ";
 }
 
 
@@ -69,5 +80,7 @@ int main()
 	test_list();
 	std::cout << "testing the actual MutantStack (should be same as list)" << std::endl;
 	subject_main();
+	std::cout << "testing MutantStack with my own tests" << std::endl;
+	ownTests();
 	return 0;
 }
