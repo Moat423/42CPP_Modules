@@ -3,7 +3,7 @@ SHELL := /bin/bash
 MAKEFILES :=
 MAKEFLAGS += --no-print-directory --warn-undefined-variables
 
-NAME := ex01
+NAME := a.out
 CXX := c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
 
