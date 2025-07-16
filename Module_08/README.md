@@ -115,6 +115,40 @@ top()	Returns reference to top element:	c.back()
 empty() const	Whether the stack has no elements:	c.empty()
 size() const	Number of elements in the stack:	c.size()
 
+
+first, i implemented all the member functions in stack as well, instead of inheriting from stack, but they are not needed anymore. but here they are now:
+```c++
+template < class Type, class Container >
+bool	MutantStack<Type, Container>::empty() const {
+	return (this->c.empty());
+}
+
+template < class Type, class Container >
+void	MutantStack<Type, Container>::pop() {
+	this->c.pop_back();
+}
+
+template < class Type, class Container >
+void MutantStack<Type, Container>::push(const Type& value) {
+	this->c.push_back(value);
+}
+
+template < class Type, class Container >
+typename Container::size_type MutantStack<Type, Container>::size() const {
+	return (this->c.size());
+}
+
+template < class Type, class Container >
+typename Container::const_reference MutantStack<Type, Container>::top() const {
+	return (this->c.back());
+}
+
+template < class Type, class Container >
+typename Container::reference MutantStack<Type, Container>::top()
+{ return (this->c.back());
+}
+```
+
 ### Iterator functions:
 a lot of containers have iterators. These define the following functions:
 

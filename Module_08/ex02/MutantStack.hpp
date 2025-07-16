@@ -24,12 +24,6 @@ class MutantStack: public std::stack<Type, Container>
 		MutantStack(const MutantStack& rhs);
 		MutantStack& operator=( const MutantStack& rhs );
 	
-		bool					empty() const;
-		void					pop();
-		void					push(const Type &value);
-		size_type				size() const;
-		reference				top();
-		const_reference			top() const;
 		//iterators
 		iterator				begin();
 		const_iterator			begin() const;
@@ -71,43 +65,6 @@ typename MutantStack<Type, Container>::container_type &MutantStack<Type, Contain
 
 
 /*==============================Member Functions==============================*/
-
-template < class Type, class Container >
-bool	MutantStack<Type, Container>::empty() const
-{
-	return (this->c.empty());
-}
-
-template < class Type, class Container >
-void	MutantStack<Type, Container>::pop()
-{
-	this->c.pop_back();
-}
-
-template < class Type, class Container >
-void MutantStack<Type, Container>::push(const Type& value)
-{
-	this->c.push_back(value);
-}
-
-template < class Type, class Container >
-typename Container::size_type MutantStack<Type, Container>::size() const
-{
-	return (this->c.size());
-}
-
-template < class Type, class Container >
-typename Container::const_reference MutantStack<Type, Container>::top() const
-{
-	return (this->c.back());
-}
-
-template < class Type, class Container >
-typename Container::reference MutantStack<Type, Container>::top()
-{
-	return (this->c.back());
-}
-
 /*==============================iterators==============================*/
 
 template < class Type, class Container >
