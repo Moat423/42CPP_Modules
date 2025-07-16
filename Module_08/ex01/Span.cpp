@@ -85,6 +85,21 @@ void	Span::printSpan( void )
 	std::cout << "}" << std::endl;
 }
 
+void	Span::fillWithDist(unsigned int size, int start, int distance)
+{
+	for (unsigned int i = 0; i < size; i++)
+	{
+		this->addNumber(start);
+		start += distance;
+	}
+}
+
+void	Span::fillWithRandom(unsigned int size)
+{
+	for (unsigned int i = 0; i < size; i++)
+		this->addNumber(rand());
+}
+
 const char *Span::isFull::what() const throw()
 {
 	return ("Span is full, can not add more numbers");

@@ -51,6 +51,8 @@ class Span
 		unsigned int		longestSpan( void );
 		unsigned int		shortestSpan( void );
 		void				printSpan( void );
+		void				fillWithDist(unsigned int size, int start, int distance);
+		void				fillWithRandom(unsigned int size);
 		class	isFull: std::exception {
 			public:
 				const char *what() const throw();
