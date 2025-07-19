@@ -3,6 +3,16 @@
 
 #include <algorithm>
 #include <stdexcept>
+#include <iostream>
+
+template<typename Container>
+void	printContainer(Container container)
+{
+	typename Container::iterator it = container.begin();
+	while (it != container.end() - 1)
+		std::cout << *it++ << " ";
+	std::cout << *it << std::endl;
+}
 
 // function template easyfind: accepts a type T, takes two parameters:
 // first type T, second an integer.
