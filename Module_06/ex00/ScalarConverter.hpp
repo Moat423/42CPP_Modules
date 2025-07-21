@@ -8,8 +8,7 @@ enum eScalarType{
 	CHAR = 1,
 	INT = 2,
 	FLOAT = 4,
-	DOUBLE = 8,
-	SPECIAL = 32
+	DOUBLE = 8
 };
 
 class ScalarConverter {
@@ -26,7 +25,6 @@ class ScalarConverter {
 		static void			convertFromInt(const std::string &literal);
 		static void			convertFromFloat(const std::string &literal);
 		static void			convertFromDouble(const std::string &literal);
-		static void			handleSpecialCases(const std::string &literal);
 		ScalarConverter();
 };
 

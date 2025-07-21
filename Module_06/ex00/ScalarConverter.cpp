@@ -43,7 +43,7 @@ eScalarType ScalarConverter::checkType( std::string literal )
 	int		scientific = 0;
 
 	if (literal == ("nan") || literal == ("-inf") || literal == ("+inf"))
-			return (DOUBLE);
+		return (DOUBLE);
 	if (literal == ("nanf") || literal == ("-inff") || literal == ("+inff"))
 		return (FLOAT);
 	if (literal.length() == 1 && !(isdigit(literal[0])))
@@ -188,7 +188,7 @@ void	ScalarConverter::convertFromDouble( const std::string &literal )
 	long	i = 0;
 	float	fl = 0;
 	double	db = 0;
-	char *endptr;
+	char	*endptr;
 	int		type = DOUBLE;
 	db = strtod(literal.c_str(), &endptr);
 	if (*endptr != '\0')
